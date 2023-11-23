@@ -42,11 +42,12 @@
                     <!--Your posts here!-->
                     <div class="timeline"> <!--refer to P_post.php for the content-->
                     <?php
+                    
                         if($posts)
                         {
                             
                         foreach ($posts as $ROW) //It will display nth number of posts
-                        {   
+                        {  
                             $user = new User();
                             $ROW_user = $user->get_user($ROW['stud_ID']);
 

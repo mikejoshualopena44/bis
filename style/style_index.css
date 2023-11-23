@@ -1011,6 +1011,14 @@ a.liked i.bx-heart {
   color: var(--secondbg); /* Change this to the desired color for liked state */
 }
 
+.people-react{
+  color: var(--text-color);
+}
+
+.people-react:hover{
+  text-decoration: underline;
+}
+
 .tag {
   margin-top: 1rem;
   color: var(--text-color);
@@ -1138,3 +1146,4 @@ a.liked i.bx-heart {
   background: var(--secondbg);
   color: var(--fourthbg);
 }
+

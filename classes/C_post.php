@@ -130,11 +130,13 @@ class Post{
     public function get_likes($id, $type)
     {
         $DB = new CONNECTION_DB();
-        if($type == "post" && is_numeric($id) ){
+        $type = addslashes($type);
+
+        if(is_numeric($id) ){
 
             
             //get like details
-            $sql = "SELECT likes FROM likes WHERE type='post' && content_id = '$id' LIMIT 1";
+            $sql = "SELECT likes FROM likes WHERE type='$type' && content_id = '$id' LIMIT 1";
             $result = $DB->read($sql);
 
             //avoid user to like again if already click like
@@ -147,8 +149,48 @@ class Post{
 
         }
 
-        return [];
+        return false;
     }
+
+  
+    public function get_likes_with_users($id, $type, $limit = 3)
+    {
+        $DB = new CONNECTION_DB();
+        $User = new User();
+        $type = addslashes($type);
+    
+        if (is_numeric($id)) {
+            // Get like details
+            $sql = "SELECT likes FROM likes WHERE type='$type' && content_id = '$id' LIMIT 1";
+            $result = $DB->read($sql);
+    
+            // Avoid user to like again if already click like
+            if (is_array($result)) {
+                $likes = json_decode($result[0]['likes'], true);
+    
+                // Extract stud_ID values
+                $studIDs = array_column($likes, 'stud_ID');
+    
+                // Fetch user data for the likes
+                $users = [];
+                foreach ($studIDs as $studID) {
+                    $friend_user = $User->get_user($studID);
+                    if ($friend_user) {
+                        $users[] = $friend_user;
+                    }
+                }
+    
+                // Limit the result to the specified number
+                $limitedUsers = array_slice($users, 0, $limit);
+    
+                return $limitedUsers;
+            }
+        }
+    
+        return false;
+    }
+    
+    
 
     public function like_post($id, $type, $Bisuconnect_stud_ID)
     {

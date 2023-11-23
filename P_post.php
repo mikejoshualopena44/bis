@@ -2,7 +2,27 @@
   
     $databaseDate = $ROW['date']; // As $ROW['date'] contains the date from the database
     $formattedDate = date('M d, Y', strtotime($databaseDate)); //Convert databse date format to desired Month,Day and Year
+    
 
+    $login = new Login();
+    $user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
+    $Post = new Post();
+    $likes = false;
+  
+  
+    // show who likes the  posts
+  
+    $ERROR = "";
+    if(isset($_GET['id']) && isset($_GET['type'])){
+  
+      $likes = $Post->get_likes($_GET['id'],$_GET['type']);
+  
+    }
+    else{
+      $ERROR = "No data was found!";
+    }
+  
+    
 ?>
 
 <div class="timeline">
@@ -105,12 +125,12 @@
 
         <div class="liked-by">
 
-            <!-- recent people reacted profile -->
-            <span><img id="react_img"src="./images/profile-10.jpg" alt=""></span>
-            <span><img id="react_img1" src="./images/profile-4.jpg" alt=""></span>
-            <span><img id="react_img2"src="./images/profile-15.jpg"alt=""></span> 
+            <!-- Display the recent people who like -->
+           <span><img id="react_img"src="./images/profile-10.jpg" alt=""></span> 
+           <span><img id="react_img1" src="./images/profile-4.jpg" alt=""></span>
+           <span><img id="react_img2"src="./images/profile-15.jpg"alt=""></span> 
             
-            <!-- Display who likes -->
+            <!-- Display number of likes-->
             <?php 
                 $i_liked = false;
 
@@ -164,8 +184,9 @@
 
                     }
             ?>
-            <a href="people-likes.php?type=post&id=($ROW[post_id]">
-                <span style="color: white"><?php echo $name ?></span>
+            
+            <a href="people-likes.php?type=post&id=<?php echo $ROW['post_id'] ?>">
+                <span class="people-react"><?php echo $name ?></span>
             </a>
             
             <!-- Count number of likes -->

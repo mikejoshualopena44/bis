@@ -7,23 +7,9 @@
   $user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
   $Post = new Post();
   $likes = false;
- 
 
-  //check who login //white listing to avoid sql injection
-  if(isset($_GET['id']) && is_numeric($_GET['id'])){
-      $profile = new Profile();
-      $profile_data = $profile-> get_profile($_GET['id']?? '');
 
-      if(is_array( $profile_data))
-      {
-        $user_data = $profile_data[0];
-      }
-  }
- 
-
-  $image_class = new Image();
-
-  // to delete posts
+  // show who likes the  posts
 
   $ERROR = "";
   if(isset($_GET['id']) && isset($_GET['type'])){
@@ -34,6 +20,8 @@
   else{
     $ERROR = "No data was found!";
   }
+
+  
   
   //change image in sidebar
     $corner_image = "images/bman1.jpg";
@@ -43,7 +31,7 @@
       $corner_image = $user_data['profile_image'];
     }
 
-
+  
 ?>
 
 <!--=== HTML ===-->
@@ -52,7 +40,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | People who liked </title>
-    <link rel="stylesheet" href="style/delete_styles.css">
+    <link rel="stylesheet" href="style/style_peoplelikes.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/lego.jpg">
     <!-- Boxicons CDN Link -->
@@ -136,7 +124,7 @@
        <div class="delete-modal">
 
          <nav class="home-header"> 
-            <h3><a href="index.php"> BisuConnect</a></h3>    
+            <h3><a href="index.php" style="color: #212145 "> BisuConnect</a></h3>    
           </nav>
 
             <div class="delete-content">
@@ -145,23 +133,19 @@
               </div><br>
               <h2>People loved your post</h2> 
               <?php
-              
+                $User = new User();
+                $image_class = new Image();
 
-               
                 if(is_array($likes)){
-
+                
                   foreach ($likes as $ROW) {
 
-                    $user = new User();
-                    $image_class = new Image();
-
-
-                    $FRIEND_ROW = $user->get_user($ROW['stud_ID']);
-                    include ("classes/C_user.php");
+                    $FRIEND_ROW = $User->get_user($ROW['stud_ID']);
+                    include ("P_user.php");
  
                   }
                   
-                  print_r("error 2");
+                  
                 }
               
               ?>
