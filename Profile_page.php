@@ -389,19 +389,31 @@
 
 <!-- return to previous screen where you left of -->
 <script>
-  function handleLike(event) {
-    // Store the current scroll position
-    const scrollY = window.scrollY || window.pageYOffset;
+    function like_post(e) {
+        e.preventDefault();
 
-    // Allow the default behavior (navigate to the specified href)
-    // Note: You can add your AJAX logic here if needed
+        // Toggle the 'liked' class on the parent 'a' element
+        e.target.parentNode.classList.toggle('liked');
 
-    // Restore the scroll position after the navigation
-    setTimeout(() => {
-      window.scrollTo(0, scrollY);
-    }, 0);
-  }
+        // Send the request to the server
+        var link = e.target.parentNode.href;
+        var xml = new XMLHttpRequest();
+
+        xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                // Update the likes count if needed
+                var likesCount = parseInt(xml.responseText);
+                // You can update the likes count on the UI if required
+            }
+        };
+
+        xml.open("GET", link, true);
+        xml.send();
+    }
 </script>
+
+
+
 
 
 

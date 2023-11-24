@@ -45,8 +45,14 @@ if(isset($_SERVER['HTTP_REFERER'])){
 
 
 
-header("Location: " . $return_to);
-die;
+    $post = new Post();
+    $likes = $post->get_likes($_GET['id'],$_GET['type']);
+    
+    if(is_array($likes)){
+        echo count($likes);
+    }else{
+        echo 0;
+    }
 
 
 ?>
