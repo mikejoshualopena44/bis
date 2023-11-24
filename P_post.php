@@ -85,13 +85,12 @@
               ?>
                 <div class="edit <?php echo basename($_SERVER['PHP_SELF']) === 'index.php' ? 'hidden' : ''; ?>">
                     <span id="edt-opt" class="edt">
-                        <a href="edit.php?id=<?php echo $ROW['post_id']?>">
-                            Edit
-                        </a>
+
+                        Edit
                     </span>.
                     <span id="del-opt" class="del">
                         <a href="delete.php?id=<?php echo $ROW['post_id']?>">
-                            Delete
+                        Delete
                         </a>
                     </span>
                         
@@ -211,7 +210,7 @@
         <!-- like, comment icon -->
         <div class="tag">
             <div class="left-icons">
-                <a href="like.php?type=post&id=<?php  echo $ROW['post_id'] ?> " class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event)">
+                <a href="like.php?type=post&id=<?php  echo $ROW['post_id'] ?> " class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="handleLike(event)">
                     <i class='bx bx-heart bx-lg'></i>
                 </a>
                 <a href=""><i class='bx bx-message-dots bx-lg'></i></a>
@@ -229,6 +228,4 @@
         "></div>
     </div>        
 </div>
-
-
 
