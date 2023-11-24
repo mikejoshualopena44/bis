@@ -126,6 +126,64 @@ class Post{
         $DB->save($query);
 
     }
+
+    public function edit_post( $data, $files) //Check if user input in post area
+    {
+
+        if(!empty($data['post']) || !empty($files['file']['name'])){
+
+            $myimage ="";
+            $has_image = 0;
+            $stud_ID = " ";
+
+
+                if(!empty($files['file']['name']))
+                {
+
+                    $folder = "uploads/" . $stud_ID . "/";
+
+                    //create folder for every user
+        
+                    if(!file_exists($folder))
+                    {
+                    mkdir($folder,0777,true);
+                    }
+        
+                    $image_class = new Image();
+        
+                    //create random folder name
+                    $myimage = $folder . $image_class->generate_filename(15).".jpg" ;
+                    move_uploaded_file($_FILES['file']['tmp_name'], $myimage);
+
+                    $image_class->resize_img($myimage,$myimage,1500,1500);
+                    
+                    $has_image = 1;
+                }
+    
+
+            $post = "";
+            if(isset($data['post'])){
+                $post = addslashes($data['post']);
+            }
+
+            $post_id = addslashes($data['post_id']);
+
+            if($has_image){
+                $query = " UPDATE posts SET post = '$post', image = '$myimage' WHERE post_id = '$post_id' LIMIT 1";
+            }else{
+                $query = " UPDATE posts SET post = '$post' WHERE post_id = '$post_id' LIMIT 1";
+            }          
+
+            $DB = new CONNECTION_DB();
+            $DB->save($query);
+
+
+        }else{
+            $this->error .= "Please input something to post!<br>";
+        }
+
+        return $this->error;
+    }
     
     public function get_likes($id, $type)
     {
