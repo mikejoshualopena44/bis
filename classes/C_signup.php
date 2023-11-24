@@ -44,6 +44,13 @@ class Signup
                
             }
 
+            if ($key == "stud_ID") {
+                // Check if the student ID already exists in the database
+                if ($this->isStudentIDExists($value)) {
+                    $this->error .= "Student ID already exists!<br>";
+                }
+            }
+
         }
 
         if($this->error == ""){
@@ -53,6 +60,18 @@ class Signup
 
             return $this->error;
         }
+    }
+
+    
+    private function isStudentIDExists($studID)
+    {
+        $DB = new CONNECTION_DB();
+        $studID = addslashes($studID);
+
+        $sql = "SELECT stud_ID FROM users WHERE stud_ID = '$studID' LIMIT 1";
+        $result = $DB->read($sql);
+
+        return is_array($result) && count($result) > 0;
     }
 
     public function create_user($data)
