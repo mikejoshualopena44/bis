@@ -212,7 +212,7 @@
         <!-- like, comment icon -->
         <div class="tag">
             <div class="left-icons">
-                <a href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>, <?php echo $i_liked ?>)">
+                <a href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>)">
                     <i class='bx bx-heart bx-lg'></i>
                 </a>
                 <a href=""><i class='bx bx-message-dots bx-lg'></i></a>

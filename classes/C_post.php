@@ -252,71 +252,68 @@ class Post{
 
     public function like_post($id, $type, $Bisuconnect_stud_ID)
     {
-       
-
-        if($type == "post"){
-
-            $DB = new CONNECTION_DB();
-            //increment attribute like on likes table
-            $sql = "SELECT likes FROM likes WHERE type='post' && content_id = '$id' LIMIT 1";
+        $DB = new CONNECTION_DB();
+    
+        if ($type == "post") {
+            // Fetch existing likes for the post from the database
+            $sql = "SELECT likes FROM likes WHERE type='post' AND content_id = '$id' LIMIT 1";
             $result = $DB->read($sql);
-
-            //avoid user to like again if already click like
-            if(is_array($result)){
-
-                $likes = json_decode($result[0]['likes'],true);
-
-                $stud_ids = array_column($likes, "stud_ID");
-
-            //if user like it already
-                if(!in_array($Bisuconnect_stud_ID, $stud_ids )){
+    
+            if (is_array($result)) {
+                $likes = json_decode($result[0]['likes'], true);
+    
+                // Check if the user has already liked the post
+                $user_already_liked = false;
+                $updated_likes = [];
+    
+                foreach ($likes as $like) {
+                    if ($like['stud_ID'] == $Bisuconnect_stud_ID) {
+                        $user_already_liked = true;
+                    } else {
+                        $updated_likes[] = $like;
+                    }
+                }
+    
+                if (!$user_already_liked) {
+                    // Add the user's like
                     $arr["stud_ID"] = $Bisuconnect_stud_ID;
                     $arr["date"] = date("Y-m-d H:i:s");
-
-                    $likes[] = $arr;
-                    $likes_string = json_encode($likes);
-                    $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' && content_id = '$id' LIMIT 1 ";
-                    $DB->save($sql);
-
-                    
-                    //increment attribute like on post table
-                    $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";           
-                    $DB->save($sql);
-
-                }else
-                {
-                    $key = array_search($Bisuconnect_stud_ID, $stud_ids);
-                    unset($likes[$key]);
+                    $updated_likes[] = $arr;
     
-                    $likes_string = json_encode($likes);
-                    $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='$type' && content_id = '$id' LIMIT 1";
-                    $DB->save($sql);
-
-                    //decrement attribute like on post table
-                    $sql = "UPDATE posts SET likes = likes - 1 WHERE post_id = '$id' LIMIT 1";           
+                    // Update the likes in the database
+                    $likes_string = json_encode($updated_likes);
+                    $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' AND content_id = '$id' LIMIT 1";
                     $DB->save($sql);
     
+                    // Increment the likes count on the posts table
+                    $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";
+                    $DB->save($sql);
+                } else {
+                    // User already liked, remove the like
+                    $likes_string = json_encode($updated_likes);
+                    $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' AND content_id = '$id' LIMIT 1";
+                    $DB->save($sql);
+    
+                    // Decrement the likes count on the posts table
+                    $sql = "UPDATE posts SET likes = likes - 1 WHERE post_id = '$id' LIMIT 1";
+                    $DB->save($sql);
                 }
-
-
-            }else{
+            } else {
+                // No existing likes, create a new array with the user's like
                 $arr["stud_ID"] = $Bisuconnect_stud_ID;
                 $arr["date"] = date("Y-m-d H:i:s");
-
-                $arr2[] = $arr;
-
-                $likes = json_encode($arr2);
-                $sql = "INSERT INTO likes (type,content_id,likes ) VALUES ('$type','$id','$likes')";
+                $updated_likes[] = $arr;
+    
+                // Encode the likes array and insert it into the database
+                $likes = json_encode($updated_likes);
+                $sql = "INSERT INTO likes (type, content_id, likes) VALUES ('$type', '$id', '$likes')";
                 $DB->save($sql);
-
-                //increment attribute like on post table
-                $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";           
+    
+                // Increment the likes count on the posts table
+                $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";
                 $DB->save($sql);
-                
             }
         }
-            
-
         
     }
 

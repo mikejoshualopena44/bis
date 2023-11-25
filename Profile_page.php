@@ -371,7 +371,7 @@
 
 <!-- Add this script to your HTML file -->
 <script>
- function like_post(e, postId, iLiked) {
+ function like_post(e, postId) {
     e.preventDefault();
 
     // Toggle the 'liked' class on the parent 'a' element
@@ -385,7 +385,7 @@
         if (xml.readyState == 4 && xml.status == 200) {
             // Update the like count
             var likesCount = parseInt(xml.responseText);
-            updateLikeCount(postId, iLiked, likesCount);
+            updateLikeCount(postId, likesCount);
         }
     };
 
@@ -393,7 +393,7 @@
     xml.send();
 }
 
-function updateLikeCount(postId,iLiked, count) {
+function updateLikeCount(postId, count) {
     // Update the like count in the DOM
     var likeCountElement = document.getElementById('like-count-' + postId);
 
