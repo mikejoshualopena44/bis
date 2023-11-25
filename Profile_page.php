@@ -91,7 +91,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Profile_page </title>
     <link rel="shortcut icon" type="x-icon" href="images/lego.jpg">
-    <link rel="stylesheet" href="style/style_profile.css">
+    <link rel="stylesheet" href="style/profile_style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -236,26 +236,6 @@
             </div>
         </div>
 
-       <!-- pop-up modal for edit post-->       
-       <div class="edit-modal">
-            <div class="edit-content">
-              <div class="close-edt">+</div>
-              <h2>Edit post</h2>
-              <form method="post" action="Profile_page.php"> <!-- Updated action to the same page -->
-                  <div>
-                      <textarea name="description" id="text-description" placeholder="Edit post" rows="20">
-                        <?php
-                          echo htmlspecialchars($ROW['post']) 
-                        ?>
-                      </textarea>
-                  </div>
-                  <div class="edt-btn">
-                      <input type="submit" value="Save" name="">
-                  </div>
-              </form>
-            </div>
-        </div>
-
         <!-- below cover-->
 
         <?php
@@ -388,28 +368,54 @@
      </script>
 
 <!-- return to previous screen where you left of -->
+
+<!-- Add this script to your HTML file -->
 <script>
-    function like_post(e) {
-        e.preventDefault();
+ function like_post(e, postId, iLiked) {
+    e.preventDefault();
 
-        // Toggle the 'liked' class on the parent 'a' element
-        e.target.parentNode.classList.toggle('liked');
+    // Toggle the 'liked' class on the parent 'a' element
+    e.target.parentNode.classList.toggle('liked');
 
-        // Send the request to the server
-        var link = e.target.parentNode.href;
-        var xml = new XMLHttpRequest();
+    // Send the request to the server using AJAX
+    var link = "like.php?type=post&id=" + postId;
+    var xml = new XMLHttpRequest();
 
-        xml.onreadystatechange = function () {
-            if (xml.readyState == 4 && xml.status == 200) {
-                // Update the likes count if needed
-                var likesCount = parseInt(xml.responseText);
-                // You can update the likes count on the UI if required
-            }
-        };
+    xml.onreadystatechange = function () {
+        if (xml.readyState == 4 && xml.status == 200) {
+            // Update the like count
+            var likesCount = parseInt(xml.responseText);
+            updateLikeCount(postId, iLiked, likesCount);
+        }
+    };
 
-        xml.open("GET", link, true);
-        xml.send();
+    xml.open("GET", link, true);
+    xml.send();
+}
+
+function updateLikeCount(postId,iLiked, count) {
+    // Update the like count in the DOM
+    var likeCountElement = document.getElementById('like-count-' + postId);
+
+    if (likeCountElement) {
+
+      var text = "";
+
+      if (count>0){
+     
+        if(count == 1){
+          text = "1 Person love your post"
+        }
+        else{
+          text = count + " People loved this post"
+          }
+        }
+      
+
+      likeCountElement.textContent = text;
     }
+}
+
 </script>
 
 

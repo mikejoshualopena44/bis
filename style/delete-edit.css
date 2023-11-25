@@ -1,0 +1,1323 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+a {
+  text-decoration: none; /* Remove underline */
+  color: var(--text-color); /* Set text color to white */
+}
+img{
+    background-color: none;
+    position: relative;
+    height: 2rem;
+    margin-right:1rem;
+}
+:root {
+    --text-color: #fff;
+    --firstbg: #42428a;
+    --secondbg: #f0c310;
+    --thirdbg: #42428aa4;
+    --fourthbg: #212145;
+    --ffthbg: #f0c310af;
+    --clr: #222327;
+    --sixthbg: #42428a;
+    --primary-color-hue: 252;
+    --dark-color-lightness: 17%;
+    --light-color-lightness: 95%;
+    --white-color-lightness: 100%;
+    --color-white: hsl(252, 30%, var(--white-color-lightness));
+    --color-light: hsl(252, 30%, var(--light-color-lightness));
+    --color-grey: hsl(252, 15%, 65%);
+    --color-primary: hsl(var(--primary-color-hue), 75%, 60%);
+    --color-secondary: hsl(252, 100%, 90%);
+    --color-success: hsl(120, 95%, 65%);
+    --color-danger: hsl(0, 95%, 65%);
+    --color-dark: hsl(252, 30%, var(--dark-color-lightness));
+    --color-black: hsl(252, 30%, 10%);
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+}
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--text-color);
+  flex-direction: column;
+}
+ 
+.label {
+  font-weight: bold;
+  color: var(--secondbg);
+}
+.date {
+  color: var(--text-color);
+}
+.edit {
+  float: right;
+  color: var(--text-color);
+  cursor: pointer;
+}
+#del-opt,
+#edt-opt{
+  color: var(--text-color);
+}
+/*=== MOBILE NAVBAR ===*/
+.mobile-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--secondbg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5px;
+  z-index: 1000; /* Adjust the value as needed */
+}
+.mobile-separator {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5.4rem; /* Adjust the height as needed */
+  background:  var(--fourthbg); /* Set the color you want for the separator bar */
+  z-index: 999; /* A lower z-index to place it below the mobile navbar */
+}
+.mobile-navbar ul{
+  display: flex;
+  width: 350px;
+}
+.mobile-navbar ul li {
+  position: relative;
+  list-style: none;
+  width: 25%;
+  height: 70px;
+  z-index: 1;
+}
+.mobile-navbar ul li a{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+.mobile-navbar ul li a .mobile-icon{
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.5em;
+  text-align: center;
+  transition: 0.5s;
+  color: var(--fourthbg);
+}
+.mobile-navbar ul li.active a .mobile-icon{
+  transform: translateY(-32px);
+  color: var(--text-color);
+}
+.mobile-navbar ul li a .mobile-txt{
+  position: absolute;
+  color: var(--firstbg);
+  font-weight: 400;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px)
+}
+.mobile-navbar ul li.active a .mobile-txt{
+  opacity: 1;
+  transform: translateY(10px)
+}
+.indicator{
+  position: absolute;
+  margin-top: -10%;
+  width: 70px;
+  height: 70px;
+  background: var(--firstbg);
+  border-radius: 50%;
+  border: 6px solid var(--fourthbg);
+  transition: 0.5s;
+}
+.indicator::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 0px -10px 0 0 var(--fourthbg);
+}
+.indicator::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: 0px -10px 0 0 var(--fourthbg) ;
+}
+.mobile-navbar ul li:nth-child(1).active ~ .indicator{
+  transform: translateX(calc(70px* 0 ));
+}  
+.mobile-navbar ul li:nth-child(2).active ~ .indicator{
+  transform: translateX(calc(70px* 1));
+}  
+.mobile-navbar ul li:nth-child(3).active ~ .indicator{
+  transform: translateX(calc(70px* 2));
+}  
+.mobile-navbar ul li:nth-child(4).active ~ .indicator{
+  transform: translateX(calc(70px* 3));
+}  
+.mobile-navbar ul li:nth-child(5).active ~ .indicator{
+  transform: translateX(calc(70px* 4));
+}  
+ /*==== SIDEBAR ====*/   
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: var(--secondbg);
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open{
+  width: 250px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name{
+  color: var(--fourthbg);
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  color: var(--fourthbg);
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+  color: var(--fourthbg);
+}
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: var(--text-color);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
+  display: none;
+}
+.sidebar input{
+  font-size: 15px;
+  color: var(--fourthbg);
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: var(--text-color);
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: var(--firstbg);
+  color: #FFF;
+}
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: var(--secondbg);
+}
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: var(--secondbg);
+}
+.sidebar li a {
+  display: flex;
+  height: 50px; /* Set a fixed height or adjust this value as needed */
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: var(--thirdbg);
+  overflow: hidden; /* Add this line to hide content exceeding the fixed height */
+}
+.sidebar .nav-list .profilebg {
+    color: var(--secondbg);
+    background: #0a0a1c;
+    border-radius: 12px;
+}
+.sidebar li a:hover{
+  background: var(--fourthbg);
+}
+.sidebar li a .links_name{
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i{
+  transition: all 0.5s ease;
+  color: var(--secondbg);
+}
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile{
+  width: 250px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: auto;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+.online{
+    position: relative;
+}
+.online::after{
+    content: '';
+    width: 7px;
+    height: 7px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background-color: #41db51;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/*bg color */
+.profile-section{
+  position: flex;
+  min-height: 100dvh; /* Set a minimum height to take up the entire viewport height */
+  top: 0;
+  left: 78px;
+  min-width: 99dvw;
+  transition: all 0.5s ease;
+  z-index: 2;
+  padding: 40px;
+  background-color: var(--fourthbg);
+}
+.profile-section::-webkit-scrollbar { /*Hide scrollbar univarsal*/
+  display: none; 
+}
+.hr{
+  overflow-x: hidden;
+}
+.sidebar.open ~ .profile-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.profile-section .text{
+  display: inline-block;
+  color: var(--fourthbg);
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+/* For desktop view (screens wider than 768px) */
+@media screen and (min-width: 426px) {
+  .mobile-separator,
+  .mobile-navbar {
+    display: none;
+  }
+  .sidebar {
+    display: block; /* Show the sidebar */
+  }
+  .profile-section {
+    left: 78px; /* Adjust the position of the profile section to accommodate the sidebar */
+    
+    
+  }
+  .profile-dp{
+    top: 65%;
+  }
+  .menu-buttons {
+    font-size: 1vw;/* Adjust the font size for larger screens */
+    width: 15vw;
+  }
+  .profile-header {
+    height: 4rem; /* Set the height to 2rem for mobile view */
+  }
+  .text-post{
+    font-size: 17px;
+    padding: 10px;
+  }
+  .posts-area{
+    padding: 10px;
+  }
+  #posts_btn{
+    font-size: 14px;
+  }
+  p{
+    font-size: 1vw;
+  }
+  .timeline-img img{
+    max-width: 8% !important;
+    margin-bottom: 15px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+  }
+  .profile-name{
+    margin-top:5rem;
+  }
+  .profile-content{
+    padding-left:7rem;
+    padding-right:7rem;
+  }
+  .tag i {
+    font-size: 30px; /* You can adjust the size as needed */
+  }
+  .label {
+    font-size:1.2vw;
+  }
+  .date {
+    font-size:.9vw;
+  }
+  .edit {
+    font-size:.9vw;
+  }
+  .posted-text{
+    font-size: .8dvw;
+  }
+}
+/* For mobile view (screens up to 767px) */
+@media (max-width: 425px) {
+  hr{
+    display: none;
+  }
+  .sidebar {
+    display: none; /* Hide the sidebar */
+  }
+  .profile-dp{
+    top: 40%;
+    max-width: 30% !important;
+  }
+  
+  .profile-section {
+    left: 0; /* Move the profile section to the left edge */
+    width: 100%; /* Expand the profile section to full width */
+    padding-top: 5.5vh;
+  }
+  .menu-buttons {
+    font-size: 3vw;/* Adjust the font size for larger screens */
+    width: 15vw;
+  }
+  .profile-header {
+    height: 2rem; /* Set the height to 2rem for mobile view */
+  }
+  .text-post{
+    font-size: 10px;
+    padding:10px;
+  }
+  #posts_btn{
+    font-size: 10px;
+    margin-top: -5px;
+    margin-right: 4px;
+  }
+  span,
+  p{
+    font-size: 2vw;
+  }
+  .timeline-img img{
+    max-width: 15% !important;
+    margin-bottom: 15px;
+  }
+  .timeline-bar{
+    padding: 12px;
+  }
+  .timeline-txt .tag{
+    font-size: 2vw; /* Increase the font size for the .tag class */
+  }
+  .profile-name{
+    margin-top:3rem;
+  }
+  .tag i {
+    font-size: 15px; /* You can adjust the size as needed */
+  }
+  .label {
+    font-weight: bold;
+    font-size:3vw;
+  }
+  .date {
+    font-size:2vw;
+  }
+  .edit {
+    font-size:2vw;
+  }
+  .posted-text{
+    font-size: 2vw;
+  }
+  .right{
+    display: none; 
+  }
+  
+}
+/* === MOBILE === 1214*/
+/*=== PROFILE ===*/
+.home-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--secondbg);
+  color: var(--fourthbg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1; /* Assuming initially visible */
+}
+.home-header.hidden {
+  opacity: 0;
+}
+.nav--hidden{
+  transform: translateY(calc(-1 * var(--nav-height)));
+}
+.profile-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--secondbg);
+  color: var(--fourthbg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50; 
+  display:none;
+}
+.profile-container {
+  display: flex; /* Use 'display: flex' to center elements horizontally and vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: 100%;
+  min-height: 15rem;
+  background-color: var(--fourthbg);
+  border-radius: 1rem;
+}
+.profile-square{
+  width:20px
+}
+.profile-box {
+  background-color: var(--fourthbg);
+  position: relative;
+  text-align: center;
+  color: var(--text-color);
+  
+}
+.profile-bg {
+  margin-top: 1rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  border: 2px solid var(--secondbg);
+  background-color: var(--fourthbg);
+}
+.profile-dp {
+  max-width: 15%;
+  height: auto;
+  border-radius: 50%;
+  border: 2px solid var(--secondbg);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center it horizontally and vertically */
+}
+.profile-name{
+  color: var(--text-color);
+  font-size: 2.0rem;
+  font-weight: 550;
+}
+.menu-buttons {
+  font-weight: bold;
+  display: inline-block;
+  background-color: var(--secondbg);
+  color: var(--fourthbg);
+  margin: 2px;
+  border-radius: 1rem;
+}
+.menu-buttons:hover{
+  background-color: var(--fourthbg);
+  border: 2px solid var(--secondbg);
+  color: var(--secondbg);
+} 
+.profile-content {
+  display: flex;
+  align-items: start;
+  gap:1rem;
+  max-height: 95dvh;
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top:20px; 
+}
+/*sticky div*/
+.profile-content::-webkit-scrollbar { /*Hide scrollbar univarsal*/
+  display: none; 
+}
+.profile-friends-img {
+  display: flex;
+  max-width: 20%; /* Increase the maximum width to make it larger */
+  height: auto; /* Allow the height to adjust proportionally */
+  border-radius: 15%;
+  margin: 8px;
+}
+.friends-bar {
+  background-color: var(--thirdbg);
+  min-height: 500px; /* Set a fixed height for the friends container */
+  color: var(--text-color);
+  padding: 15px;
+  border-radius: 1.5rem;
+  padding-bottom: 50px;
+   
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  flex:1;
+  display:flex;
+  align-items: start;
+  flex-direction: column;
+}
+.friends-container {
+  border-radius: 1rem;
+  padding: 4px;
+  max-height: 710px; /* Set a max-height to limit the number of displayed friends */
+  overflow-y: auto; /* Add a vertical scrollbar when the content overflows */
+  -ms-overflow-style: none; /* Hide scrollbar for Edge */
+  top: 0;
+  scrollbar-width: thin; /* Hide scrollbar for webkit (Chrome, Safari) */
+  scrollbar-color: transparent transparent;
+  
+  
+  scrollbar-width: thin; /* Hide scrollbar for Firefox */
+}
+.friends-container::-webkit-scrollbar { /*Hide scrollbar univarsal*/
+  display: none; 
+}
+.friends {
+  display: flex; /* Use flex display for each friend */
+  align-items: center; /* Vertically align the content within each friend */
+  margin-bottom: 10px; /* Add some margin for spacing between friends */
+  border-radius: 1rem;
+}
+.bisuan {
+  display: grid; /* Use flex display for each friend */
+  align-items: center; /* Vertically align the content within each friend */
+  margin: 12px; /* Add some margin for spacing between friends */
+  text-align: center;
+  border: solid 1px var(--fourthbg);
+  border-radius: 2rem;
+  align-items: center;
+}
+/* Style the text part of the friend */
+.friends a {
+  margin-left: 10px; /* Add space between the image and text */
+}
+.friends:hover {
+  color: var(--fourthbg);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--secondbg);
+}
+/*a or anchor setup above as public variable*/
+/*posts area*/
+.profile-posts {
+  min-height: 850px;
+  width: 100%;
+  flex:2;
+  background: var(--firstbg);
+  padding:20px;
+  padding-right: 20px;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Start images at the left */
+  align-items: flex-start; /* Align images to the top */
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+}
+.posts-area {
+  background-color: var(--text-color);
+  border-radius: 1rem;
+  width:100%;
+}
+.posts-area textarea{
+  width: 100%;
+  border: none;
+  font-family: "Poppins" , sans-serif;
+  resize: none;
+  color: var(--fourthbg);
+  border-radius: 15px;
+  resize: none;
+}
+#posts_btn {
+  float: right;
+  background-color: var(--secondbg);
+  border-radius: 2rem;
+  border: none;
+  color: var(--fourthbg);
+  padding: 4px;
+  width: 50px;
+  font-weight: bold;
+}
+/* profile timeline */
+.timeline{
+  margin-bottom: 20px;
+}
+.timeline-img img {
+  max-width: 100px; /* Ensure the image doesn't exceed its container's width */
+  height: auto; /* Automatically adjust the height to maintain the aspect ratio */
+  border-radius: 15%;
+  float: left;
+}
+.timeline-txt{
+ padding: 1rem;
+  
+}
+.timeline-txt p{
+  color: var(--text-color);
+  text-align: justify;
+  
+  
+}
+.timeline-bar {
+  margin-top: 20px;
+  background-color: var(--fourthbg);
+  color: var(--text-color);
+  border-radius: 1rem;
+  min-height: 7rem;
+  
+}
+/* post */
+.posted-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom-image-class {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  margin:0;
+}
+/*Like comment share */
+.tag {
+  margin-top: 1rem;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between; /* Add space between the two icon groups */
+}
+.tag a:hover {
+  color: var(--secondbg);
+}
+.left-icons {
+  display: flex;
+  align-items: center;
+  margin-left:10px;
+}
+.left-icons a:not(:last-child) {
+  margin-right: 1rem; /* Add margin between the icons */
+}
+.right-icons {
+  margin-left: auto; /* Push right-icons to the right corner */
+  margin-right:10px;
+}
+.timeline-bar hr{
+  color: var(--fourthbg);
+  margin-bottom: -20x;
+}
+/* =============== Notification Popup ============== */
+#notification-img{
+  border-radius: 1rem;
+}
+.text-muted{
+  color: var(--ffthbg);
+}
+.notifications-popup > div {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.notifications-popup small {
+  display: block;
+}
+/*=======Right =========*/
+.right {
+  height: max-content;
+  position: sticky;
+  top: 20px;  
+}
+.right .messages {
+  background: var(--firstbg);
+  border-radius: 1rem;
+  padding: 50px; /*to edit */
+  margin-top: 20px;
+  color: var(--text-color);
+  top: 200rem;
+}
+.right .messages .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: var(--secondbg);
+}
+.right .messages i {
+  font-size: 1.4rem;
+}
+.right .messages .search-bar {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.right .messages .category {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.right .messages .category h6 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 4px solid var(--color-light);
+  padding-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+.right .messages .category .active {
+  border-color: var(--secondbg);
+}
+.right .messages .message-requests {
+  color: var(--secondbg);
+}
+.right .messages .message {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: start;
+}
+.right .message .profile-photo {
+  position: relative;
+  overflow: visible;
+}
+.right .profile-photo img {
+  border-radius: 50%;
+}
+.right .messages .message:last-child {
+  margin: 0;
+}
+.right .messages .message p {
+  font-size:0.8rem;
+}
+.right .messages .message .profile-photo .active {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 3px solid var(--secondbg);
+  background: var(--secondbg);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+/*====== PHOTOS==========*/
+.photos {
+  min-height: 15rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Start images at the left */
+  align-items: center;
+  margin: 10px; /* Adjust the spacing between images */
+}
+.photos img {
+  width: 30%; /* Adjust the percentage based on your layout */
+  height: auto;
+  margin: 5px; /* Adjust the spacing between images */
+}
+.photos:hover {
+  border: 3px solid var(--secondbg);
+  transform: scale(1.03);
+  cursor: pointer;
+}
+/* ==== About Me ====*/
+.about-me{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 400px;
+  width: 100%;
+  flex: 2;
+  background: var(--firstbg);
+  padding-top: 20px;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  margin-top: 20px;
+  border-radius: 1.5rem;
+}
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  color: var(--text-color) ;
+  gap:2;
+}
+#soc{
+  font-size: 5rem;
+}
+#soc:hover{
+  cursor:pointer;
+  background-color: var(--secondbg-);
+}
+h2{
+  
+  display: block;
+  color: var(--secondbg);
+}
+.about-me  .button{
+  color: var(--text-color);
+  margin-top: 40px;
+  border: 2px solid var(--secondbg);
+  border-radius: 8px;
+}
+.about-me .button input{
+  width: 10dvw;
+  height: 3dvh;
+  color: var(--fourthbgr);
+  background: var(--firstbg);
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  
+}
+.about-me .button input:hover{
+  background: var(--secondbg);
+  color: var(--fourthbg);
+}
+/*==== REACT ==== */
+.liked-by span img{
+  border-radius: 50%;
+}
+/*== Loading ==*/
+.spinner-parent{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh;
+    margin: 0;
+}
+.glitch-wrapper {
+    margin-top: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+ }
+ 
+ .glitch {
+    position: relative;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    letter-spacing: 4px;
+    z-index: 1;
+ }
+ 
+ .glitch:before,
+ .glitch:after {
+    display: block;
+    content: attr(data-glitch);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+ }
+ 
+ .glitch:before {
+    animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    color: #42428a;
+    z-index: -1;
+ }
+ 
+ .glitch:after {
+    animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+    color: #f0c310;
+    z-index: -2;
+ }
+ 
+.spinner-child{
+position: absolute;
+top: 50%; /* Center vertically */
+left: 50%; /* Center horizontally */
+transform: translate(-50%, -50%); /* Center the child div */
+}
+.spinner-child {
+    --size: 30px;
+    --first-block-clr: #42428a;
+    --second-block-clr: #f0c310;
+    --clr: #111;
+    width: 100px;
+    height: 100px;
+  
+   }
+   
+   .spinner-child::after,.spinner-child::before {
+    box-sizing: border-box;
+    position: absolute;
+    content: "";
+    width: var(--size);
+    height: var(--size);
+    top: 50%;
+    animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+    left: 50%;
+    background: var(--first-block-clr);
+   }
+   
+   .spinner-child::after {
+    background: var(--second-block-clr);
+    top: calc(50% - var(--size));
+    left: calc(50% - var(--size));
+    animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+   }
+   
+   #react_img{
+    border: 2px solid var(--secondbg);
+   }
+   #react_img1{
+    margin-left: -30px;
+    border: 2px solid var(--secondbg);
+   }
+   #react_img2{
+    margin-left: -30px;
+    border: 2px solid var(--secondbg);
+   }
+/* == Modal for delete == */
+.delete-modal{
+  width: 100%;
+  height: 100%;
+  background-color: var(--fourthbg) ;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden; /* Hide horizontal overflow */
+  z-index: 120;
+}
+.delete-content{
+  width: 50dvw; 
+  min-height: 80dvh;
+  backdrop-filter: blur(15px) saturate(135%);
+  -webkit-backdrop-filter: blur(15px) saturate(135%);
+  background-color: rgba(17, 25, 40, 0.23);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  gap: .5rem;
+}
+.delete-content .close-del{
+  position:absolute;
+  top: 0;
+  right: 14px;
+  font-size: 42px;
+  transform: rotate(45deg);
+  color: var(--secondbg);
+  cursor: pointer;
+}
+.delete-content h2{
+  display: flex;
+  color: var(--secondbg);
+  font-family: "Poppins" , sans-serif;
+}
+.delete-content form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  color: var(--text-color);
+  gap: 3rem
+}
+.delete-content .med-container{
+  display:flex;
+  justify-content: space-between;
+}
+.delete-content #text-media{
+  width: 15dvw;
+  height: 5dvh;
+  border: none;
+  font-family: "Poppins" , sans-serif;
+  color: var(--fourthbg);
+  border-radius: 15px;
+  font-size: 15px;
+}
+.delete-content .del-btn{
+  color: var(--text-color);
+  margin-top: 40px;
+  
+}
+.delete-content .del-btn input{
+  width: 10dvw;
+  height: 3dvh;
+  color: var(--fourthbgr);
+  background: var(--firstbg);
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  
+}
+.delete-content .del-btn input:hover{
+  background: var(--secondbg);
+  color: var(--fourthbg);
+}
+.delete-box{
+  background-color: var(--thirdbg);
+  max-width: 75%;
+  height: 50%;;
+  border-radius: 1rem;
+}
+/* == Modal for Edit == */
+.edit-modal{
+  width: 100%;
+  height: 100%;
+  background-color: var(--fourthbg) ;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden; /* Hide horizontal overflow */
+  z-index: 120;
+}
+.edit-content{
+  width: 50dvw; 
+  min-height: 80dvh;
+  backdrop-filter: blur(15px) saturate(135%);
+  -webkit-backdrop-filter: blur(15px) saturate(135%);
+  background-color: rgba(17, 25, 40, 0.23);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  gap: .5rem;
+}
+.edit-content .close-edt{
+  position:absolute;
+  top: 0;
+  right: 14px;
+  font-size: 42px;
+  transform: rotate(45deg);
+  color: var(--secondbg);
+  cursor: pointer;
+}
+.edit-content h2{
+  display: flex;
+  color: var(--secondbg);
+  font-family: "Poppins" , sans-serif;
+}
+.edit-content form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  color: var(--text-color);
+  gap: 3rem
+  
+}
+.edit-content .med-container{
+  display:flex;
+  justify-content: space-between;
+}
+.edit-content #text-media{
+  width: 15dvw;
+  height: 5dvh;
+  border: none;
+  font-family: "Poppins" , sans-serif;
+  color: var(--fourthbg);
+  border-radius: 15px;
+  font-size: 15px;
+}
+.edit-content .edt-btn {
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+.edit-content .edt-btn #text-post{
+  resize: none;
+  width: 40dvw; /* You can set the desired width */
+  min-height: 30dvh;
+  padding: 1rem;
+  font-size: 1rem;
+}
+.edit-content .edt-btn input{
+  width: 10dvw;
+  height: 3dvh;
+  color: var(--fourthbgr);
+  background: var(--firstbg);
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  
+}
+.edit-content .edt-btn input:hover{
+  background: var(--secondbg);
+  color: var(--fourthbg);
+}
+.edit-box{
+  background-color: var(--thirdbg);
+  max-width: 30%;
+  border-radius: 1rem;
+}
