@@ -164,7 +164,7 @@
                        
                         if($ROW['likes'] == 1){
                             if($i_liked){
-                                $name= "You loved this post";
+                                $name= "1 person loved this post";
                             }else{
                                 $name= "1 person loved this post";
                             }
@@ -175,15 +175,35 @@
                                 if($ROW['likes']-1 == 1){
                                     $text = "other";
                                 }
-                                $name= "You and " . ($ROW['likes'] -1) . " $text loved this post";
+                                $name= $ROW['likes'] . " people loved this post";
                             }else{
                                 $name= $ROW['likes'] . " people loved this post";
                             }
                            
                         }
-
-
-                    }
+                    }    
+//                        if($ROW['likes'] == 1){
+//                            if($i_liked){
+//                                $name= "You loved this post";
+//                            }else{
+//                                $name= "1 person loved this post";
+//                            }
+//                        }else{
+//                            if($i_liked){
+//
+//                                $text = "others";
+//                                if($ROW['likes']-1 == 1){
+//                                    $text = "other";
+//                                }
+//                                $name= "You and " . ($ROW['likes'] -1) . " $text loved this post";
+//                            }else{
+//                                $name= $ROW['likes'] . " people loved this post";
+// //                           }
+ //                          
+ //                       }
+//
+//
+               
             ?>          
 
             <a href="people-likes.php?type=post&id=<?php echo $ROW['post_id']; ?>">

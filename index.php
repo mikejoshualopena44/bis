@@ -55,7 +55,7 @@
     <title>BISUconnect | Home_page </title>
     <link rel="stylesheet" href="style/style_index.css">
 
-    <link rel="shortcut icon" type="x-icon" href="images/lego.jpg">
+    <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -83,7 +83,7 @@ session_start();
     <meta name="keywords" content="BisuConnect, Bisuan, Website">
     <meta name="referrer" content="no-referrer">
     <link rel="stylesheet" type="text/css" href="style/login_style.css">
-    <link rel="shortcut icon" type="x-icon" href="images/lego.jpg">
+    <link rel="shortcut icon" type="x-icon" href="images/logo.png">
 
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">

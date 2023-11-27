@@ -70,7 +70,7 @@
     <title>BISUconnect | Edit post </title>
     <link rel="stylesheet" href="style/delete_edit.css">
 
-    <link rel="shortcut icon" type="x-icon" href="images/lego.jpg">
+    <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -187,7 +187,7 @@
 
                   <div class="edt-btn">
                       <textarea name="post" id="text-post"  placeholder=""><?php  echo $ROW['post']?></textarea>
-                      <input style="width: 100%" name="file" id="posts_browse" type="file" > 
+<!--    for FILE      <input style="width: 100%" name="file" id="posts_browse" type="file" > --> 
                       <input type="hidden" value="<?php echo $ROW['post_id']?>" name="post_id">
                       <input style="margin-top: 1rem; " type="submit" value="Save" >
                   </div>
