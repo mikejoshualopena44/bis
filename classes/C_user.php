@@ -36,6 +36,7 @@ class User{
 
     }
 
+
     public function get_friends($id)
     {
 

@@ -21,7 +21,12 @@
 <div class="sidebar">
       <div class="logo-details">
         <img class='bx bxl-c-plus-plus icon'  id="logo-img" src="images/BISU.png"  alt="">
-          <div class="logo_name">BisuConnect</div>
+          <div class="logo_name">
+            <a href="index.php" style="color: #212145">
+              BisuConnect
+            </a>
+          </div>     
+    </a>
           <i class='bx bx-menu' id="btn" ></i>
       </div>
       <ul class="nav-list">

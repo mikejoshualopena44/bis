@@ -14,7 +14,8 @@
 	//posting starts here
 
 
-	if($_SERVER['REQUEST_METHOD'] == "POST")
+  //check user post upon posting
+  if($_SERVER['REQUEST_METHOD'] == "POST")
 	{
     //Change Profile
     if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != "")
@@ -23,7 +24,7 @@
       if($_FILES['file']['type'] == "image/jpeg")
       {
         //size to check file size
-        $allowed_size = (1024  * 1024) *7;
+        $allowed_size =  (1024 * 1024) * 200; //200MB
         if($_FILES['file']['size'] < $allowed_size)
         {
             //All goods
@@ -100,7 +101,7 @@
       
             }
         }else{
-          echo "<div class='error'>";
+          echo "<div class='error' id='error-message'>";
           echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
           echo "Only images of 7MB or lower are allowed";
           echo "</div>"; 
@@ -108,7 +109,7 @@
 
       }else
       {
-        echo "<div class='error'>";
+        echo "<div class='error' id='error-message'>";
         echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
         echo "Only images of jpeg format are allowed";
         echo "</div>";       
@@ -118,19 +119,12 @@
     else
     {
 
-      echo "<div class='error'>";
+      echo "<div class='error' id='error-message'>";
       echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
 		  echo "please add a valid image!";
 	  	echo "</div>";
     }
   }
-
-   //   echo "<div class='error'>";
-   //   echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
-		//	echo "please add a valid image!";
-	//		echo "</div>";
-
-  //For image in the side bar
 
 ?>
 
@@ -212,9 +206,7 @@
       <!-- END OF SIDEBAR-->
 
   <!-- Profile Page -->
-    <div class="home-header">
-       <h3>BisuConnect</h3>
-    </div>
+  <?php include("header.php"); ?>
       
     <div class="profile-section">
         <!-- below cover-->

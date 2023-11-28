@@ -2,6 +2,7 @@
   //print_r($_SESSION);
   include ("classes/autoloader.php");
 
+
   //Check if user is logged in and if numeric to secure
   //isset($_SESSION['Bisuconnect_stud_ID']); 
   $login = new Login();
@@ -13,18 +14,18 @@
 
   if($_SERVER['REQUEST_METHOD'] == "POST" ) //inserting post to db
   {
+
     $post = new Post();
     $id = $_SESSION['Bisuconnect_stud_ID'];
-    $files= "";
-    $result = $post->create_post($id, $_POST,$files);
+    $result = $post->create_post($id, $_POST,$_FILES);
 
     //To avoid resubmission of post when refreshing
 
     if($result == ""){
-      header("Location: index.php");
+      header("Location: Profile_page.php");
       die;
     }else{
-      echo "<div class='error'>";
+      echo "<div class='error' id='error-message'>";
       echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
       print_r($result);
       echo "</div>";
@@ -44,6 +45,9 @@
 
   $friends = $user->get_friends($id);
 
+  // To collect recent posts from other users
+  $post = new Post();
+  $recent_posts = $post->get_recent_posts($_SESSION['Bisuconnect_stud_ID']);
 
 ?>
 
@@ -53,7 +57,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Home_page </title>
-    <link rel="stylesheet" href="style/style_index.css">
+    <link rel="stylesheet" href="style/style_ind.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -134,9 +138,7 @@
 
     <div class="profile-section">
 
-    <nav class="home-header">
-         <h3>BisuConnect</h3>
-    </nav>
+    <?php include("header.php"); ?>
           <!-- === Announcement -->
           <section class="ancmnt-container">
           <div class="ancmnt-bar">
@@ -163,9 +165,8 @@
         <div class="profile-content">
           <!-- friends area-->
 
-          <div class="org-container">
             <div class="org-bar">
-              <div class="label">Organizations</div> <br>
+              <div class="label">&nbsp &nbsp Organizations</div> <br>
                   <a href="https://www.facebook.com/bisuofficial" target="_blank">
                     <img class="org-logo" src="images/BISU.jpg " alt="friends" ><br>  
                   </a> 
@@ -187,9 +188,13 @@
                   <a href="https://www.facebook.com/bdats.bisumc" target="_blank">
                     <img class="org-logo" src="images/bdats.jpg " alt="friends"><br>  
                   </a> 
+
+
+                  
+
                   </a>
               </div>
-          </div>
+
           <!-- Start Post area-->
 
               <div class="profile-posts">
@@ -216,32 +221,29 @@
                 <!--profile- timeline-->
 
                   <!--profile- timeline-->
-                  <div class="tmp-container">
+
                     <div class="timeline-bar">
                         <!-- Other posts here!-->
                         <?php
-                        // (!= for others)  (== for only you)  
+                        
                         if ($_SESSION['Bisuconnect_stud_ID'] == $user_data['stud_ID']){
                         ?>
                             <div class="timeline"> <!--refer to P_post.php for the content-->
                             <?php
-                                if($posts)
-                                  {
-                                  foreach ($posts as $ROW) //It will display nth number of posts
-                                  { 
+                              if ($recent_posts) {
+                                  foreach ($recent_posts as $ROW) {
                                       $user = new User();
                                       $ROW_user = $user->get_user($ROW['stud_ID']);
-
                                       include("P_post.php");
                                   }
-                                  }
+                              }
                               ?>
                             </div>
                         <?php
                         }
                         ?>
                     </div>
-                </div>
+
               </div>
 
 
@@ -371,17 +373,80 @@
   if (currentPage === 'index.php') {
     document.getElementById('activity-stream').classList.add('profilebg');
   }
+  
+</script>
 
-  </script>
+
+ <!--=== Script for loading ====-->
+
+ <script>
+    $(window).on('load', function(){
+    $(".spinner-parent").fadeOut(1010);
+    $(".body").fadeIn(1010);
+    })
+</script>
+
+<!-- Add this script to your HTML file -->
+<script>
+ function like_post(e, postId) {
+    e.preventDefault();
+
+    // Toggle the 'liked' class on the parent 'a' element
+    e.target.parentNode.classList.toggle('liked');
+
+    // Send the request to the server using AJAX
+    var link = "like.php?type=post&id=" + postId;
+    var xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function () {
+        if (xml.readyState == 4 && xml.status == 200) {
+            // Update the like count
+            var likesCount = parseInt(xml.responseText);
+            updateLikeCount(postId, likesCount);
+        }
+    };
+
+    xml.open("GET", link, true);
+    xml.send();
+}
+
+function updateLikeCount(postId, count) {
+    // Update the like count in the DOM
+    var likeCountElement = document.getElementById('like-count-' + postId);
+
+    if (likeCountElement) {
+
+      var text = "";
+
+      if (count>0){
+     
+        if(count == 1){
+          text = "1 person loved this post"
+        }
+        else{
+          text = count + " people loved this post"
+          }
+        }
+      
+
+      likeCountElement.textContent = text;
+    }
+}
+
+</script>
+
+<!-- Timer for error message to display -->
+<script>
+  // Show the error message
+    document.getElementById('error-message').style.display = 'block';
+
+  // Automatically hide the error message after 5 seconds
+    setTimeout(function() {
+      document.getElementById('error-message').style.display = 'none';
+    }, 1000);
+</script>
 
 
-    <!--=== Script for loading ====-->
 
-    <script>
-        $(window).on('load', function(){
-          $(".spinner-parent").fadeOut(1010);
-          $(".body").fadeIn(1010);
-        })
-      </script>
 </body>
 </html>

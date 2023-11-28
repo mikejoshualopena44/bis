@@ -1,8 +1,8 @@
 <hr width="1645rem">
 <div class="about-me" >
-    <div class="social-media">
-        <!-- About Me-->
-        
+ <!--    <div class="social-media">
+        About Me
+       
         <a style="color:deepskyblue" href="https://www.facebook.com/yourprofile" target="_blank"> <i class='bx bxl-facebook-circle' id="soc"></i></a>    
         <a style="color:aqua" href="https://twitter.com/yourusername" target="_blank"> <i class='bx bxl-twitter' id="soc"></i></a>  
         <a style="color:chocolate" href="https://www.instagram.com/yourhandle" target="_blank"> <i class='bx bxl-instagram-alt' id="soc" ></i></a>  
@@ -10,6 +10,7 @@
         <a style="color:cornflowerblue" href="#" target="_blank">  <i class='bx bxl-linkedin-square' id="soc"></i></a>  
          <br>
     </div>
+-->
     <br><br>
         <div>
             <h2>About Me</h2>

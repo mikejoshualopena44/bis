@@ -5,7 +5,6 @@
     
 
     $login = new Login();
-    $user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
     $Post = new Post();
     $likes = false;
   
@@ -21,6 +20,10 @@
     else{
       $ERROR = "No data was found!";
     }
+
+    //declare
+    $User = new User();
+    $FRIEND_ROW = $User->get_user($ROW['stud_ID']);
   
     
 ?>
@@ -48,9 +51,16 @@
      <!-- Name and Date-->
     <div class="timeline-txt">
         <div class="label">
+
+        <!-- for linking the name to the user profile -->
+
+        <a href="Profile_page.php?id=<?php echo $FRIEND_ROW['stud_ID'];  ?>" style="color:#f0c310">
             <?php 
-            //html escaping to avoid usertyping script
+            //html escaping to avoid usertyping script          
                 echo htmlspecialchars($ROW_user['firstName']) . " " . htmlspecialchars($ROW_user['lastName']); // get the array or the user_DB
+            ?>
+        </a>
+            <?php           
 
                 if($ROW['is_profile_image'])
                 {  
@@ -73,7 +83,7 @@
                 }
             ?>
         </div>
-        <div class="date">
+        <div class="date" style="color:#fff">
             <?php 
                 echo $formattedDate;
             ?>

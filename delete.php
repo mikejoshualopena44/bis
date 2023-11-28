@@ -68,7 +68,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Delete post </title>
-    <link rel="stylesheet" href="style/delete_edit.css">
+    <link rel="stylesheet" href="style/dt.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->

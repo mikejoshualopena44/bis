@@ -2,7 +2,7 @@
     <!-- friends area-->
     <div class="friends-bar">
         <div class="label">Bisuans</div> <br>
-        <div class="friends-container">                   
+        <div class="friends-container">                         
             <?php
                 if($friends)
                 {
@@ -29,7 +29,7 @@
                         <div class="posts-area">
                             <form method="post" enctype="multipart/form-data" action="#">
                             <textarea name="post" id="text-post"  placeholder="What's on your mind, <?php echo $user_data['firstName']; ?>?"></textarea>
-                            <input name="file" id="posts_browse" type="file" > 
+                            <input name="file" id="posts_browse" type="file"> 
                             <input id="posts_btn" type="submit" value="Post"> 
                             <br><br>
                             </form>

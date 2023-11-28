@@ -36,7 +36,7 @@
       header("Location: Profile_page.php");
       die;
     }else{
-      echo "<div class='error'>";
+      echo "<div class='error' id='error-message'>";
       echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
       print_r($result);
       echo "</div>";
@@ -91,7 +91,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Profile_page </title>
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="style/style_profile.css">
+    <link rel="stylesheet" href="style/style_pp.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -369,7 +369,7 @@
 
 <!-- return to previous screen where you left of -->
 
-<!-- Add this script to your HTML file -->
+<!-- using AJAX to not refresh the page when clicking like -->
 <script>
  function like_post(e, postId) {
     e.preventDefault();
@@ -415,8 +415,20 @@ function updateLikeCount(postId, count) {
       likeCountElement.textContent = text;
     }
 }
-
 </script>
+
+<!-- Timer for error message to display -->
+<script>
+  // Show the error message
+    document.getElementById('error-message').style.display = 'block';
+
+  // Automatically hide the error message after 5 seconds
+    setTimeout(function() {
+      document.getElementById('error-message').style.display = 'none';
+    }, 3000);
+</script>
+
+
 
 
 

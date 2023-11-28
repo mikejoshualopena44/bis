@@ -23,9 +23,10 @@ img{
   background-color: var(--secondbg);
   font-weight: 600;
   color: var(--fourthbg);
-  margin-bottom: 1.5rem;
+  margin-bottom: -3.5rem;
   margin-top: 4.5rem;
   border-radius: 1rem;
+  z-index: 220;
 }
 :root {
     --text-color: #fff;
@@ -470,7 +471,7 @@ body{
   width: calc(100% - 78px);
   transition: all 0.5s ease;
   z-index: 2;
-  overflow: hidden; /* Add this property to hide overflowing content */
+  
 
   padding-left: 20px;
   padding-right: 20px;
@@ -720,14 +721,10 @@ body{
   display: flex;
   align-items: start;
   gap:1rem;
-  max-height: 95dvh;
-  overflow-y: auto; /* Enable vertical scrolling */
+  min-height: 95dvh;
   margin-top:20px; 
 }
 /*sticky div*/
-.profile-content::-webkit-scrollbar { /*Hide scrollbar univarsal*/
-  display: none; 
-}
 
 
 
@@ -742,22 +739,28 @@ body{
 
 
 
-.friends-bar {
-  background-color: var(--thirdbg);
-  min-height: 500px; /* Set a fixed height for the friends container */
-  color: var(--text-color);
+.friends-bar {  
+  
+  min-height: 200px; /* Set a fixed height for the friends container */
   padding: 15px;
   border-radius: 1.5rem;
   padding-bottom: 50px;
-   
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
 
+
+  background-color: var(--thirdbg);
+  color: var(--text-color);
+  
+
+   
   flex:1;
   display:flex;
   align-items: start;
   flex-direction: column;
+  
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+
 }
 
 .friends-container {
@@ -821,14 +824,14 @@ body{
   padding:20px;
   padding-right: 20px;
   border-radius: 1.5rem;
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* Start images at the left */
   align-items: flex-start; /* Align images to the top */
 
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
+  position: relative;
+  top: 0;
 }
 
 

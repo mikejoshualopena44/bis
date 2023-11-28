@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
+
 a {
   text-decoration: none; /* Remove underline */
   color: var(--text-color); /* Set text color to white */
@@ -16,35 +17,23 @@ img{
     height: 2rem;
     margin-right:1rem;
 }
+.error{
+  padding:1rem;
+  background-color: var(--secondbg);
+  font-weight: 600;
+  color: var(--fourthbg);
+  margin-bottom: -8rem;
+  margin-top: 4.5rem;
+  border-radius: 1rem;
+  z-index: 230;
+}
 :root {
     --text-color: #fff;
     --firstbg: #42428a;
     --secondbg: #f0c310;
     --thirdbg: #42428aa4;
     --fourthbg: #212145;
-    --ffthbg: #f0c310af;
     --clr: #222327;
-    --sixthbg: #42428a;
-    --primary-color-hue: 252;
-    --dark-color-lightness: 17%;
-    --light-color-lightness: 95%;
-    --white-color-lightness: 100%;
-    --color-white: hsl(252, 30%, var(--white-color-lightness));
-    --color-light: hsl(252, 30%, var(--light-color-lightness));
-    --color-grey: hsl(252, 15%, 65%);
-    --color-primary: hsl(var(--primary-color-hue), 75%, 60%);
-    --color-secondary: hsl(252, 100%, 90%);
-    --color-success: hsl(120, 95%, 65%);
-    --color-danger: hsl(0, 95%, 65%);
-    --color-dark: hsl(252, 30%, var(--dark-color-lightness));
-    --color-black: hsl(252, 30%, 10%);
-    --border-radius: 2rem;
-    --card-border-radius: 1rem;
-    --btn-padding: 0.6rem 2rem;
-    --search-padding: 0.6rem 1rem;
-    --card-padding: 1rem;
-    --sticky-top-left: 5.4rem;
-    --sticky-top-right: -18rem;
 }
 body{
   display: flex;
@@ -53,23 +42,16 @@ body{
   min-height: 100vh;
   background: var(--text-color);
   flex-direction: column;
+  --nav-height: 50px;
+  padding-top: var(--nav-height);
+  scroll-behavior: smooth;
 }
+
  
 .label {
   font-weight: bold;
-  color: var(--secondbg);
-}
-.date {
-  color: var(--text-color);
-}
-.edit {
-  float: right;
-  color: var(--text-color);
-  cursor: pointer;
-}
-#del-opt,
-#edt-opt{
-  color: var(--text-color);
+  font-size:1.2vw;
+  
 }
 /*=== MOBILE NAVBAR ===*/
 .mobile-navbar {
@@ -83,6 +65,7 @@ body{
   padding: 1.5px;
   z-index: 1000; /* Adjust the value as needed */
 }
+
 .mobile-separator {
   position: fixed;
   bottom: 0;
@@ -91,6 +74,8 @@ body{
   background:  var(--fourthbg); /* Set the color you want for the separator bar */
   z-index: 999; /* A lower z-index to place it below the mobile navbar */
 }
+
+
 .mobile-navbar ul{
   display: flex;
   width: 350px;
@@ -102,6 +87,7 @@ body{
   height: 70px;
   z-index: 1;
 }
+
 .mobile-navbar ul li a{
   position: relative;
   display: flex;
@@ -112,6 +98,7 @@ body{
   text-align: center;
   font-weight: 500;
 }
+
 .mobile-navbar ul li a .mobile-icon{
   position: relative;
   display: block;
@@ -139,6 +126,7 @@ body{
   opacity: 1;
   transform: translateY(10px)
 }
+
 .indicator{
   position: absolute;
   margin-top: -10%;
@@ -149,6 +137,7 @@ body{
   border: 6px solid var(--fourthbg);
   transition: 0.5s;
 }
+
 .indicator::before{
   content: "";
   position: absolute;
@@ -160,6 +149,7 @@ body{
   border-top-right-radius: 20px;
   box-shadow: 0px -10px 0 0 var(--fourthbg);
 }
+
 .indicator::after{
   content: "";
   position: absolute;
@@ -171,6 +161,7 @@ body{
   border-top-left-radius: 20px;
   box-shadow: 0px -10px 0 0 var(--fourthbg) ;
 }
+
 .mobile-navbar ul li:nth-child(1).active ~ .indicator{
   transform: translateX(calc(70px* 0 ));
 }  
@@ -186,6 +177,8 @@ body{
 .mobile-navbar ul li:nth-child(5).active ~ .indicator{
   transform: translateX(calc(70px* 4));
 }  
+
+
  /*==== SIDEBAR ====*/   
 .sidebar{
   position: fixed;
@@ -239,6 +232,8 @@ body{
   text-align: right;
   color: var(--fourthbg);
 }
+
+
 .sidebar i{
   color: #fff;
   height: 60px;
@@ -327,11 +322,14 @@ body{
   background: var(--thirdbg);
   overflow: hidden; /* Add this line to hide content exceeding the fixed height */
 }
+
+
 .sidebar .nav-list .profilebg {
     color: var(--secondbg);
     background: #0a0a1c;
     border-radius: 12px;
 }
+
 .sidebar li a:hover{
   background: var(--fourthbg);
 }
@@ -370,6 +368,7 @@ body{
   transition: all 0.5s ease;
   overflow: hidden;
 }
+
 .sidebar.open li.profile{
   width: 250px;
 }
@@ -385,6 +384,7 @@ body{
   border-radius: 6px;
   margin-right: 10px;
 }
+
 .sidebar li.profile .name,
 .sidebar li.profile .job{
   font-size: 15px;
@@ -426,22 +426,25 @@ body{
     right: 0;
 }
 /*bg color */
+
+
+
+
 .profile-section{
-  position: flex;
-  min-height: 100dvh; /* Set a minimum height to take up the entire viewport height */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 10dvh; /* Set a minimum height to take up the entire viewport height */
   top: 0;
   left: 78px;
-  min-width: 99dvw;
+  width: calc(100% - 78px);
   transition: all 0.5s ease;
   z-index: 2;
-  padding: 40px;
+ 
+  padding-left: 20px;
+  padding-right: 20px;
   background-color: var(--fourthbg);
-}
-.profile-section::-webkit-scrollbar { /*Hide scrollbar univarsal*/
-  display: none; 
-}
-.hr{
-  overflow-x: hidden;
+
 }
 .sidebar.open ~ .profile-section{
   left: 250px;
@@ -460,52 +463,43 @@ body{
   .mobile-navbar {
     display: none;
   }
+
   .sidebar {
     display: block; /* Show the sidebar */
   }
   .profile-section {
     left: 78px; /* Adjust the position of the profile section to accommodate the sidebar */
-    
-    
-  }
-  .profile-dp{
-    top: 65%;
   }
   .menu-buttons {
-    font-size: 1vw;/* Adjust the font size for larger screens */
-    width: 15vw;
+    font-size: 16px; /* Adjust the font size for larger screens */
   }
-  .profile-header {
-    height: 4rem; /* Set the height to 2rem for mobile view */
+  .home-header {
+    height: var(--nav-height); /* Set the height to 2rem for mobile view */
   }
-  .text-post{
-    font-size: 17px;
+
+  .profile-posts {
+    width: 80rem;
+  }
+  #create-post{
+    font-size: 15px;
     padding: 10px;
   }
   .posts-area{
     padding: 10px;
   }
   #posts_btn{
+    margin: 0 10px 0 10px;
     font-size: 14px;
   }
   p{
     font-size: 1vw;
   }
-  .timeline-img img{
-    max-width: 8% !important;
-    margin-bottom: 15px;
-    margin-top: 1rem;
-    margin-left: 1rem;
-  }
-  .profile-name{
-    margin-top:5rem;
-  }
-  .profile-content{
-    padding-left:7rem;
-    padding-right:7rem;
+  .timeline-bar{
+    padding: 30px;
+    margin: 20px;
   }
   .tag i {
-    font-size: 30px; /* You can adjust the size as needed */
+    font-size: 30px !important; /* You can adjust the size as needed */
   }
   .label {
     font-size:1.2vw;
@@ -517,41 +511,37 @@ body{
     font-size:.9vw;
   }
   .posted-text{
-    font-size: .8dvw;
+    font-size: 1vw;
+    color: var(--text-color);
   }
+
+  /*newsfeed*/
 }
+
 /* For mobile view (screens up to 767px) */
 @media (max-width: 425px) {
-  hr{
-    display: none;
-  }
+
   .sidebar {
     display: none; /* Hide the sidebar */
   }
   .profile-dp{
-    top: 40%;
-    max-width: 30% !important;
+    max-width: 50% !important;
   }
-  
   .profile-section {
     left: 0; /* Move the profile section to the left edge */
     width: 100%; /* Expand the profile section to full width */
     padding-top: 5.5vh;
   }
-  .menu-buttons {
-    font-size: 3vw;/* Adjust the font size for larger screens */
-    width: 15vw;
-  }
-  .profile-header {
+  .home-header {
     height: 2rem; /* Set the height to 2rem for mobile view */
   }
-  .text-post{
+  textarea{
     font-size: 10px;
     padding:10px;
   }
   #posts_btn{
     font-size: 10px;
-    margin-top: -5px;
+    margin-top: px;
     margin-right: 4px;
   }
   span,
@@ -559,7 +549,7 @@ body{
     font-size: 2vw;
   }
   .timeline-img img{
-    max-width: 15% !important;
+    max-width: 20% !important;
     margin-bottom: 15px;
   }
   .timeline-bar{
@@ -568,8 +558,8 @@ body{
   .timeline-txt .tag{
     font-size: 2vw; /* Increase the font size for the .tag class */
   }
-  .profile-name{
-    margin-top:3rem;
+  .profile-friends{
+    display: none;
   }
   .tag i {
     font-size: 15px; /* You can adjust the size as needed */
@@ -587,11 +577,32 @@ body{
   .posted-text{
     font-size: 2vw;
   }
-  .right{
-    display: none; 
+    /*newsfeed*/
+  .profile-posts{
+    margin-right: 0;
   }
-  
+
 }
+@media (max-width: 1214px) {
+
+  .label {
+    font-weight: bold;
+    font-size:2vw;
+  }
+/*  .profile-content{
+    flex-direction: column;
+  }
+
+  .profile-friends{
+    display: none;
+  }*/
+  #create-post{
+    font-size: 10px;
+    padding: 10px;
+  }
+
+}
+
 /* === MOBILE === 1214*/
 /*=== PROFILE ===*/
 .home-header {
@@ -608,197 +619,185 @@ body{
   transition: opacity 0.3s ease-in-out;
   opacity: 1; /* Assuming initially visible */
 }
+
 .home-header.hidden {
   opacity: 0;
 }
+
 .nav--hidden{
   transform: translateY(calc(-1 * var(--nav-height)));
 }
-.profile-header{
-  position: fixed;
-  top: 0;
-  left: 0;
+/* === Announcement == */
+.ancmnt-container{
   width: 100%;
-  background-color: var(--secondbg);
-  color: var(--fourthbg);
+  height: 400px;
+  background-color: var(--fourthbg);
+  margin-top: 60px;
+  padding: 2rem;
+  margin-top: 60px
+}
+
+.ancmnt-bar {
+	position: relative;
+	max-width: 70rem;
+	margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.slider {
+	display: flex;
+  min-height: 250px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
+	border-radius: 0.5rem;
+	-ms-overflow-style: none; /* Hide scrollbar IE and Edge */
+	scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.slider::-webkit-scrollbar {
+	display: none;
+}
+
+.slider img {
+  height: 300px;
+	flex: 1 0 100%;
+	scroll-snap-align: start;
+	object-fit: cover;
+}
+
+.slider-nav {
+	display: flex;
+	column-gap: 1rem;
+	position: absolute;
+	bottom: 1.25rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+}
+
+.slider-nav a {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background-color: var(--secondbg);
+	opacity: 0.75;
+	transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover {
+	opacity: 1;
+}
+
+
+
+/* == Create post ===*/
+.profile-photo {
+  width: 2.7rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.create-post {
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 50; 
-  display:none;
+  justify-content: space-between;
+  background: var(--color-white);
+  padding: 0.4rem var(--card-padding);
+  border-radius: var(--border-radius);
+  border: none;
 }
-.profile-container {
-  display: flex; /* Use 'display: flex' to center elements horizontally and vertically */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+
+.create-post input[type="text"] {
   width: 100%;
-  min-height: 15rem;
-  background-color: var(--fourthbg);
-  border-radius: 1rem;
+  justify-self: start;
+  padding-left: 1rem;
+  background: transparent;
+  color: var(--color-dark);
+  margin-right: 1rem;
 }
-.profile-square{
-  width:20px
-}
+
+/* For Profile*/
 .profile-box {
-  background-color: var(--fourthbg);
-  position: relative;
+  background-color: var(--fourthbg) ;
   text-align: center;
   color: var(--text-color);
-  
 }
-.profile-bg {
-  margin-top: 1rem;
-  max-width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  border: 2px solid var(--secondbg);
-  background-color: var(--fourthbg);
-}
-.profile-dp {
-  max-width: 15%;
-  height: auto;
-  border-radius: 50%;
-  border: 2px solid var(--secondbg);
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center it horizontally and vertically */
-}
-.profile-name{
-  color: var(--text-color);
-  font-size: 2.0rem;
-  font-weight: 550;
-}
+
 .menu-buttons {
   font-weight: bold;
   display: inline-block;
+  width: 65px;
   background-color: var(--secondbg);
   color: var(--fourthbg);
+  font-size: 1rem; /* Use vw (viewport width) for responsive font size */
   margin: 2px;
   border-radius: 1rem;
 }
-.menu-buttons:hover{
-  background-color: var(--fourthbg);
-  border: 2px solid var(--secondbg);
-  color: var(--secondbg);
-} 
+
+
 .profile-content {
   display: flex;
   align-items: start;
-  gap:1rem;
-  max-height: 95dvh;
-  overflow-y: auto; /* Enable vertical scrolling */
-  margin-top:20px; 
+  gap: 2rem;
+  margin-top: 7vh;
 }
-/*sticky div*/
-.profile-content::-webkit-scrollbar { /*Hide scrollbar univarsal*/
-  display: none; 
-}
-.profile-friends-img {
-  display: flex;
-  max-width: 20%; /* Increase the maximum width to make it larger */
-  height: auto; /* Allow the height to adjust proportionally */
-  border-radius: 15%;
-  margin: 8px;
-}
-.friends-bar {
+
+/* ===Organizations=== */
+.org-bar {
+  height: 95dvh;
+  padding: 20px; /* Add padding to the org-bar if needed */
+  border-radius: 1rem; /* Rounded corners for the org-bar */
+  gap: 10px; /* Adjust the spacing between images */
+  row-gap: 2;
+  margin-top: 20px;
+
   background-color: var(--thirdbg);
-  min-height: 500px; /* Set a fixed height for the friends container */
-  color: var(--text-color);
-  padding: 15px;
-  border-radius: 1.5rem;
-  padding-bottom: 50px;
-   
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  flex:1;
-  display:flex;
+
+  flex: .55;
   align-items: start;
-  flex-direction: column;
-}
-.friends-container {
-  border-radius: 1rem;
-  padding: 4px;
-  max-height: 710px; /* Set a max-height to limit the number of displayed friends */
-  overflow-y: auto; /* Add a vertical scrollbar when the content overflows */
-  -ms-overflow-style: none; /* Hide scrollbar for Edge */
-  top: 0;
-  scrollbar-width: thin; /* Hide scrollbar for webkit (Chrome, Safari) */
-  scrollbar-color: transparent transparent;
-  
-  
-  scrollbar-width: thin; /* Hide scrollbar for Firefox */
-}
-.friends-container::-webkit-scrollbar { /*Hide scrollbar univarsal*/
-  display: none; 
-}
-.friends {
-  display: flex; /* Use flex display for each friend */
-  align-items: center; /* Vertically align the content within each friend */
-  margin-bottom: 10px; /* Add some margin for spacing between friends */
-  border-radius: 1rem;
-}
-.bisuan {
-  display: grid; /* Use flex display for each friend */
-  align-items: center; /* Vertically align the content within each friend */
-  margin: 12px; /* Add some margin for spacing between friends */
-  text-align: center;
-  border: solid 1px var(--fourthbg);
-  border-radius: 2rem;
-  align-items: center;
-}
-/* Style the text part of the friend */
-.friends a {
-  margin-left: 10px; /* Add space between the image and text */
-}
-.friends:hover {
-  color: var(--fourthbg);
-  font-size: 15px;
-  font-weight: bold;
-  background-color: var(--secondbg);
-}
-/*a or anchor setup above as public variable*/
-/*posts area*/
-.profile-posts {
-  min-height: 850px;
-  width: 100%;
-  flex:2;
-  background: var(--firstbg);
-  padding:20px;
-  padding-right: 20px;
-  border-radius: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start; /* Start images at the left */
-  align-items: flex-start; /* Align images to the top */
+
+
   position: -webkit-sticky;
   position: sticky;
-  bottom: 0;
+  top: 15px;
+
+  overflow-y: auto;
 }
-.posts-area {
-  background-color: var(--text-color);
-  border-radius: 1rem;
-  width:100%;
+
+.org-bar::-webkit-scrollbar {  
+	display: none;
 }
-.posts-area textarea{
-  width: 100%;
-  border: none;
-  font-family: "Poppins" , sans-serif;
-  resize: none;
-  color: var(--fourthbg);
-  border-radius: 15px;
-  resize: none;
-}
-#posts_btn {
-  float: right;
-  background-color: var(--secondbg);
-  border-radius: 2rem;
-  border: none;
-  color: var(--fourthbg);
-  padding: 4px;
-  width: 50px;
+
+.label {
   font-weight: bold;
+  text-align: start;
+  color: var(--text-color);
 }
+
+.org-logo {
+  width: 160px; /* Set a fixed width for square images */
+  height: 160px; /* Set a fixed height for square images */
+  object-fit: cover; /* Maintain the aspect ratio and cover the entire container */
+  border-radius: 50%; /* Rounded corners for the image container */
+  margin: 5px; /* Adjust the margin for spacing between images */
+  margin-bottom:2rem;
+
+
+}
+
+.org-logo:hover {
+  transform: scale(1.1); /* Zoom in the image on hover */
+  -webkit-box-shadow: 10px 13.5px 13.5px -2px #000000;
+  -moz-box-shadow: 10px 13.5px 13.5px -2px #000000;
+  box-shadow: 10px 13.5px 13.5px -2px #000000;
+}
+
+
 /* profile timeline */
 .timeline{
   margin-bottom: 20px;
@@ -809,157 +808,95 @@ body{
   border-radius: 15%;
   float: left;
 }
-.timeline-txt{
- padding: 1rem;
-  
-}
+
+
 .timeline-txt p{
   color: var(--text-color);
   text-align: justify;
   
-  
 }
+
+.tmp-container{
+  overflow-y: auto;
+  min-width: 60rem;
+  height: 99rem;
+  flex:3.7;
+  background: var(--firstbg);
+  margin-top: 20px;
+  margin-right: -10px;
+  margin-left: -10px;
+  border-radius: 1.5rem;
+}
+
+.tmp-container::-webkit-scrollbar {
+	display: none;
+}
+
 .timeline-bar {
   margin-top: 20px;
   background-color: var(--fourthbg);
-  color: var(--text-color);
+  color: var(--secondbg);
   border-radius: 1rem;
   min-height: 7rem;
-  
+
 }
-/* post */
-.posted-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+#react_img{
+  border: 2px solid var(--secondbg);
+  border-radius: 50%;
+ }
+ #react_img1{
+  margin-left: -30px;
+  border: 2px solid var(--secondbg);
+  border-radius: 50%;
+ }
+ #react_img2{
+  margin-left: -30px;
+  border: 2px solid var(--secondbg);
+  border-radius: 50%;
+ }
+
+.friends-container::-webkit-scrollbar { /*Hide scrollbar univarsal*/
+  display: none; 
 }
-.custom-image-class {
-  width: 100%;
-  height: 100%;
-  border: 2px solid #000;
-  border-radius: 1rem;
-  margin:0;
+
+
+#info{
+  margin-left: auto;
 }
-/*Like comment share */
-.tag {
-  margin-top: 1rem;
-  color: var(--text-color);
-  display: flex;
-  justify-content: space-between; /* Add space between the two icon groups */
-}
-.tag a:hover {
-  color: var(--secondbg);
-}
-.left-icons {
-  display: flex;
-  align-items: center;
-  margin-left:10px;
-}
-.left-icons a:not(:last-child) {
-  margin-right: 1rem; /* Add margin between the icons */
-}
-.right-icons {
-  margin-left: auto; /* Push right-icons to the right corner */
-  margin-right:10px;
-}
-.timeline-bar hr{
-  color: var(--fourthbg);
-  margin-bottom: -20x;
-}
-/* =============== Notification Popup ============== */
-#notification-img{
-  border-radius: 1rem;
-}
-.text-muted{
-  color: var(--ffthbg);
-}
-.notifications-popup > div {
-  display: flex;
-  align-items: start;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.notifications-popup small {
-  display: block;
-}
-/*=======Right =========*/
-.right {
-  height: max-content;
-  position: sticky;
-  top: 20px;  
-}
-.right .messages {
-  background: var(--firstbg);
-  border-radius: 1rem;
-  padding: 50px; /*to edit */
-  margin-top: 20px;
-  color: var(--text-color);
-  top: 200rem;
-}
-.right .messages .heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  color: var(--secondbg);
-}
-.right .messages i {
-  font-size: 1.4rem;
-}
-.right .messages .search-bar {
-  display: flex;
-  margin-bottom: 1rem;
-}
-.right .messages .category {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.right .messages .category h6 {
-  width: 100%;
+.friends {
+  display: grid; /* Use flex display for each friend */
+  align-items: center; /* Vertically align the content within each friend */
+  margin: 12px; /* Add some margin for spacing between friends */
   text-align: center;
-  border-bottom: 4px solid var(--color-light);
-  padding-bottom: 0.5rem;
-  font-size: 0.75rem;
+  border: solid 1px var(--fourthbg);
+  border-radius: 2rem;
+  align-items: center;
+
 }
-.right .messages .category .active {
-  border-color: var(--secondbg);
+
+/* Style the text part of the friend */
+.friends a {
+  margin-left: 10px; /* Add space between the image and text */
 }
-.right .messages .message-requests {
-  color: var(--secondbg);
+
+.friends:hover {
+  color: var(--fourthbg);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--secondbg);
+  border-radius: 2rem;
 }
-.right .messages .message {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  align-items: start;
+
+/* friends area*/
+.profile-friends {
+  max-height: 200px;
+  flex:1;
+  padding-right: 20px;
 }
-.right .message .profile-photo {
-  position: relative;
-  overflow: visible;
-}
-.right .profile-photo img {
-  border-radius: 50%;
-}
-.right .messages .message:last-child {
-  margin: 0;
-}
-.right .messages .message p {
-  font-size:0.8rem;
-}
-.right .messages .message .profile-photo .active {
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 50%;
-  border: 3px solid var(--secondbg);
-  background: var(--secondbg);
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-/*====== PHOTOS==========*/
-.photos {
-  min-height: 15rem;
+
+.profile-friends-img {
+  min-height: 12rem;
   border-radius: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -967,175 +904,181 @@ body{
   align-items: center;
   margin: 10px; /* Adjust the spacing between images */
 }
-.photos img {
-  width: 30%; /* Adjust the percentage based on your layout */
+
+.profile-friends-img img {
+  width: 10%; /* Adjust the percentage based on your layout */
   height: auto;
   margin: 5px; /* Adjust the spacing between images */
 }
-.photos:hover {
-  border: 3px solid var(--secondbg);
-  transform: scale(1.03);
-  cursor: pointer;
+
+
+.friends-bar {
+  background-color: var(--thirdbg);
+  min-height: 500px; /* Set a fixed height for the friends container */
+  margin-top: 20px;
+  color: var(--text-color);
+  padding: 15px;
+  border-radius: 1.5rem;
+  padding-bottom: 60px;
+
 }
-/* ==== About Me ====*/
-.about-me{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-height: 400px;
+
+.friends-container {
+  height: auto;
   width: 100%;
-  flex: 2;
-  background: var(--firstbg);
-  padding-top: 20px;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  flex:2;
+  padding:20px;
+  padding-right: 20px;
+  margin-top: 20px;
+  margin-right:20px;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Start images at the left */
+  align-items: flex-start; /* Align images to the top */
+  border-radius: 1rem;
+  padding: 4px;
+  /* Set a max-height to limit the number of displayed friends */
+/*  overflow-y: auto; /* Add a vertical scrollbar when the content overflows 
+
+  -ms-overflow-style: none; /* Hide scrollbar for Edge 
+
+  scrollbar-width: thin; /* Hide scrollbar for webkit (Chrome, Safari) 
+  scrollbar-color: transparent transparent;
+  
+    
+  scrollbar-width: thin; /* Hide scrollbar for Firefox 
+*/
+}
+
+
+/*a or anchor setup above as public variable*/
+/*posts area*/
+.profile-posts {
+  min-width: 20rem;
+  min-height: 10dvh;
+  flex:3.7;
+  background: var(--thirdbg);
+  padding:10px;
   margin-top: 20px;
   border-radius: 1.5rem;
+
+  overflow-y: auto; /* Enable vertical scrolling */
+
+  position: relative;
+  top: 0;
+
+  
 }
-.social-media {
+
+
+.posts-area {
+  background-color: var(--text-color);
+  border-radius: 15px;
+  margin: 15px;
+}
+
+#text-post{
+  width: 100%;
+  resize: vertical;
+}
+
+#create-post{
+  width: 100%;
+  border: none;
+  font-family: "Poppins" , sans-serif;
+  resize: vertical; /* Allow vertical resizing only */
+  color: var(--fourthbg);
+  border-radius: 15px;
+}
+
+#posts_btn {
+  float: right;
+  background-color: var(--secondbg);
+  border-radius: 2rem;
+  border: none;
+  color: var(--fourthbg);
+  padding: 4px;
+  height: 2rem;
+  width: 5rem;
+  font-weight: bold;
+}
+
+
+/* posts */
+.posted-image {
   display: flex;
   justify-content: center;
-  align-items: center; 
-  color: var(--text-color) ;
-  gap:2;
+  align-items: center;
 }
-#soc{
-  font-size: 5rem;
+
+.custom-image-class {
+  width: 50%;
+  height: 50%;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  margin:0;
 }
-#soc:hover{
-  cursor:pointer;
-  background-color: var(--secondbg-);
+
+
+/*Like comment share */
+
+.hidden {
+  display: none;
 }
-h2{
-  
-  display: block;
+
+a.liked i.bx-heart {
+  color: var(--secondbg); /* Change this to the desired color for liked state */
+}
+
+.people-react{
+  color: var(--text-color);
+}
+
+.people-react:hover{
+  text-decoration: underline;
+}
+
+.tag {
+  margin-top: 1rem;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between; /* Add space between the two icon groups */
+}
+
+.tag a:hover {
   color: var(--secondbg);
 }
-.about-me  .button{
-  color: var(--text-color);
-  margin-top: 40px;
-  border: 2px solid var(--secondbg);
-  border-radius: 8px;
+
+.left-icons {
+  display: flex;
+  align-items: center;
+  margin-left:10px;
 }
-.about-me .button input{
-  width: 10dvw;
-  height: 3dvh;
-  color: var(--fourthbgr);
-  background: var(--firstbg);
-  border-radius: 6px;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  
+
+.left-icons a:not(:last-child) {
+  margin-right: 1rem; /* Add margin between the icons */
 }
-.about-me .button input:hover{
-  background: var(--secondbg);
+
+.right-icons {
+  margin-left: auto; /* Push right-icons to the right corner */
+  margin-right:10px;
+}
+
+
+
+.timeline-bar hr{
   color: var(--fourthbg);
+  margin-bottom: -20x;
 }
-/*==== REACT ==== */
-.liked-by span img{
-  border-radius: 50%;
-}
-/*== Loading ==*/
-.spinner-parent{
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh;
-    margin: 0;
-}
-.glitch-wrapper {
-    margin-top: 7rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
- }
- 
- .glitch {
-    position: relative;
-    font-size: 45px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #fff;
-    letter-spacing: 4px;
-    z-index: 1;
- }
- 
- .glitch:before,
- .glitch:after {
-    display: block;
-    content: attr(data-glitch);
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
- }
- 
- .glitch:before {
-    animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-    color: #42428a;
-    z-index: -1;
- }
- 
- .glitch:after {
-    animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-    color: #f0c310;
-    z-index: -2;
- }
- 
-.spinner-child{
-position: absolute;
-top: 50%; /* Center vertically */
-left: 50%; /* Center horizontally */
-transform: translate(-50%, -50%); /* Center the child div */
-}
-.spinner-child {
-    --size: 30px;
-    --first-block-clr: #42428a;
-    --second-block-clr: #f0c310;
-    --clr: #111;
-    width: 100px;
-    height: 100px;
-  
-   }
-   
-   .spinner-child::after,.spinner-child::before {
-    box-sizing: border-box;
-    position: absolute;
-    content: "";
-    width: var(--size);
-    height: var(--size);
-    top: 50%;
-    animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-    left: 50%;
-    background: var(--first-block-clr);
-   }
-   
-   .spinner-child::after {
-    background: var(--second-block-clr);
-    top: calc(50% - var(--size));
-    left: calc(50% - var(--size));
-    animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-   }
-   
-   #react_img{
-    border: 2px solid var(--secondbg);
-   }
-   #react_img1{
-    margin-left: -30px;
-    border: 2px solid var(--secondbg);
-   }
-   #react_img2{
-    margin-left: -30px;
-    border: 2px solid var(--secondbg);
-   }
+
+
 /* == Modal for delete == */
 .delete-modal{
   width: 100%;
   height: 100%;
-  background-color: var(--fourthbg) ;
+  background-color: rgba(0, 0, 0, 0.7) ;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -1144,22 +1087,26 @@ transform: translate(-50%, -50%); /* Center the child div */
   overflow-x: hidden; /* Hide horizontal overflow */
   z-index: 120;
 }
+
 .delete-content{
-  width: 50dvw; 
-  min-height: 80dvh;
+  width: 110dvh;
+  height: 50dvh;
   backdrop-filter: blur(15px) saturate(135%);
   -webkit-backdrop-filter: blur(15px) saturate(135%);
   background-color: rgba(17, 25, 40, 0.23);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
-  
+  position: sticky;
   display:flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  top: 0;
-  gap: .5rem;
+  gap:4rem;
+  top:0;
 }
+
+
+
 .delete-content .close-del{
   position:absolute;
   top: 0;
@@ -1169,10 +1116,13 @@ transform: translate(-50%, -50%); /* Center the child div */
   color: var(--secondbg);
   cursor: pointer;
 }
+
+
 .delete-content h2{
-  display: flex;
+  display: flex !important;
   color: var(--secondbg);
   font-family: "Poppins" , sans-serif;
+
 }
 .delete-content form{
   display: flex;
@@ -1180,8 +1130,9 @@ transform: translate(-50%, -50%); /* Center the child div */
   align-items: center;
   justify-content: center; 
   color: var(--text-color);
-  gap: 3rem
+  gap:2rem;
 }
+
 .delete-content .med-container{
   display:flex;
   justify-content: space-between;
@@ -1195,10 +1146,10 @@ transform: translate(-50%, -50%); /* Center the child div */
   border-radius: 15px;
   font-size: 15px;
 }
+
 .delete-content .del-btn{
   color: var(--text-color);
   margin-top: 40px;
-  
 }
 .delete-content .del-btn input{
   width: 10dvw;
@@ -1215,109 +1166,4 @@ transform: translate(-50%, -50%); /* Center the child div */
   background: var(--secondbg);
   color: var(--fourthbg);
 }
-.delete-box{
-  background-color: var(--thirdbg);
-  max-width: 75%;
-  height: 50%;;
-  border-radius: 1rem;
-}
-/* == Modal for Edit == */
-.edit-modal{
-  width: 100%;
-  height: 100%;
-  background-color: var(--fourthbg) ;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-x: hidden; /* Hide horizontal overflow */
-  z-index: 120;
-}
-.edit-content{
-  width: 50dvw; 
-  min-height: 80dvh;
-  backdrop-filter: blur(15px) saturate(135%);
-  -webkit-backdrop-filter: blur(15px) saturate(135%);
-  background-color: rgba(17, 25, 40, 0.23);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  top: 0;
-  gap: .5rem;
-}
-.edit-content .close-edt{
-  position:absolute;
-  top: 0;
-  right: 14px;
-  font-size: 42px;
-  transform: rotate(45deg);
-  color: var(--secondbg);
-  cursor: pointer;
-}
-.edit-content h2{
-  display: flex;
-  color: var(--secondbg);
-  font-family: "Poppins" , sans-serif;
-}
-.edit-content form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; 
-  color: var(--text-color);
-  gap: 3rem
-  
-}
-.edit-content .med-container{
-  display:flex;
-  justify-content: space-between;
-}
-.edit-content #text-media{
-  width: 15dvw;
-  height: 5dvh;
-  border: none;
-  font-family: "Poppins" , sans-serif;
-  color: var(--fourthbg);
-  border-radius: 15px;
-  font-size: 15px;
-}
-.edit-content .edt-btn {
-  color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-}
-.edit-content .edt-btn #text-post{
-  resize: none;
-  width: 40dvw; /* You can set the desired width */
-  min-height: 30dvh;
-  padding: 1rem;
-  font-size: 1rem;
-}
-.edit-content .edt-btn input{
-  width: 10dvw;
-  height: 3dvh;
-  color: var(--fourthbgr);
-  background: var(--firstbg);
-  border-radius: 6px;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  
-}
-.edit-content .edt-btn input:hover{
-  background: var(--secondbg);
-  color: var(--fourthbg);
-}
-.edit-box{
-  background-color: var(--thirdbg);
-  max-width: 30%;
-  border-radius: 1rem;
-}
+

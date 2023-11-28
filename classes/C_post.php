@@ -38,10 +38,24 @@ class Post{
                 if(!empty($files['file']['name']))
                 {
 
-                    $folder = "uploads/" . $stud_ID . "/";
+                    $allowed_types = ['image/jpeg'];
+                    $file_type = mime_content_type($files['file']['tmp_name']);
+            
+                    if (!in_array($file_type, $allowed_types)) {
+                        $this->error .= "Only images of JPEG format are allowed.<br>";
+                        return $this->error;
+                    }
+            
+                    // Check if the file is a valid image using getimagesize
+                    $image_info = getimagesize($files['file']['tmp_name']);
+            
+                    if ($image_info === false) {
+                        $this->error .= "Invalid image file. Please upload a valid image.<br>";
+                        return $this->error;
+                    }
 
-                    //create folder for every user
-        
+                    //create folder for every user   
+                    $folder = "uploads/" . $stud_ID . "/";                        
                     if(!file_exists($folder))
                     {
                     mkdir($folder,0777,true);
@@ -94,6 +108,20 @@ class Post{
             return false;
         }
 
+    }
+
+    public function get_recent_posts($current_user_id, $limit = 50) //Get the recent posts of other user
+    {
+        $query = "SELECT * FROM posts WHERE stud_ID != '$current_user_id' OR stud_ID = '$current_user_id' ORDER BY id DESC LIMIT $limit";
+
+        $DB = new CONNECTION_DB();
+        $result = $DB->read($query);
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     public function get_one_posts($post_id)  //get the posts of the user

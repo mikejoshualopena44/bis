@@ -1,5 +1,5 @@
 <?php
-  //print_r($_GET);
+  
 
   include ("classes/autoloader.php");
 
@@ -128,9 +128,9 @@
           </nav>
 
             <div class="delete-content">
-              <div class="close-del">
-                <a href="Profile_page.php">+</a>
-              </div><br>
+            <div class="close-del">
+                <a href="#" id="closeButton">+</a>
+            </div>
               <h2>People loved your post</h2> 
               <?php
                 $User = new User();
@@ -212,6 +212,28 @@
           $(".body").fadeIn(1010);
         })
     </script>
+
+<!-- Add this script in your people-likes.php page, after the previous script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var likeLinks = document.querySelectorAll('.like-link');
+        
+        likeLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                // Store the current page in session storage
+                sessionStorage.setItem('previousPage', window.location.href);
+            });
+        });
+
+        var closeDelLink = document.getElementById('closeButton');
+        closeDelLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            var previousPage = sessionStorage.getItem('previousPage');
+            window.location.href = previousPage || 'index.php'; // Default to index.php if no previous page is stored
+        });
+    });
+</script>
+
 
   
 
