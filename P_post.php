@@ -289,7 +289,7 @@ if (!function_exists('formatPostDuration')) {
         <!-- like, comment icon -->
         <div class="tag">
             <div class="left-icons">
-                <a class="heart" href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>)">
+                <a href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="heart <?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>)">
                     <i class='bx bx-heart bx-lg'></i>
                 </a>
                 <a class="cmnt" href="single_post.php?id=<?php echo $ROW['post_id'] ?>">

@@ -1027,10 +1027,9 @@ body{
   display: none;
 }
 
-a.liked i.bx-heart {
-  color: var(--secondbg); /* Change this to the desired color for liked state */
+.liked i.bx-heart {
+  color: var(--secondbg);
 }
-
 .people-react{
   color: var(--text-color);
 }

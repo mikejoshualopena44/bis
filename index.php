@@ -388,11 +388,21 @@
 
 <!-- Add this script to your HTML file -->
 <script>
- function like_post(e, postId) {
+// Function to check if the post is liked in local storage
+function isPostLiked(postId) {
+    return localStorage.getItem('liked_post_' + postId) === 'true';
+}
+
+// Function to handle liking a post
+function like_post(e, postId) {
     e.preventDefault();
 
     // Toggle the 'liked' class on the parent 'a' element
     e.target.parentNode.classList.toggle('liked');
+
+    // Save the liked status in local storage
+    var isLiked = e.target.parentNode.classList.contains('liked');
+    localStorage.setItem('liked_post_' + postId, isLiked);
 
     // Send the request to the server using AJAX
     var link = "like.php?type=post&id=" + postId;
@@ -410,29 +420,38 @@
     xml.send();
 }
 
+// Function to update like count in the DOM
 function updateLikeCount(postId, count) {
-    // Update the like count in the DOM
     var likeCountElement = document.getElementById('like-count-' + postId);
 
     if (likeCountElement) {
+        var text = "";
 
-      var text = "";
-
-      if (count>0){
-     
-        if(count == 1){
-          text = "1 person loved this post"
+        if (count > 0) {
+            if (count === 1) {
+                text = "1 person loved this post";
+            } else {
+                text = count + " people loved this post";
+            }
         }
-        else{
-          text = count + " people loved this post"
-          }
-        }
-      
 
-      likeCountElement.textContent = text;
+        likeCountElement.textContent = text;
     }
 }
 
+// Check liked status on page load and apply 'liked' class
+document.addEventListener('DOMContentLoaded', function () {
+    var likeElements = document.querySelectorAll('.heart');
+    
+    likeElements.forEach(function (likeElement) {
+        var postId = likeElement.getAttribute('data-post-id');
+        var isLiked = isPostLiked(postId);
+        
+        if (isLiked) {
+            likeElement.classList.add('liked');
+        }
+    });
+});
 </script>
 
 <!-- Timer for error message to display -->
