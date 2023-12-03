@@ -1028,7 +1028,7 @@ body{
   visibility: hidden;
   transition: .2s linear;
   top: 105%;
-  left: -4px;
+  left: 5px;
   font-weight: bold;
 }
 
