@@ -40,12 +40,18 @@
   else{
     $ERROR = "No such post  found!";
   }
+  //To go back to a page where you came from
+	if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "edit.php")){
+
+		$_SESSION['return_to'] = $_SERVER['HTTP_REFERER'];
+	}
+
   
   if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     
     $Post->edit_post($_POST, $_FILES);  
-    header("Location: Profile_page.php");
+    header("Location: ".$_SESSION['return_to']);
     die;
 
 

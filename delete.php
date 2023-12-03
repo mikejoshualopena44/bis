@@ -6,6 +6,11 @@
   $login = new Login();
   $user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
   $post = new Post();
+  
+  if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "delete.php")){
+
+		$_SESSION['return_to'] = $_SERVER['HTTP_REFERER'];
+	}
 
   //check who login //white listing to avoid sql injection
   if(isset($_GET['id']) && is_numeric($_GET['id'])){
@@ -40,12 +45,12 @@
   else{
     $ERROR = "No such post  found!";
   }
-  
+  //To go back to a page where you came from
   if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     
     $Post->delete_post($_POST['post_id']);  
-    header("Location: Profile_page.php");
+    header("Location: ".$_SESSION['return_to']);
     die;
 
 
