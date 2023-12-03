@@ -38,14 +38,13 @@ class Post{
                 if(!empty($files['file']['name']))
                 {
 
-                    $allowed_types = ['image/jpeg'];
+                    $allowed_types = ['image/jpeg', 'image/png'];
                     $file_type = mime_content_type($files['file']['tmp_name']);
-            
+                    
                     if (!in_array($file_type, $allowed_types)) {
-                        $this->error .= "Only images of JPEG format are allowed.<br>";
+                        $this->error .= "Only images of JPEG and PNG format are allowed.<br>";
                         return $this->error;
                     }
-            
                     // Check if the file is a valid image using getimagesize
                     $image_info = getimagesize($files['file']['tmp_name']);
             
@@ -80,10 +79,18 @@ class Post{
 
             $post = addslashes($data['post']) ;
             $post_id = $this->create_post_id();
-
-            $query = "INSERT INTO posts (post_id,stud_ID,post,image,has_image,is_profile_image,is_cover_image ) VALUES ('$post_id','$stud_ID','$post','$myimage','$has_image','$is_profile_image','$is_cover_image' )";
-
+            $parent = 0;
             $DB = new CONNECTION_DB();
+
+            if(isset($data['parent']) && is_numeric($data['parent'])){
+                $parent = $data['parent'];
+
+                $sql = "UPDATE posts SET comments = comments +1 WHERE post_id = '$parent' LIMIT 1";
+                $DB->save($sql);
+            }
+            $query = "INSERT INTO posts (post_id,stud_ID,post,image,parent,has_image,is_profile_image,is_cover_image ) VALUES ('$post_id','$stud_ID','$post','$myimage','$parent','$has_image','$is_profile_image','$is_cover_image' )";
+
+            
             $DB->save($query);
 
 
@@ -97,6 +104,22 @@ class Post{
     public function get_posts($id)  //get the posts of the user
     {
         $query = "SELECT * FROM posts WHERE stud_ID = '$id' ORDER BY id DESC LIMIT 10";
+
+        $DB = new CONNECTION_DB();
+        $result= $DB->read($query);
+
+        if($result){
+             
+            return $result;
+        }else{
+            return false;
+        }
+
+    }
+
+    public function get_comments($id)  //get the posts of the user
+    {
+        $query = "SELECT * FROM posts WHERE parent = '$id' ORDER BY id DESC LIMIT 10";
 
         $DB = new CONNECTION_DB();
         $result= $DB->read($query);
@@ -148,10 +171,55 @@ class Post{
         if(!is_numeric($post_id)){
             return false;
         }
+
+
+		$Post = new Post();
+		$one_post = $Post->get_one_posts($post_id);
+
+		$DB = new CONNECTION_DB();
+		$sql = "SELECT parent FROM posts WHERE post_id = '$post_id' limit 1";
+		$result = $DB->read($sql);
+		
+		if(is_array($result)){
+
+			if($result[0]['parent'] > 0){
+
+				$parent = $result[0]['parent'];
+
+				$sql = "UPDATE posts SET comments = comments - 1 where post_id = '$parent' limit 1";
+				$DB->save($sql);
+			}
+		}
+			  
+        
+
         $query = "DELETE FROM posts WHERE post_id = '$post_id' LIMIT 1";
 
         $DB = new CONNECTION_DB();
         $DB->save($query);
+
+
+        	//delete any images and thumbnails
+		if($one_post['image'] != "" && file_exists($one_post['image']))
+		{
+			unlink($one_post['image']);
+		}
+
+		if($one_post['image'] != "" && file_exists($one_post['image']. "_post_thumb"))
+		{
+			unlink($one_post['image']. "_post_thumb");
+		}
+
+		if($one_post['image'] != "" && file_exists($one_post['image']. "_cover_thumb"))
+		{
+			unlink($one_post['image']. "_cover_thumb");
+		}
+
+		//delete all comments
+		$query = "delete from posts where parent = '$post_id' ";
+		$DB->save($query);
+
+
 
     }
 

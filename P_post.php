@@ -1,7 +1,43 @@
 <?php
-  
-    $databaseDate = $ROW['date']; // As $ROW['date'] contains the date from the database
-    $formattedDate = date('M d, Y', strtotime($databaseDate)); //Convert databse date format to desired Month,Day and Year
+if (!function_exists('formatPostDuration')) {
+    date_default_timezone_set('Asia/Manila'); //Set timezone
+
+  function formatPostDuration($postDate) {
+    $currentTime = time();
+    $postTime = strtotime($postDate);
+    $timeDifference = $currentTime - $postTime;
+
+    $secondsInMinute = 60;
+    $secondsInHour = $secondsInMinute * 60;
+    $secondsInDay = $secondsInHour * 24;
+    $secondsInMonth = $secondsInDay * 30;
+    $secondsInYear = $secondsInDay * 365;
+
+    if ($timeDifference < $secondsInMinute) {
+        return $timeDifference . " seconds ago";
+    } elseif ($timeDifference < $secondsInHour) {
+        $minutes = floor($timeDifference / $secondsInMinute);
+        return $minutes . " minute" . ($minutes > 1 ? "s" : "") . " ago";
+    } elseif ($timeDifference < $secondsInDay) {
+        $hours = floor($timeDifference / $secondsInHour);
+        return $hours . " hour" . ($hours > 1 ? "s" : "") . " ago";
+    } elseif ($timeDifference < $secondsInMonth) {
+        $days = floor($timeDifference / $secondsInDay);
+        return $days . " day" . ($days > 1 ? "s" : "") . " ago";
+    } elseif ($timeDifference < $secondsInYear) {
+        $months = floor($timeDifference / $secondsInMonth);
+        return $months . " month" . ($months > 1 ? "s" : "") . " ago";
+    } else {
+        $years = floor($timeDifference / $secondsInYear);
+        return $years . " year" . ($years > 1 ? "s" : "") . " ago";
+    }
+    }
+}
+
+
+    $postDate = $ROW['date']; // As $ROW['date'] contains the date from the database
+    $elapsedTime = formatPostDuration($postDate);
+
     
 
     $login = new Login();
@@ -69,7 +105,7 @@
                     {
                         $pronoun = "her";
                     }
-                    echo"<span style='color: white ; font-weight:normal'> updated $pronoun profile image </span>";
+                    echo"<span style='color: white ; font-weight:normal ; font-size: 17px'> updated $pronoun profile image </span>";
                 }
 
                 if($ROW['is_cover_image'])
@@ -79,13 +115,13 @@
                     {
                         $pronoun = "her";
                     }
-                    echo"<span style='color: white ; font-weight:normal'> updated $pronoun cover photo </span>";
+                    echo"<span style='color: white ; font-weight:normal ; font-size: 17px'> updated $pronoun cover photo </span>";
                 }
             ?>
         </div>
         <div class="date" style="color:#fff">
             <?php 
-                echo $formattedDate;
+                echo $elapsedTime;
             ?>
         </div>
 
@@ -237,16 +273,37 @@
          </div>
         
         <div class="comments text-muted"  style=" color:darkgray">
-            View all 199 comments
+            <?php
+
+            $comments = " ";
+
+            if($ROW['comments'] > 0){
+
+               $comments = "(" . $ROW['comments'] . ")";            
+
+            }
+            
+            
+            ?>
         </div>
         <!-- like, comment icon -->
         <div class="tag">
             <div class="left-icons">
-                <a href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>)">
+                <a class="heart" href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="<?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>)">
                     <i class='bx bx-heart bx-lg'></i>
                 </a>
-                <a href=""><i class='bx bx-message-dots bx-lg'></i></a>
-                <a href=""><i class='bx bx-share-alt bx-lg'></i></a>
+                <a class="cmnt" href="single_post.php?id=<?php echo $ROW['post_id'] ?>">
+                    <i class='bx bx-message-dots bx-lg' id="icon"></i>
+                    <?php echo "&nbsp <div style='font-size: 1.5rem;'> $comments </div>"?>
+                </a>
+                <a class="view"href="view_image.php?id=<?php echo $ROW['post_id'] ?>">
+                <?php
+                    if($ROW['has_image']){
+
+                        echo "<i class='bx bx-fullscreen'></i>";
+                    }
+                    ?>
+                </a>
             </div>
             <div class="right-icons">
                 <i class='bx bx-bookmark-plus bx-lg'></i>

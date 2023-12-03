@@ -17,16 +17,6 @@ img{
     height: 2rem;
     margin-right:1rem;
 }
-.error{
-  padding:1rem;
-  background-color: var(--secondbg);
-  font-weight: 600;
-  color: var(--fourthbg);
-  margin-bottom: -8rem;
-  margin-top: 4.5rem;
-  border-radius: 1rem;
-  z-index: 230;
-}
 :root {
     --text-color: #fff;
     --firstbg: #42428a;
@@ -42,16 +32,12 @@ body{
   min-height: 100vh;
   background: var(--text-color);
   flex-direction: column;
-  --nav-height: 50px;
-  padding-top: var(--nav-height);
-  scroll-behavior: smooth;
 }
 
  
 .label {
   font-weight: bold;
   font-size:1.2vw;
-  
 }
 /*=== MOBILE NAVBAR ===*/
 .mobile-navbar {
@@ -428,23 +414,20 @@ body{
 /*bg color */
 
 
-
-
 .profile-section{
   display: flex;
-  flex-direction: column;
   position: relative;
-  min-height: 10dvh; /* Set a minimum height to take up the entire viewport height */
+  min-height: 100vh; /* Set a minimum height to take up the entire viewport height */
   top: 0;
   left: 78px;
-  width: calc(100% - 78px);
+  max-width: 100dvw;
   transition: all 0.5s ease;
   z-index: 2;
- 
+  overflow: hidden; /* Add this property to hide overflowing content */
+  padding-bottom: 80px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 70px;
   background-color: var(--fourthbg);
-
 }
 .sidebar.open ~ .profile-section{
   left: 250px;
@@ -474,11 +457,11 @@ body{
     font-size: 16px; /* Adjust the font size for larger screens */
   }
   .home-header {
-    height: var(--nav-height); /* Set the height to 2rem for mobile view */
+    height: 4rem; /* Set the height to 2rem for mobile view */
   }
 
   .profile-posts {
-    width: 80rem;
+    min-width: 50rem;
   }
   #create-post{
     font-size: 15px;
@@ -495,11 +478,10 @@ body{
     font-size: 1vw;
   }
   .timeline-bar{
-    padding: 30px;
-    margin: 20px;
+    padding: 10px;
   }
   .tag i {
-    font-size: 30px !important; /* You can adjust the size as needed */
+    font-size: 30px; /* You can adjust the size as needed */
   }
   .label {
     font-size:1.2vw;
@@ -512,7 +494,6 @@ body{
   }
   .posted-text{
     font-size: 1vw;
-    color: var(--text-color);
   }
 
   /*newsfeed*/
@@ -605,7 +586,7 @@ body{
 
 /* === MOBILE === 1214*/
 /*=== PROFILE ===*/
-.home-header {
+.home-header{
   position: fixed;
   top: 0;
   left: 0;
@@ -615,18 +596,9 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 50;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 1; /* Assuming initially visible */
+  z-index: 50; 
 }
 
-.home-header.hidden {
-  opacity: 0;
-}
-
-.nav--hidden{
-  transform: translateY(calc(-1 * var(--nav-height)));
-}
 /* === Announcement == */
 .ancmnt-container{
   width: 100%;
@@ -741,41 +713,30 @@ body{
 
 
 .profile-content {
-  display: flex;
-  align-items: start;
-  gap: 2rem;
   margin-top: 7vh;
+  display: flex;
 }
 
 /* ===Organizations=== */
-.org-bar {
-  height: 95dvh;
-  padding: 20px; /* Add padding to the org-bar if needed */
-  border-radius: 1rem; /* Rounded corners for the org-bar */
+.org-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 10px; /* Adjust the spacing between images */
-  row-gap: 2;
-  margin-top: 20px;
-
-  background-color: var(--thirdbg);
-
-  flex: .55;
-  align-items: start;
-
-
-  position: -webkit-sticky;
-  position: sticky;
-  top: 15px;
-
-  overflow-y: auto;
+  padding: 20px; /* Add padding to the container */
 }
 
-.org-bar::-webkit-scrollbar {  
-	display: none;
+.org-bar {
+  flex: 1;
+  padding: 20px; /* Add padding to the org-bar if needed */
+  background-color: var(--thirdbg);
+  border-radius: 1rem; /* Rounded corners for the org-bar */
+  row-gap: 2;
 }
 
 .label {
   font-weight: bold;
-  text-align: start;
+  text-align: center;
   color: var(--text-color);
 }
 
@@ -816,45 +777,14 @@ body{
   
 }
 
-.tmp-container{
-  overflow-y: auto;
-  min-width: 60rem;
-  height: 99rem;
-  flex:3.7;
-  background: var(--firstbg);
-  margin-top: 20px;
-  margin-right: -10px;
-  margin-left: -10px;
-  border-radius: 1.5rem;
-}
-
-.tmp-container::-webkit-scrollbar {
-	display: none;
-}
-
 .timeline-bar {
   margin-top: 20px;
   background-color: var(--fourthbg);
   color: var(--secondbg);
   border-radius: 1rem;
   min-height: 7rem;
-
 }
 
-#react_img{
-  border: 2px solid var(--secondbg);
-  border-radius: 50%;
- }
- #react_img1{
-  margin-left: -30px;
-  border: 2px solid var(--secondbg);
-  border-radius: 50%;
- }
- #react_img2{
-  margin-left: -30px;
-  border: 2px solid var(--secondbg);
-  border-radius: 50%;
- }
 
 .friends-container::-webkit-scrollbar { /*Hide scrollbar univarsal*/
   display: none; 
@@ -881,11 +811,10 @@ body{
 }
 
 .friends:hover {
-  color: var(--fourthbg);
+  color: var(--secondbg);
   font-size: 15px;
   font-weight: bold;
-  background-color: var(--secondbg);
-  border-radius: 2rem;
+
 }
 
 /* friends area*/
@@ -955,32 +884,21 @@ body{
 /*a or anchor setup above as public variable*/
 /*posts area*/
 .profile-posts {
-  min-width: 20rem;
-  min-height: 10dvh;
+  min-width: 50rem;
+  min-height: 400px;
   flex:3.7;
-  background: var(--thirdbg);
+  background: var(--firstbg);
   padding:10px;
   margin-top: 20px;
   border-radius: 1.5rem;
-
-  overflow-y: auto; /* Enable vertical scrolling */
-
-  position: relative;
-  top: 0;
-
-  
+  transition: all 1s ease;
 }
 
 
 .posts-area {
   background-color: var(--text-color);
   border-radius: 15px;
-  margin: 15px;
-}
 
-#text-post{
-  width: 100%;
-  resize: vertical;
 }
 
 #create-post{
@@ -1013,8 +931,8 @@ body{
 }
 
 .custom-image-class {
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   border: 2px solid #000;
   border-radius: 1rem;
   margin:0;
@@ -1022,23 +940,6 @@ body{
 
 
 /*Like comment share */
-
-.hidden {
-  display: none;
-}
-
-a.liked i.bx-heart {
-  color: var(--secondbg); /* Change this to the desired color for liked state */
-}
-
-.people-react{
-  color: var(--text-color);
-}
-
-.people-react:hover{
-  text-decoration: underline;
-}
-
 .tag {
   margin-top: 1rem;
   color: var(--text-color);
@@ -1071,99 +972,3 @@ a.liked i.bx-heart {
   color: var(--fourthbg);
   margin-bottom: -20x;
 }
-
-
-/* == Modal for delete == */
-.delete-modal{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7) ;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-x: hidden; /* Hide horizontal overflow */
-  z-index: 120;
-}
-
-.delete-content{
-  width: 110dvh;
-  height: 50dvh;
-  backdrop-filter: blur(15px) saturate(135%);
-  -webkit-backdrop-filter: blur(15px) saturate(135%);
-  background-color: rgba(17, 25, 40, 0.23);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  position: sticky;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap:4rem;
-  top:0;
-}
-
-
-
-.delete-content .close-del{
-  position:absolute;
-  top: 0;
-  right: 14px;
-  font-size: 42px;
-  transform: rotate(45deg);
-  color: var(--secondbg);
-  cursor: pointer;
-}
-
-
-.delete-content h2{
-  display: flex !important;
-  color: var(--secondbg);
-  font-family: "Poppins" , sans-serif;
-
-}
-.delete-content form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; 
-  color: var(--text-color);
-  gap:2rem;
-}
-
-.delete-content .med-container{
-  display:flex;
-  justify-content: space-between;
-}
-.delete-content #text-media{
-  width: 15dvw;
-  height: 5dvh;
-  border: none;
-  font-family: "Poppins" , sans-serif;
-  color: var(--fourthbg);
-  border-radius: 15px;
-  font-size: 15px;
-}
-
-.delete-content .del-btn{
-  color: var(--text-color);
-  margin-top: 40px;
-}
-.delete-content .del-btn input{
-  width: 10dvw;
-  height: 3dvh;
-  color: var(--fourthbgr);
-  background: var(--firstbg);
-  border-radius: 6px;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  
-}
-.delete-content .del-btn input:hover{
-  background: var(--secondbg);
-  color: var(--fourthbg);
-}
-

@@ -26,7 +26,12 @@ class Signup
                 if (is_numeric($value))
                 {
                     $this->error .="First name should be consists of letter!<br>";
-                }             
+                }      
+                
+                // Check if the length of firstName is greater than 16 characters
+                if (strlen($value) > 16) {
+                    $this->error .= "First name should be less than 16 characters!<br>";
+                }
             }
             
 
@@ -37,10 +42,16 @@ class Signup
                     $this->error .="Last name should be consists of letter!<br>";
                 }
 
+                // Check if the length of lastName is greater than 16 characters
+                if (strlen($value) > 16) {
+                    $this->error .= "Last name should be less than 16 characters!<br>";
+                }
+
                 if (strstr($value, " "))
                 {
                     $this->error .="Last name can't have spaces!<br>";
                 }
+
                
             }
 

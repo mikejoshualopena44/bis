@@ -25,13 +25,13 @@
                 // Display these post area only if the current user's ID matches the profile user's ID
                 
                 ?>
-                        <!--post something-->
+                        <!-- Post something -->
                         <div class="posts-area">
                             <form method="post" enctype="multipart/form-data" action="#">
-                            <textarea name="post" id="text-post"  placeholder="What's on your mind, <?php echo $user_data['firstName']; ?>?"></textarea>
-                            <input name="file" id="posts_browse" type="file"> 
-                            <input id="posts_btn" type="submit" value="Post"> 
-                            <br><br>
+                                <textarea name="post" id="text-post" placeholder="What's on your mind, <?php echo $user_data['firstName']; ?>?"></textarea>
+                                <input name="file" id="posts_browse" type="file" accept="image/jpeg, image/png"> <!-- Specify accepted file types -->
+                                <input id="posts_btn" type="submit" value="Post">
+                                <br><br>
                             </form>
                         </div><br>
                 <?php

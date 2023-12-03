@@ -138,7 +138,7 @@ class Image
     {
         if(file_exists($original_file_name))
         {
-            $original_img = imagecreatefromjpeg($original_file_name);
+            $original_img = imagecreatefromstring(file_get_contents($original_file_name));
 
             $original_width = imagesx( $original_img);
             $original_height = imagesy( $original_img);

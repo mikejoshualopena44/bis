@@ -8,3 +8,4 @@ include ("classes/C_user.php");
 include ("classes/C_post.php");
 include ("classes/C_image.php");
 include ("classes/C_profile.php");
+include ("classes/C_settings.php");

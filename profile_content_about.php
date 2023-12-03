@@ -16,7 +16,7 @@
             <h2>About Me</h2>
             <br>
             <p style="font-weight: thin; color: aliceblue">
-                <?php echo $user_data['introduction']; ?>
+                <?php echo nl2br($user_data['introduction']); ?> 
             </p>
         </div>
         <?php

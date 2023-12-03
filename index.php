@@ -57,7 +57,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Home_page </title>
-    <link rel="stylesheet" href="style/style_ind.css">
+    <link rel="stylesheet" href="style/index_style.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -209,7 +209,7 @@
                         <div class="posts-area">
                             <form method="post" enctype="multipart/form-data" action="#">
                             <textarea name="post" id="text-post"  placeholder="What's on your mind, <?php echo $user_data['firstName']; ?>?"></textarea><br><br>
-                            <input name="file" id="posts_browse" type="file" > 
+                            <input name="file" id="posts_browse" type="file"  accept="image/jpeg, image/png">  
                             <input id="posts_btn" type="submit" value="Post"> 
                             <br><br>
                             </form>

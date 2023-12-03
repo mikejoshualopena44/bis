@@ -31,8 +31,15 @@
       </div>
       <ul class="nav-list">
         <li>
-            <i class='bx bx-search' ></i>
-          <input type="text" placeholder="Search...">
+          <i class='bx bx-search' ></i> 
+
+
+          <form method="get" action="search.php" >
+          <input type="text" placeholder=" Search for people .." name="find" >
+          </form>
+
+
+
           <span class="tooltip">Search</span>
         </li>
         <li id="activity-stream">
@@ -57,19 +64,12 @@
         <span class="tooltip">Bisuans</span>
       </li>
       <li id="setting">
-        <a href="#">
+        <a href="settings.php">
           <i class='bx bx-cog' ></i>
-          <span class="links_name">Setting</span>
+          <span class="links_name">Settings</span>
         </a>
-        <span class="tooltip">Setting</span>
+        <span class="tooltip">Settings</span>
       </li>
-      <li id="logout">
-          <a href="P_logout.php"> <!-- Logout user-->
-            <i class='bx bx-log-out' ></i>
-            <span class="links_name">Logout</span>
-          </a>
-          <span class="tooltip">Logout</span>
-        </li>
       <li class="profile">
           <div class="profile-details">
             

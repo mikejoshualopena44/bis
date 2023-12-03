@@ -78,7 +78,7 @@ session_start();
 
     <!-- Info's--> 
     <title>BisuConnect</title>
-    <meta name="author" content="Kurt Trunks Canabe,Mikee Samantha Gamorot, Mike Joshua Lopena, Jan Andrew Paul Maylon">
+    <meta name="author" content="Mike Joshua Lopena, Kurt Trunks Canabe,Mikee Samantha Gamorot, Jan Andrew Paul Maylon">
     <meta name="description" content="TE  03/ Cognate Elective">
     <meta name="keywords" content="BisuConnect, Bisuan, Website">
     <meta name="referrer" content="no-referrer">

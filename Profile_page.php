@@ -91,7 +91,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Profile_page </title>
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="style/style_pp.css">
+    <link rel="stylesheet" href="style/profile_style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,7 +227,7 @@
               <h2>Edit about me</h2>
               <form method="post" action="Profile_page.php"> <!-- Updated action to the same page -->
                   <div>
-                      <textarea name="description" id="text-description" placeholder="Edit description" rows="5"><?php echo $user_data['introduction']; ?></textarea>
+                      <textarea name="description" id="text-description" placeholder="Edit description" rows="5"><?php echo htmlspecialchars(strip_tags($user_data['introduction'])); ?></textarea>
                   </div>
                   <div class="about-btn">
                       <input type="submit" value="Save" name="updateIntroduction">
