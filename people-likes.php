@@ -216,15 +216,10 @@
 <!-- Add this script in your people-likes.php page, after the previous script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var likeLinks = document.querySelectorAll('.like-link');
-        
-        likeLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                // Store the current page in session storage
-                sessionStorage.setItem('previousPage', window.location.href);
-            });
-        });
+        // Store the current page in session storage
+        sessionStorage.setItem('previousPage', document.referrer);
 
+        // Listen for closeButton click
         var closeDelLink = document.getElementById('closeButton');
         closeDelLink.addEventListener('click', function(event) {
             event.preventDefault();
