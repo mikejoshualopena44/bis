@@ -103,7 +103,7 @@ class Post{
 
     public function get_posts($id)  //get the posts of the user
     {
-        $query = "SELECT * FROM posts WHERE stud_ID = '$id' ORDER BY id DESC LIMIT 10";
+        $query = "SELECT * FROM posts WHERE parent = 0 AND stud_ID = '$id' ORDER BY id DESC LIMIT 10";
 
         $DB = new CONNECTION_DB();
         $result= $DB->read($query);
@@ -117,25 +117,29 @@ class Post{
 
     }
 
-    public function get_comments($id)  //get the posts of the user
+    public function get_comments($id)
     {
-        $query = "SELECT * FROM posts WHERE parent = '$id' ORDER BY id DESC LIMIT 10";
-
+        $query = "SELECT p.*, 
+                         (SELECT COUNT(*) FROM posts WHERE parent = p.post_id) AS reply_count 
+                  FROM posts p 
+                  WHERE parent = '$id' 
+                  ORDER BY id DESC 
+                  LIMIT 50";
+    
         $DB = new CONNECTION_DB();
-        $result= $DB->read($query);
-
-        if($result){
-             
+        $result = $DB->read($query);
+    
+        if ($result) {
             return $result;
-        }else{
+        } else {
             return false;
         }
-
     }
+    
 
     public function get_recent_posts($current_user_id, $limit = 50) //Get the recent posts of other user
     {
-        $query = "SELECT * FROM posts WHERE stud_ID != '$current_user_id' OR stud_ID = '$current_user_id' ORDER BY id DESC LIMIT $limit";
+        $query = "SELECT * FROM posts WHERE parent = 0 AND (stud_ID != '$current_user_id' OR stud_ID = '$current_user_id') ORDER BY id DESC LIMIT $limit";
 
         $DB = new CONNECTION_DB();
         $result = $DB->read($query);

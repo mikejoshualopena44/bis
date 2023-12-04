@@ -145,16 +145,17 @@ if (!function_exists('formatPostDuration')) {
               <?php
                   }
               ?>
-        
         <br><br>
             <!-- Media posts -->
-            <div class="posted-image">
-                <?php //location C_image 
-                    if (file_exists($ROW['image'])) {
-                        $post_img = $image_class->get_thumb_posts($ROW['image']);
-                        echo "<img src='$post_img' class='custom-image-class' />";
-                    }
-                ?>
+            <div class="posted-image">                
+                    <?php //location C_image 
+                        if (file_exists($ROW['image'])) {
+                            $post_img = $image_class->get_thumb_posts($ROW['image']);
+                            
+                            echo "<img src='$post_img' class='custom-image-class' />";
+                        }
+                    ?>
+       
             </div>
 
             <br>

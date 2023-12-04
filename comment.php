@@ -235,17 +235,40 @@ if (!function_exists('formatPostDuration')) {
             </div>
             
             <div class="comments text-muted"  style=" color:darkgray">
-                View all 199 comments
+                <?php
+
+                $comments = " ";
+                $sub_text = " ";
+
+                if ($COMMENT['reply_count'] > 0) {
+                    $comments = "(" . $COMMENT['reply_count'] . ")";
+
+                    if($COMMENT['reply_count'] == 1){
+                        $sub_text = "reply";
+                    }else{
+                        $sub_text = "replies";
+                    }
+                    
+                }
+                ?>
+                
             </div>
             <!-- like, comment icon -->
             <div class="tag">
                 <div class="left-icons">
+                    <!-- heart-->
                     <a href="like.php?type=post&id=<?php echo $COMMENT['post_id']; ?>" class="heart <?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $COMMENT['post_id']; ?>)">
                         <i class='bx bx-heart bx-lg'></i>
                     </a>
+
+                    <!-- reply-->
                     <a class="cmnt" href="single_post.php?id=<?php echo $COMMENT['post_id'] ?>">
                         <i class='bx bx-reply' id="icon"></i>
+                        <?php echo "&nbsp  
+                        <div style='font-size: 1.5rem; '> $comments </div> &nbsp
+                        <div style='font-size: 1rem; float:right; '> $sub_text </div>" ?>
                     </a>
+                    <!--view image-->
                     <a class="view"href="view_image.php?id=<?php echo $COMMENT['post_id'] ?>">
                     <?php
                         if($COMMENT['has_image']){
