@@ -59,7 +59,7 @@ if (!function_exists('formatPostDuration')) {
 
     //declare
     $User = new User();
-    $FRIEND_ROW = $User->get_user($COMMENT['stud_ID']);
+    $ROW_user = $user->get_user($COMMENT['stud_ID']);
   
     
 ?>
