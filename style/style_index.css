@@ -981,6 +981,7 @@ body{
 #text-post{
   width: 100%;
   resize: vertical;
+  font-size: 1rem;
 }
 
 #create-post{

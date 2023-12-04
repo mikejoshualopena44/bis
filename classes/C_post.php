@@ -136,8 +136,8 @@ class Post{
         }
     }
     
-
-    public function get_recent_posts($current_user_id, $limit = 50) //Get the recent posts of other user
+    //number of post
+    public function get_recent_posts($current_user_id, $limit = 1000) //Get the recent posts of other user
     {
         $query = "SELECT * FROM posts WHERE parent = 0 AND (stud_ID != '$current_user_id' OR stud_ID = '$current_user_id') ORDER BY id DESC LIMIT $limit";
 

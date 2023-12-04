@@ -91,7 +91,7 @@ if (!function_exists('formatPostDuration')) {
 
             <!-- for linking the name to the user profile -->
 
-            <a href="Profile_page.php?id=<?php echo $FRIEND_ROW['stud_ID'];  ?>" style="color:#f0c310">
+            <a href="Profile_page.php?id=<?php echo $ROW_user['stud_ID'];  ?>" style="color:#f0c310">
                 <?php 
                 //html escaping to avoid usertyping script          
                     echo htmlspecialchars($ROW_user['firstName']) . " " . htmlspecialchars($ROW_user['lastName']); // get the array or the user_DB
@@ -127,7 +127,7 @@ if (!function_exists('formatPostDuration')) {
             </div>
 
             <?php
-            if ($_SESSION['Bisuconnect_stud_ID'] == $user_data['stud_ID']) {
+            if ($_SESSION['Bisuconnect_stud_ID'] == $COMMENT['stud_ID']) {
                 // Display these options only if the current user's ID matches the profile user's ID
                 ?>
                     <div class="edit <?php echo basename($_SERVER['PHP_SELF']) === 'index.php' ? 'hidden' : ''; ?>">
@@ -277,9 +277,6 @@ if (!function_exists('formatPostDuration')) {
                         }
                         ?>
                     </a>
-                </div>
-                <div class="right-icons">
-                    <i class='bx bx-bookmark-plus bx-lg'></i>
                 </div>
             </div>
                     <br>

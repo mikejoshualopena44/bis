@@ -61,7 +61,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Comments </title>
-    <link rel="stylesheet" href="style/comment.css">
+    <link rel="stylesheet" href="style/cmnt.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -145,7 +145,7 @@
        <div class="delete-modal">
 
          <nav class="home-header"> 
-            <h3><a href="index.php" style="color: #212145 "> BisuConnect</a></h3>    
+            <h3><a href="index.php" style="color: #212145; "> BisuConnect</a></h3>    
           </nav>
 
             <div class="delete-content">
