@@ -162,7 +162,7 @@
 
             <div class="delete-content">
               <div class="close-del">
-                <a href="Profile_page.php">+</a>
+                <a href="#" id="closeButton">+</a>
               </div><br>
               <h2>DELETE POST</h2>
               <form method="post" action=""> <!-- Updated action to the same page -->
@@ -262,6 +262,22 @@
     </script>
 
      </script>
+
+<!-- Add this script in your people-likes.php page, after the previous script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Store the current page in session storage
+        sessionStorage.setItem('previousPage', document.referrer);
+
+        // Listen for closeButton click
+        var closeDelLink = document.getElementById('closeButton');
+        closeDelLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            var previousPage = sessionStorage.getItem('previousPage');
+            window.location.href = previousPage || 'index.php'; // Default to index.php if no previous page is stored
+        });
+    });
+</script>
 
 
 </body>

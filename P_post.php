@@ -126,25 +126,26 @@ if (!function_exists('formatPostDuration')) {
         </div>
 
         <?php
-        if ($_SESSION['Bisuconnect_stud_ID'] == $user_data['stud_ID']) {
-            // Display these options only if the current user's ID matches the profile user's ID
-              ?>
-                <div class="edit <?php echo basename($_SERVER['PHP_SELF']) === 'index.php' ? 'hidden' : ''; ?>">
-                    <span id="edt-opt" class="edt">
-                    <a href="edit.php?id=<?php echo $ROW['post_id']?>">
-                            Edit
-                        </a>
-                    </span>.
-                    <span id="del-opt" class="del">
-                        <a href="delete.php?id=<?php echo $ROW['post_id']?>">
-                            Delete
-                        </a>
-                    </span>
-                        
-                </div>
-              <?php
-                  }
-              ?>
+            if ($_SESSION['Bisuconnect_stud_ID'] == $ROW['stud_ID']) {
+                // Display these options only if the current user's ID matches the profile user's ID
+                ?>
+                    <div class="edit <?php echo basename($_SERVER['PHP_SELF']) === 'index.php' ? 'hidden' : ''; ?>">
+                        <span id="edt-opt" class="edt">
+                        <a href="edit.php?id=<?php echo $ROW['post_id']?>">
+                                Edit
+                            </a>
+                        </span>.
+                        <span id="del-opt" class="del">
+                            <a href="delete.php?id=<?php echo $ROW['post_id']?>">
+                                Delete
+                            </a>
+                        </span>
+                            
+                    </div>
+                <?php
+                    }
+                ?>
+
         <br><br>
             <!-- Media posts -->
             <div class="posted-image">                

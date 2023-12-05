@@ -145,7 +145,7 @@
 
             <div class="delete-content">
             <div class="close-del">
-                <a href="#" id="closeButton">+</a>
+                <a href="<?php echo $_SESSION['return_to']; ?>" id="closeButton">+</a>
             </div>
               <h2> View Image</h2> 
               <?php
@@ -235,10 +235,12 @@
         closeDelLink.addEventListener('click', function(event) {
             event.preventDefault();
             var previousPage = sessionStorage.getItem('previousPage');
-            window.location.href = previousPage || 'index.php'; // Default to index.php if no previous page is stored
+            var returnTo = "<?php echo isset($_SESSION['return_to']) ? $_SESSION['return_to'] : 'index.php'; ?>";
+            window.location.href = previousPage || returnTo; // Default to returnTo if no previous page is stored
         });
     });
 </script>
+
 
 
   

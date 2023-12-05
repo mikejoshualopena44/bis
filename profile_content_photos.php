@@ -11,24 +11,28 @@
     <?php
 
         $DB = new CONNECTION_DB();
-        
-        $sql = ("SELECT image,post_id FROM posts WHERE has_image = 1 && stud_ID = $user_data[stud_ID] ORDER BY id DESC LIMIT 30 ");
+        $image_class = new Image();
+
+        $sql = "SELECT image, post_id FROM posts WHERE has_image = 1 && stud_ID = $user_data[stud_ID] ORDER BY id DESC LIMIT 30 ";
         $images = $DB->read($sql);
 
+        if (is_array($images)) {
+            foreach ($images as $image_row) {
+                $postID = $image_row['post_id'];
 
-        $iamge_class = new Image();
-        if(is_array($images)){
+                // Skip if the image is a profile or cover photo
+                if ($image_class->isProfileOrCoverImage($postID)) {
+                    continue;
+                }
 
-            foreach($images as $image_row){
-                echo "<img src='". $image_class->get_thumb_posts($image_row['image']) ."' class='photos' />";
+                echo "<a class='info' href='single_post.php?id=$image_row[post_id]'> ";
+                echo "<img src='" . $image_class->get_thumb_posts($image_row['image']) . "' class='photos' />";
+                echo "</a>";
             }
-            
-
-        }
-        else
-        {
+        } else {
             echo "No Images were found!";
         }
+
 
     ?>
     </div>

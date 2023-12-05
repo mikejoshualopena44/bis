@@ -22,7 +22,7 @@
     //To avoid resubmission of post when refreshing
 
     if($result == ""){
-      header("Location: Profile_page.php");
+      header("Location: index.php");
       die;
     }else{
       echo "<div class='error' id='error-message'>";
@@ -143,12 +143,12 @@
           <section class="ancmnt-container">
           <div class="ancmnt-bar">
             <div class="slider">
-              <img id="slide-1" src="images/BISU_bg8.jpg" alt=" Announcement Image" />
-              <img id="slide-2" src="images/BISU_bg.jpg" alt=" Announcement Image" />
-              <img id="slide-3" src="images/BISU_bg6.png" alt=" Announcement Image" />
-              <img id="slide-4" src="images/BISU_bg3.jpg" alt=" Announcement Image" />
-              <img id="slide-5" src="images/BISU_bg4.jpg" alt=" Announcement Image" />
-              <img id="slide-6" src="images/BISU_bg5.jpg" alt=" Announcement Image" />
+              <img id="slide-1" src="images/announcement/BISU_bg8.jpg" alt=" Announcement Image" />
+              <img id="slide-2" src="images/announcement/BISU_bg.jpg" alt=" Announcement Image" />
+              <img id="slide-3" src="images/announcement/BISU_bg6.png" alt=" Announcement Image" />
+              <img id="slide-4" src="images/announcement/BISU_bg3.jpg" alt=" Announcement Image" />
+              <img id="slide-5" src="images/announcement/BISU_bg4.jpg" alt=" Announcement Image" />
+              <img id="slide-6" src="images/announcement/BISU_bg5.jpg" alt=" Announcement Image" />
             
             </div>
             <div class="slider-nav">

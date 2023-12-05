@@ -91,7 +91,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Profile_page </title>
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="style/style_profile.css">
+    <link rel="stylesheet" href="style/style-profile.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -165,6 +165,34 @@
       <div class="profile-header">
           <h3>BisuConnect</h3>
       </div>
+
+<!--Change profile and cover image modal 
+  
+          <div class="friends-bar" style="z-index: 100 ; max-width: 200dvw; top: 20rem ;left: 42rem; position: absolute;" >
+                        <div class="label">Change Photo</div> <br>
+                            <div class="posts-area">
+                              <form method="post" action="" class="create-post" enctype="multipart/form-data">
+                                  <input type="file" name="file" id="upload-btn">
+                                  <input type="submit" value="Change" id="posts_btn"> 
+                              </form>
+                            </div><br>
+                            <div class="prev-area" >       
+                            <?php
+                                      $change = "profile";
+                                      //if you change bg image
+                                      if(isset($_GET['change']) && $_GET['change'] == "cover")
+                                      {
+                                        $change = "cover";
+                                        echo "<img style='z-index: 101 ; width: 20rem;' src='$user_data[cover_image]'id='prev_cp''>";
+                                      }else
+                                      {
+                                        echo "<img style='z-index: 101 ; height: 40rem;' src='$user_data[profile_image]' id='prev_dp'>";
+                                      }  
+                                  ?>
+                            </div>
+                        </div>
+         
+-->
       <div class="profile-section">
         <div class="profile-container">
           <!-- user profile-->

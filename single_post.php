@@ -1,12 +1,19 @@
 <?php
   
-
+  
   include ("classes/autoloader.php");
+
+
 
   $login = new Login();
   $user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
   $Post = new Post();
   $ROW = false;
+
+  // To go back to a page where you came from
+  if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "single_post.php")){
+    $_SESSION['return_to'] = $_SERVER['HTTP_REFERER'];
+  }
 
   if($_SERVER['REQUEST_METHOD'] == "POST" ) //inserting post to db
   {
@@ -150,7 +157,7 @@
 
             <div class="delete-content">
             <div class="close-del">
-                <a href="#" id="closeButton">+</a>
+              <a href="#" id="closeButton">+</a>
             </div>
               <h2> Comments</h2> 
               <?php
@@ -258,15 +265,10 @@
 <!-- Add this script in your people-likes.php page, after the previous script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var likeLinks = document.querySelectorAll('.like-link');
-        
-        likeLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                // Store the current page in session storage
-                sessionStorage.setItem('previousPage', window.location.href);
-            });
-        });
+        // Store the current page in session storage
+        sessionStorage.setItem('previousPage', document.referrer);
 
+        // Listen for closeButton click
         var closeDelLink = document.getElementById('closeButton');
         closeDelLink.addEventListener('click', function(event) {
             event.preventDefault();
@@ -275,6 +277,9 @@
         });
     });
 </script>
+
+
+
 
 <!-- using AJAX to not refresh the page when clicking like -->
 <script>

@@ -838,6 +838,7 @@ body{
 }
 
 
+
 .posts-area {
   background-color: var(--text-color);
   border-radius: 1rem;
@@ -952,9 +953,14 @@ a.liked i.bx-heart {
 }
 
 /* =====Reacts Icon===== */
+
+.info:hover{
+  cursor: zoom-in;
+}
 .heart,
 .cmnt,
-.view {
+.view,
+.info{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1004,6 +1010,25 @@ a.liked i.bx-heart {
   font-weight: bold;
 }
 
+.info::after {
+  white-space: nowrap; 
+  content: 'View Image';
+  position: absolute;
+  font-size: 20px;
+  color: var(--text-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 65%;
+  left: 30px;
+  font-weight: bold;
+  border-radius: 1rem;
+  padding: 1px 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+
 #icon {
   width: 30px;
   height: 30px;
@@ -1024,6 +1049,12 @@ a.liked i.bx-heart {
   top: 100%;
 }
 
+.info:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 75%;
+}
+
 
 
 .right-icons {
@@ -1035,8 +1066,11 @@ a.liked i.bx-heart {
 
 .timeline-bar hr{
   color: var(--fourthbg);
-  margin-bottom: -20x;
+  margin-bottom: -20px;
 }
+
+
+
 
 /* =============== Notification Popup ============== */
 
@@ -1154,7 +1188,7 @@ a.liked i.bx-heart {
   right: 0;
 }
 
-/*====== PHOTOS==========*/
+/* =============== Photo gallery ============== */
 
 .photos {
   min-height: 15rem;
@@ -1172,10 +1206,12 @@ a.liked i.bx-heart {
   margin: 5px; /* Adjust the spacing between images */
 }
 
+
 .photos:hover {
-  border: 3px solid var(--secondbg);
   transform: scale(1.03);
   cursor: pointer;
+  -webkit-filter: blur(5px);
+  filter: blur(3px);
 }
 
 /* ==== About Me ====*/

@@ -265,7 +265,24 @@ class Image
         {
             return $filename;
         }
-     }
+    }
+
+
+    public function isProfileOrCoverImage($postID)
+    {
+        $DB = new CONNECTION_DB();
+        $query = "SELECT is_profile_image, is_cover_image FROM posts WHERE post_id = '$postID'";
+        $result = $DB->read($query);
+
+        if ($result && count($result) > 0) {
+            $imageData = $result[0];
+            return ($imageData['is_profile_image'] == 1 || $imageData['is_cover_image'] == 1);
+        }
+
+        return false;
+    }
+
+    
 }
 
 
