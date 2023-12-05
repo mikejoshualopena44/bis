@@ -101,9 +101,17 @@ class Post{
         return $this->error;
     }
 
-    public function get_posts($id)  //get the posts of the user
+    public function get_posts($id)  //limit profile posts
     {
-        $query = "SELECT * FROM posts WHERE parent = 0 AND stud_ID = '$id' ORDER BY id DESC LIMIT 10";
+
+        //pagination keeps increasing
+        $limit = 15;
+        $page_number = isset($_GET['page'])? $page_number = (int)$_GET['page']: 1;
+        $page_number = $page_number < 1 ? $page_number = 1 : $page_number;
+
+        $offset= ($page_number - 1) * $limit;
+
+        $query = "SELECT * FROM posts WHERE parent = 0 AND stud_ID = '$id' ORDER BY id DESC LIMIT $limit OFFSET $offset";
 
         $DB = new CONNECTION_DB();
         $result= $DB->read($query);
@@ -117,14 +125,23 @@ class Post{
 
     }
 
+    //limit profile comment
     public function get_comments($id)
     {
+
+        //pagination keeps increasing
+        $limit = 10;
+        $page_number = isset($_GET['page'])? $page_number = (int)$_GET['page']: 1;
+        $page_number = $page_number < 1 ? $page_number = 1 : $page_number;
+
+        $offset= ($page_number - 1) * $limit;
+
         $query = "SELECT p.*, 
                          (SELECT COUNT(*) FROM posts WHERE parent = p.post_id) AS reply_count 
                   FROM posts p 
                   WHERE parent = '$id' 
                   ORDER BY id DESC 
-                  LIMIT 50";
+                  LIMIT $limit OFFSET $offset";
     
         $DB = new CONNECTION_DB();
         $result = $DB->read($query);
@@ -137,9 +154,16 @@ class Post{
     }
     
     //number of post
-    public function get_recent_posts($current_user_id, $limit = 10) //Get the recent posts of other user
+    public function get_recent_posts($current_user_id) //Get the recent posts of users //limit index posts
     {
-        $query = "SELECT * FROM posts WHERE parent = 0 AND (stud_ID != '$current_user_id' OR stud_ID = '$current_user_id') ORDER BY id DESC LIMIT $limit";
+        //pagination keeps increasing
+        $limit = 40;
+        $page_number = isset($_GET['page'])? $page_number = (int)$_GET['page']: 1;
+        $page_number = $page_number < 1 ? $page_number = 1 : $page_number;
+
+        $offset= ($page_number - 1) * $limit;
+
+        $query = "SELECT * FROM posts WHERE parent = 0 AND (stud_ID != '$current_user_id' OR stud_ID = '$current_user_id') ORDER BY id DESC LIMIT $limit OFFSET $offset";
 
         $DB = new CONNECTION_DB();
         $result = $DB->read($query);

@@ -236,6 +236,11 @@
                                       $ROW_user = $user->get_user($ROW['stud_ID']);
                                       include("P_post.php");
                                   }
+                              }else{
+                                  // No posts, display "No more comments" message
+                                  echo "<div class='noComment'>";
+                                  echo "No more post";
+                                  echo "</div>";
                               }
                               ?>
                             </div>
@@ -243,11 +248,27 @@
                         }
                         ?>
                     </div>
+                    <?php
+                      //pagination on previous and next page on class_F_paginationLink.php
+                      $pg = pagination_link();
+                    ?>
+
+                    <div class="page-container">
+                        <a href="<?php echo $pg['prev_page'] ?>"> 
+                            <i class='bx bxs-chevron-left' style="color: #f0c310"></i>
+                            <input id="page" type="submit" value="Previous Page"> 
+                        </a>
+
+                        <a href="<?php echo  $pg['next_page'] ?>"> 
+                            <input id="page" type="submit" value="Next Page"> 
+                            <i class='bx bxs-chevron-right' style="color: #f0c310"></i>
+                        </a>
+                    </div>
+
 
               </div>
-
-
             <!--== End of post area== -->
+
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 session_start();
 
 include ("classes/connection.php");
+include ("classes/F_paginationLink.php");
 include ("classes/C_signup.php");
 include ("classes/C_login.php");
 include ("classes/C_user.php");
