@@ -27,6 +27,8 @@ if(isset($_SERVER['HTTP_REFERER'])){
 
     if(isset($_GET['type']) && isset($_GET['id'])){
 
+        $post = new Post();
+
         if(is_numeric($_GET['id'])){
 
             $allowed[] = 'post';
@@ -34,10 +36,21 @@ if(isset($_SERVER['HTTP_REFERER'])){
             $allowed[] = 'comment';
 
             if(in_array($_GET['type'], $allowed)){
-                
+
+                //user_class = new User();
                 $post = new Post();
                 $post->like_post($_GET['id'], $_GET['type'], $_SESSION['Bisuconnect_stud_ID']);  
+
+                //$single_post = $post->get_user($_GET['id']);
+                $single_post = $post->get_one_posts($_GET['id']);
+
             }
+
+            //add notification
+            add_notification( $_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+
+            
+
         }
   
     }

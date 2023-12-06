@@ -432,8 +432,7 @@ function like_post(e, postId) {
     xml.onreadystatechange = function () {
         if (xml.readyState == 4 && xml.status == 200) {
             // Update the like count
-            var likesCount = parseInt(xml.responseText);
-            updateLikeCount(postId, likesCount);
+            updateLikeCount(postId, xml.responseText);
         }
     };
 
@@ -442,18 +441,14 @@ function like_post(e, postId) {
 }
 
 // Function to update like count in the DOM
-function updateLikeCount(postId, count) {
+function updateLikeCount(postId, response) {
     var likeCountElement = document.getElementById('like-count-' + postId);
 
     if (likeCountElement) {
         var text = "";
 
-        if (count > 0) {
-            if (count === 1) {
-                text = "1 person loved this post";
-            } else {
-                text = count + " people loved this post";
-            }
+        if (response.trim() !== "") {
+            text = response.trim() + " people loved this post";
         }
 
         likeCountElement.textContent = text;

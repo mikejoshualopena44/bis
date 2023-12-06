@@ -86,38 +86,20 @@
             // Display these options only if the current user's ID matches the profile user's ID
               ?>
             <div class="friends-bar">
-              <div class="label">Notifications</div> <br>
+              <div class="label">
+                    Notifications
+                    <i style="padding-left: 4rem; font-size: 2.6vh;" class='bx bx-bell'></i>
+                </div><br>
                 <div class="friends-container">
+
+                <?php
+                $User = new User();
+
+                ?>
+
                     <div class="notifications-popup">
                             <div>
                                 <div class="profile-photo">
-                                    <img id="notification-img" src="./images/profile-2.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Keke Benjamin</b> accepted your friend request
-                                    <small class="text-muted">2 Days Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-3.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>John Doe</b> commented on your post
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-4.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Marry Oppong</b> and <b>283 Others</b> liked your post
-                                    <small class="text-muted">4 Minutes Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
                                     <img id="notification-img"src="./images/profile-5.jpg" alt="">
                                 </div>
                                 <div class="notification-body">
@@ -125,80 +107,10 @@
                                     <small class="text-muted">2 Days Ago</small>
                                 </div>
                             </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-6.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Keyley Jenner</b> commented on a post you are tagged in
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-7.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Jane Doe</b> commented on your post
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-2.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Keke Benjamin</b> accepted your friend request
-                                    <small class="text-muted">2 Days Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-3.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>John Doe</b> commented on your post
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-4.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Marry Oppong</b> and <b>283 Others</b> liked your post
-                                    <small class="text-muted">4 Minutes Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-4.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Marry Oppong</b> and <b>283 Others</b> liked your post
-                                    <small class="text-muted">4 Minutes Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-5.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Doris Y. Lartey</b> commented on a post you are tagged in
-                                    <small class="text-muted">2 Days Ago</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-6.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Keyley Jenner</b> commented on a post you are tagged in
-                                    <small class="text-muted">1 Hour Ago</small>
-                                </div>
-                            </div>
-                            
-                    </div>        
+                                                     
+                    </div>  
+                    
+                    
               <?php
                   }
               ?>
