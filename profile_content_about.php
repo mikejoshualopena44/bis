@@ -15,6 +15,10 @@
         <div>
             <h2>About Me</h2>
             <br>
+                <p style="font-weight: thin; color: aliceblue">
+                    <?="@".$user_data['tag_name']?>
+                <p>
+            <br>
             <p style="font-weight: thin; color: aliceblue">
                 <?php echo nl2br($user_data['introduction']); ?> 
             </p>

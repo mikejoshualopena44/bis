@@ -194,9 +194,9 @@ if (!function_exists('formatPostDuration')) {
                         
                             if($COMMENT['likes'] == 1){
                                 if($i_liked){
-                                    $name= "1 person loved this ";
+                                    $name= "1 person loved this comment";
                                 }else{
-                                    $name= "1 person loved this ";
+                                    $name= "1 person loved this comment ";
                                 }
                             }else{
                                 if($i_liked){
@@ -205,9 +205,9 @@ if (!function_exists('formatPostDuration')) {
                                     if($COMMENT['likes']-1 == 1){
                                         $text = "other";
                                     }
-                                    $name= $COMMENT['likes'] . " people loved this ";
+                                    $name= $COMMENT['likes'] . " people loved this comment";
                                 }else{
-                                    $name= $COMMENT['likes'] . " people loved this ";
+                                    $name= $COMMENT['likes'] . " people loved this comment ";
                                 }
                             
                             }
@@ -237,18 +237,21 @@ if (!function_exists('formatPostDuration')) {
             <div class="comments text-muted"  style=" color:darkgray">
                 <?php
 
-                $comments = " ";
-                $sub_text = " ";
-
-                if ($COMMENT['reply_count'] > 0) {
-                    $comments = "(" . $COMMENT['reply_count'] . ")";
-
-                    if($COMMENT['reply_count'] == 1){
-                        $sub_text = "reply";
-                    }else{
-                        $sub_text = "replies";
-                    }
+                if($ROW['parent'] == 0){ 
+                    $comments = " ";
+                    $sub_text = " ";
                     
+
+                    if ($COMMENT['reply_count'] > 0) {
+                        $comments = "(" . $COMMENT['reply_count'] . ")";
+
+                        if($COMMENT['reply_count'] == 1){
+                            $sub_text = "reply";
+                        }else{
+                            $sub_text = "replies";
+                        }
+                        
+                    }
                 }
                 ?>
                 
@@ -262,12 +265,14 @@ if (!function_exists('formatPostDuration')) {
                     </a>
 
                     <!-- reply-->
-                    <a class="cmnt" href="single_post.php?id=<?php echo $COMMENT['post_id'] ?>">
-                        <i class='bx bx-reply' id="icon"></i>
-                        <?php echo "&nbsp  
-                        <div style='font-size: 1.5rem; '> $comments </div> &nbsp
-                        <div style='font-size: 1rem; float:right; '> $sub_text </div>" ?>
-                    </a>
+                    <?php if($ROW['parent'] == 0){ ?>
+                        <a class="cmnt" href="single_post.php?id=<?php echo $COMMENT['post_id'] ?>">
+                            <i class='bx bx-reply' id="icon"></i>
+                            <?php echo "&nbsp  
+                            <div style='font-size: 1.5rem; '> $comments </div> &nbsp
+                            <div style='font-size: 1rem; float:right; '> $sub_text </div>" ?>
+                        </a>
+                    <?php }?>
                     <!--view image-->
                     <a class="view"href="view_image.php?id=<?php echo $COMMENT['post_id'] ?>">
                     <?php

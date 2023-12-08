@@ -85,6 +85,15 @@ class Post{
             if(isset($data['parent']) && is_numeric($data['parent'])){
                 $parent = $data['parent'];
 
+                $mypost = $this->get_one_posts($data['parent']);
+
+                if(is_array($mypost) && $mypost['stud_ID'] != $stud_ID){
+                    content_i_follow($stud_ID, $mypost);
+
+                    // Now add notification after fetching the comment
+                    add_notification($_SESSION['Bisuconnect_stud_ID'], "comment",$mypost);
+                }
+
                 $sql = "UPDATE posts SET comments = comments +1 WHERE post_id = '$parent' LIMIT 1";
                 $DB->save($sql);
             }
@@ -92,6 +101,7 @@ class Post{
 
             
             $DB->save($query);
+            
 
 
         }else{
@@ -422,6 +432,17 @@ class Post{
                     $sql = "UPDATE posts SET likes = likes - 1 WHERE post_id = '$id' LIMIT 1";
                     $DB->save($sql);
                 }
+
+                if($type != "user"){
+                     $post = new Post();
+                    $single_post = $post->get_one_posts($id);           
+
+                    // Now add notification after fetching the post
+                    add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+                }
+                
+               
+
             } else {
                 // No existing likes, create a new array with the user's like
                 $arr["stud_ID"] = $Bisuconnect_stud_ID;
@@ -436,6 +457,14 @@ class Post{
                 // Increment the likes count on the posts table
                 $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";
                 $DB->save($sql);
+
+                if($type != "user"){
+                    $post = new Post();
+                   $single_post = $post->get_one_posts($id);           
+
+                   // Now add notification after fetching the post
+                   add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+               }
             }
         }
         

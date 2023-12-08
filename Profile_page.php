@@ -44,6 +44,7 @@
 
   }
 
+
   // to collect posts
   $post = new Post();
   $id = $user_data['stud_ID']; //getting from userdata to only visit other friend not access it
@@ -54,6 +55,7 @@
  
   //to collect friends
   $user = new User();
+  $image_class = new Image();
 
 
   $friends = $user->get_friends($id);
@@ -82,6 +84,10 @@
     }
 }
 
+  if(isset($_GET['notif'])){
+    notification_seen($_GET['notif']);
+  }
+
 ?>
 
 <!--=== HTML ===-->
@@ -91,7 +97,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Profile_page </title>
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="style/style_profile.css">
+    <link rel="stylesheet" href="style/profile_style2.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -197,33 +203,60 @@
         <div class="profile-container">
           <!-- user profile-->
           <div class="profile-box">
-            <!-- Cover photo-->
-            <?php
-              $image_bg = "images/main_bg.jpg"; 
 
-              //if image loaded to db, uplaod it to profile
-              if(file_exists($user_data['cover_image']))
-              {
-                $image_bg = $image_class->get_thumb_cover($user_data['cover_image']);
-              }
-             ?>
-            <img class="profile-bg" src="<?php echo $image_bg ?>" alt="no images">
 
-            <!-- Profile photo-->
             <?php
-              $image = "images/bman1.jpg"; 
-              if($user_data['gender'] == "Female")
-              {
-                $image = "images/gman.jpg";
-              }
-              //if image loaded to db, uplaod it to profile
-              if(file_exists($user_data['profile_image']))
-              {
-                $image = $image_class->get_thumb_profile($user_data['profile_image']);
+              $coverLink = "#";  // Default link for the cover photo
+              $profileLink = "#"; // Default link for the profile photo
+
+              if (!empty($posts)) {
+                  // Assuming the first post is for the cover photo and the second post is for the profile photo
+                  if (isset($posts[0]['post_id'])) {
+                      $coverLink = "single_post.php?id=" . $posts[0]['post_id'];
+                  }
+
+                  if (isset($posts[1]['post_id'])) {
+                      $profileLink = "single_post.php?id=" . $posts[1]['post_id'];
+                  }
               }
             ?>
 
-            <img class="profile-dp" src="<?php echo $image ?>" alt="image_profile"> 
+            <!-- Cover photo-->
+            <a href=<?php echo $coverLink;?> >
+              <?php
+                $image_bg = "images/main_bg.jpg"; 
+
+                //if image loaded to db, uplaod it to profile
+                if(file_exists($user_data['cover_image']))
+                {
+                  $image_bg = $image_class->get_thumb_cover($user_data['cover_image']);
+                }
+              ?>
+              
+              <img class="profile-bg" src="<?php echo $image_bg ?>" alt="no images">
+            </a>
+
+
+
+            <!-- Profile photo-->
+            <a href=<?php echo $profileLink;?> >
+              <?php
+                $image = "images/bman1.jpg"; 
+                if($user_data['gender'] == "Female")
+                {
+                  $image = "images/gman.jpg";
+                }
+                //if image loaded to db, uplaod it to profile
+                if(file_exists($user_data['profile_image']))
+                {
+                  $image = $image_class->get_thumb_profile($user_data['profile_image']);
+                }
+              ?>
+              <img class="profile-dp" src="<?php echo $image ?>" alt="image_profile"> 
+            </a>
+
+
+            <!-- User name-->
             <a href="Profile_page.php?id=<?php echo $user_data['stud_ID']?>">
               <div class="profile-name"> <!--retrieve username-->
                 <?php echo $user_data['firstName']. " ". $user_data['lastName']  ?>

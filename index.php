@@ -57,7 +57,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Home_page </title>
-    <link rel="stylesheet" href="style/style_index.css">
+    <link rel="stylesheet" href="style/index_style.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -168,25 +168,25 @@
             <div class="org-bar">
               <div class="label">&nbsp &nbsp Organizations</div> <br>
                   <a href="https://www.facebook.com/bisuofficial" target="_blank">
-                    <img class="org-logo" src="images/BISU.jpg " alt="friends" ><br>  
+                    <img class="org-logo" src="images/org/BISU.jpg " alt="friends" ><br>  
                   </a> 
                   <a href="https://www.facebook.com/BISUMCCSO" target="_blank">
-                      <img class="org-logo" src="images/cso.jpg " alt="friends"><br>  
+                      <img class="org-logo" src="images/org/cso.jpg " alt="friends"><br>  
                   </a> 
                   <a href="https://www.facebook.com/bisumcSCV" target="_blank">
-                    <img class="org-logo" src="images/scv.jpg" alt="friends"><br>  
+                    <img class="org-logo" src="images/org/scv.jpg" alt="friends"><br>  
                   </a>  
                   <a href="https://www.facebook.com/icpepsebisumc" target="_blank">
-                    <img  class="org-logo" src="images/ICPEP.jpg" alt="friends"><br>  
+                    <img  class="org-logo" src="images/org/ICPEP.jpg" alt="friends"><br>  
                   </a>
                   <a href="https://www.facebook.com/cea.bisumain" target="_blank">
-                    <img class="org-logo" src="images/cea.jpg " alt="friends"><br>  
+                    <img class="org-logo" src="images/org/cea.jpg " alt="friends"><br>  
                   </a>   
                   <a href="https://www.facebook.com/BISUMCSSG" target="_blank">
-                    <img class="org-logo" src="images/ssg.jpg" alt="friends"><br>  
+                    <img class="org-logo" src="images/org/ssg.jpg" alt="friends"><br>  
                   </a> 
                   <a href="https://www.facebook.com/bdats.bisumc" target="_blank">
-                    <img class="org-logo" src="images/bdats.jpg " alt="friends"><br>  
+                    <img class="org-logo" src="images/org/bdats.jpg " alt="friends"><br>  
                   </a> 
 
 

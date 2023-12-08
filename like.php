@@ -6,6 +6,7 @@ include ("classes/autoloader.php");
 //Who log_in? =($_SESSION['Bisuconnect_stud_ID']); 
 $login = new Login();
 $user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
+$post = new Post();
 
 //check who login //white listing to avoid sql injection
 if(isset($_GET['id']) && is_numeric($_GET['id'])){
@@ -24,39 +25,22 @@ if(isset($_SERVER['HTTP_REFERER'])){
     $return_to = "Profile_page.php";
 }
 
+    if (isset($_GET['type']) && isset($_GET['id'])) {
+        
 
-    if(isset($_GET['type']) && isset($_GET['id'])){
+        if (is_numeric($_GET['id'])) {
+            $allowed = ['post', 'user', 'comment'];
 
-        $post = new Post();
-
-        if(is_numeric($_GET['id'])){
-
-            $allowed[] = 'post';
-            $allowed[] = 'user';
-            $allowed[] = 'comment';
-
-            if(in_array($_GET['type'], $allowed)){
-
-                //user_class = new User();
-                $post = new Post();
-                $post->like_post($_GET['id'], $_GET['type'], $_SESSION['Bisuconnect_stud_ID']);  
-
-                //$single_post = $post->get_user($_GET['id']);
-                $single_post = $post->get_one_posts($_GET['id']);
-
+            if (in_array($_GET['type'], $allowed)) {
+                $post->like_post($_GET['id'], $_GET['type'], $_SESSION['Bisuconnect_stud_ID']);
             }
-
-            //add notification
-            add_notification( $_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
-
-            
-
+     
+            //user_class = new User(); for following
+            //$single_post = $post->get_user($_GET['id']);
         }
-  
     }
-    
 
-    $post = new Post();
+    
     $likes = $post->get_likes($_GET['id'],$_GET['type']);
     
     if(is_array($likes)){

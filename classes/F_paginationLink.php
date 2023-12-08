@@ -63,7 +63,6 @@ function add_notification($stud_ID, $activity, $row)
   $stud_ID = esc($stud_ID);
   $activity = esc($activity);
   $content_owner = $row->stud_ID;
-  $date = date("Y-m-d H:i:s");
 
   $content_id = 0;
   $content_type = "";
@@ -80,10 +79,11 @@ function add_notification($stud_ID, $activity, $row)
 
   if(isset($row->gender)){
     $content_type = "profile";
+    $content_id = $row->stud_ID;
   }
 
-  $query = "INSERT INTO notifications (stud_ID,activity,content_owner,date,content_id, content_type) 
-            VALUES ('$stud_ID','$activity','$content_owner','$date','$content_id', '$content_type') ";
+  $query = "INSERT INTO notifications (stud_ID,activity,content_owner,content_id, content_type) 
+            VALUES ('$stud_ID','$activity','$content_owner','$content_id', '$content_type') ";
   
   $DB = new CONNECTION_DB();
   $DB->save($query);
@@ -93,9 +93,8 @@ function add_notification($stud_ID, $activity, $row)
 function content_i_follow($stud_ID, $row)
 {
 
+  $row = (object)$row;
   $stud_ID = esc($stud_ID); 
-  $content_owner = $row->stud_ID;
-  $date = date("Y-m-D H:i:s");
   $content_id = 0;
   $content_type = "";
 
@@ -108,8 +107,8 @@ function content_i_follow($stud_ID, $row)
     }
     
   }
-  $query = "INSERT INTO content_follow (stud_ID,date,content_id, content_type) 
-            VALUES ('$stud_ID','$date','$content_id', '$content_type') ";
+  $query = "INSERT INTO content_follow (stud_ID,content_id, content_type) 
+            VALUES ('$stud_ID','$content_id', '$content_type') ";
   
   $DB = new CONNECTION_DB();
   $DB->save($query);
@@ -121,3 +120,74 @@ function esc($value)
 {
   return addslashes($value);
 }
+
+function notification_seen($id)
+{  
+
+  $notification_id = addslashes($id);
+  $stud_ID = $_SESSION['Bisuconnect_stud_ID'];
+  $DB = new CONNECTION_DB();
+
+  $query = "SELECT * FROM notification_seen WHERE stud_ID = '$stud_ID' &&  notification_id = '$notification_id' LIMIT 1";
+  $check = $DB->read($query);
+
+  if(!is_array($check)){
+
+    $query = "INSERT INTO notification_seen (stud_ID,notification_id) 
+    VALUES ('$stud_ID','$notification_id') ";
+
+    $DB->save($query);
+  }
+}
+
+
+function check_notifications()
+{
+  $number = 0;
+
+  $stud_ID = esc($_SESSION['Bisuconnect_stud_ID']);
+  $DB = new CONNECTION_DB();
+  $follow = array();
+
+  //check content I follow
+  $sql = "SELECT * FROM content_follow WHERE (disabled = 0 AND stud_ID ='$stud_ID') LIMIT 99";
+  $i_follow = $DB->read($sql);
+
+  if(is_array($i_follow)){
+      $follow = array_column($i_follow, "content_id");
+  }
+  if(count($follow)> 0){
+
+      $str = "'" . implode("','", $follow) . "'";                 
+      $query = "SELECT * FROM notifications WHERE (content_owner = '$stud_ID' AND stud_ID != '$stud_ID') OR (content_id in ($str)) ORDER BY id DESC LIMIT 30";
+  }else{
+      $query = "SELECT * FROM notifications WHERE content_owner = '$stud_ID' AND stud_ID != '$stud_ID' ORDER BY id DESC LIMIT 30";
+  }
+  
+  $data = $DB->read($query);
+
+  if(is_array($data)){
+
+    foreach($data as $row){
+
+
+    $query = "SELECT * FROM notification_seen WHERE stud_ID = '$stud_ID' &&  notification_id = '$row[id]' LIMIT 1";
+    $check = $DB->read($query);
+
+    if(!is_array($check)){
+
+        $number ++;
+      } 
+    }   
+  }
+
+
+
+  return $number;
+}
+
+function check_tags($text)
+{
+    
+}
+

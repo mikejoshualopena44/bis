@@ -34,7 +34,22 @@ body{
   flex-direction: column;
 }
 
- 
+::-webkit-scrollbar { /*design scrollbar*/
+  width: 15px;
+
+}
+
+::-webkit-scrollbar-track{
+  background-color: var(--fourthbg) ;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #f0c310;
+  background: -webkit-linear-gradient(0deg, #f0c310 0%, #42428a 100%);
+  background: linear-gradient(0deg, #f0c310 0%, #42428a 100%);
+  border-radius: 1rem;
+}
 .label {
   font-weight: bold;
   font-size:1.2vw;

@@ -465,6 +465,23 @@ body{
     top: 0;
     right: 0;
 }
+
+::-webkit-scrollbar { /*design scrollbar*/
+  width: 15px;
+
+}
+
+::-webkit-scrollbar-track{
+  background-color: var(--fourthbg) ;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #f0c310;
+  background: -webkit-linear-gradient(0deg, #f0c310 0%, #42428a 100%);
+  background: linear-gradient(0deg, #f0c310 0%, #42428a 100%);
+  border-radius: 1rem;
+}
 /*bg color */
 .profile-section{
   position: relative;
@@ -781,8 +798,41 @@ body{
   scrollbar-width: thin; /* Hide scrollbar for Firefox */
 }
 
-.friends-container::-webkit-scrollbar { /*Hide scrollbar univarsal*/
-  display: none; 
+.friends-container::-webkit-scrollbar { /*design scrollbar*/
+  width: 7px;
+
+}
+
+.friends-container::-webkit-scrollbar-track{
+  background-color: var(--fourthbg) ;
+  border-radius: 1rem;
+}
+
+.friends-container::-webkit-scrollbar-thumb{
+  background: #42428a;
+  background: -webkit-linear-gradient(147deg, #42428a 0%, #f0c310 100%);
+  background: linear-gradient(147deg, #42428a 0%, #f0c310 100%);
+  border-radius: 1rem;
+}
+
+.notification_count{
+  width: 2dvw;
+  height: 4dvh; 
+  float: right;
+  position: relative; 
+  background-color: var(--secondbg); 
+  padding: 3px;
+  display: flex;
+  color: var(--fourthbg);
+  margin-top: -2px;
+  margin-left: 4px;
+  border-radius:50%;
+  text-align: center;
+  justify-content: center;
+}
+
+#notification_name{
+  color: var(--secondbg);
 }
 
 .friends {
@@ -790,8 +840,15 @@ body{
   align-items: center; /* Vertically align the content within each friend */
   margin-bottom: 10px; /* Add some margin for spacing between friends */
   border-radius: 1rem;
+  padding:.5rem;
 }
+.friends:hover {
+  color: var(--secondbg); 
+  font-weight: bold;
+  background-color: var(--fourthbg);
+  padding: .7rem .3rem;
 
+}
 .bisuan {
   display: grid; /* Use flex display for each friend */
   align-items: center; /* Vertically align the content within each friend */
@@ -811,13 +868,7 @@ body{
 
 
 
-.friends:hover {
-  color: var(--fourthbg);
-  font-size: 15px;
-  font-weight: bold;
-  background-color: var(--secondbg);
 
-}
 /*a or anchor setup above as public variable*/
 /*posts area*/
 .profile-posts {

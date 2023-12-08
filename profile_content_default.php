@@ -12,6 +12,21 @@
                     }
                 }
             ?>
+                    <?php
+            //pagination on previous and next page on class_F_paginationLink.php
+            $pg = pagination_link();
+        ?>      
+        <div class="page-container">
+                        <a href="#<?php //echo $pg['prev_page'] ?>"> 
+                            <i class='bx bxs-chevron-left' style="color: #f0c310"></i>
+                            <input id="page" type="submit" value="Previous"> 
+                        </a>
+
+                        <a href="#<?php //echo  $pg['next_page'] ?>"> 
+                            <input id="page" type="submit" value="Next"> 
+                            <i class='bx bxs-chevron-right' style="color: #f0c310"></i>
+                        </a>
+                    </div>
         </div>
     </div>
 
@@ -88,28 +103,78 @@
             <div class="friends-bar">
               <div class="label">
                     Notifications
-                    <i style="padding-left: 4rem; font-size: 2.6vh;" class='bx bx-bell'></i>
+                    <i style="padding-left: 2rem; font-size: 2.6vh;" class='bx bx-bell'></i>
+
+                    <!-- notification count -->
+                    <?php
+
+                        $notif = check_notifications();      
+                    ?>
+                    <?php if($notif> 0 ) :?>
+                            <div class="notification_count"><?=$notif?></div>
+                    <?php endif; ?>
+
+
                 </div><br>
                 <div class="friends-container">
 
-                <?php
-                $User = new User();
+            <?php
 
-                ?>
+                $DB = new CONNECTION_DB();
+                $id = esc($_SESSION['Bisuconnect_stud_ID']);
+                $follow = array();
 
-                    <div class="notifications-popup">
-                            <div>
-                                <div class="profile-photo">
-                                    <img id="notification-img"src="./images/profile-5.jpg" alt="">
-                                </div>
-                                <div class="notification-body">
-                                    <b>Doris Y. Lartey</b> commented on a post you are tagged in
-                                    <small class="text-muted">2 Days Ago</small>
-                                </div>
-                            </div>
-                                                     
-                    </div>  
-                    
+                //check content I follow
+                //$sql = "SELECT * FROM content_follow WHERE (disabled = 0 AND stud_ID ='$id') LIMIT 99";
+                $i_follow = $DB->read($sql);
+
+                if(is_array($i_follow)){
+                    $follow = array_column($i_follow, "content_id");
+                }
+                if(count($follow)> 0){
+
+                    $str = "'" . implode("','", $follow) . "'";                 
+                    $query = "SELECT * FROM notifications WHERE (content_owner = '$id' AND stud_ID != '$id') OR (content_id in ($str)) ORDER BY id DESC LIMIT 30";
+                }else{
+                    $query = "SELECT * FROM notifications WHERE content_owner = '$id' AND stud_ID != '$id' ORDER BY id DESC LIMIT 30";
+                }
+                
+                $data = $DB->read($query);
+
+
+            ?>
+            
+
+            <!-- Loop Notification -->
+            <?php  if(is_array($data)): ?>
+
+                <?php foreach($data as $notif_row):
+
+                    Include("single_notification.php");
+
+                endforeach; ?>
+
+            <?php else: ?>
+
+                <b>No Notifications were found</b> 
+                
+            <?php endif; ?>
+            
+            <?php
+            //pagination on previous and next page on class_F_paginationLink.php
+            $pg = pagination_link();
+        ?>      
+        <div class="page-container">
+                        <a href="#<?php //echo $pg['prev_page'] ?>"> 
+                            <i class='bx bxs-chevron-left' style="color: #f0c310"></i>
+                            <input id="page" type="submit" value="Recent"> 
+                        </a>
+
+                        <a href="#<?php //echo  $pg['next_page'] ?>"> 
+                            <input id="page" type="submit" value="Older"> 
+                            <i class='bx bxs-chevron-right' style="color: #f0c310"></i>
+                        </a>
+                    </div>              
                     
               <?php
                   }

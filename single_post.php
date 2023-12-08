@@ -161,17 +161,45 @@
             </div>
               <h2> Comments</h2> 
               <?php
+
+                //check if this is from a notification
+
+                if(isset($_GET['notif'])){
+                  notification_seen($_GET['notif']);
+                }
+                
+
+
                 $user = new User();
                 $image_class = new Image();
 
                 if(is_array($ROW)){
                   
                   $ROW_user = $user->get_user($ROW['stud_ID']);
-                  Include("P_post.php");       
+
+                  if(is_array($ROW)){
+                  
+                    $ROW_user = $user->get_user($ROW['stud_ID']);
+  
+                    if($ROW['parent'] == 0){
+                      Include("P_post.php");  
+                    }else{
+                      $COMMENT = $ROW;
+                      Include("comment.php"); 
+                    }              
+                    
+                  }              
                   
                 }
               
-              ?> <!-- Post something -->
+              ?> <!-- view original post -->
+              <?php if($ROW['parent'] != 0){ ?>
+                <a href="single_post.php?id=<?php echo $ROW['parent'] ?>">
+                  <input id="page" type="submit" value="View original post"> 
+                </a>
+              <?php } ?>
+
+            
               <hr style="width:100%">
               <div class="posts-area">
                  <form method="post" enctype="multipart/form-data" action="#">
@@ -183,7 +211,9 @@
                     <input id="posts_btn" type="submit" value="Comment">
                     
                   </form>
-              </iv>
+
+              
+              
               
                   <!-- Get comments -->
               <?php
@@ -203,7 +233,7 @@
                   echo "</div>";
                 }
               ?>
-            </div>
+            </div>  
         </div>
     </div>
 
@@ -347,9 +377,9 @@ function updateLikeCount(postId, count) {
 
         if (count > 0) {
             if (count === 1) {
-                text = "1 person loved this post";
+                text = "1 person loved this comment";
             } else {
-                text = count + " people loved this post";
+                text = count + " people loved this comment";
             }
         }
 
