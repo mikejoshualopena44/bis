@@ -1673,7 +1673,50 @@ select {
   border-radius: 50%;
 }
 
+.segment{
+  background-color: var(--sixthbg);
+  margin: 2rem 0;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 1rem;
+}
 
+/*orgname*/
+.segment label{
+  display: flex;
+  width: 9rem;
+  margin: 5px 0;
+  cursor: pointer;
+
+}
+
+.segment label:hover{
+  color: var(--secondbg);
+  text-decoration: underline;
+}
+
+.org-btn-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.org_btn{
+  background-color: var(--fourthbg);
+  color: var(--secondbg);
+  width:20dvw;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  padding: 5px 1rem;
+}
+
+.org_btn:hover{
+  background: var(--secondbg);
+  color: var(--fourthbg);
+}
 
 
 

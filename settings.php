@@ -94,7 +94,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Settings </title>
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="style/settings.css">
+    <link rel="stylesheet" href="style/settings_2.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -784,10 +784,31 @@ body{
   overflow-y: auto;
 }
 
-.org-bar::-webkit-scrollbar {  
-	display: none;
+
+.org-bar::-webkit-scrollbar { /*design scrollbar*/
+  display: none;
 }
 
+/*
+.org-bar::-webkit-scrollbar { 
+  width: 5px;
+  border-radius: 1rem;
+
+
+}
+
+.org-bar::-webkit-scrollbar-track{
+  background-color: var(--fourthbg) ;
+  border-radius: 1rem;
+}
+
+.org-bar::-webkit-scrollbar-thumb{
+  background: #42428a;
+  background: -webkit-linear-gradient(147deg, #42428a 0%, #f0c310 100%);
+  background: linear-gradient(147deg, #42428a 0%, #f0c310 100%);
+  border-radius: 1rem;
+}
+*/
 .label {
   font-weight: bold;
   text-align: start;
@@ -795,14 +816,12 @@ body{
 }
 
 .org-logo {
-  width: 160px; /* Set a fixed width for square images */
-  height: 160px; /* Set a fixed height for square images */
+  width: 10rem; /* Set a fixed width for square images */
+  height: 10rem; /* Set a fixed height for square images */
   object-fit: cover; /* Maintain the aspect ratio and cover the entire container */
   border-radius: 50%; /* Rounded corners for the image container */
   margin: 5px; /* Adjust the margin for spacing between images */
   margin-bottom:2rem;
-
-
 }
 
 .org-logo:hover {

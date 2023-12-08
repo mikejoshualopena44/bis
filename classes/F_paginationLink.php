@@ -191,3 +191,11 @@ function check_tags($text)
     
 }
 
+
+function getOrgConfig($stud_ID, $orgName) {
+  $DB = new CONNECTION_DB();
+  $query = "SELECT show_logo, logo_path, logo_url FROM org_config WHERE stud_ID = '$stud_ID' AND org_name = '$orgName' LIMIT 1";
+  $result = $DB->read($query);
+
+  return is_array($result) ? $result[0] : null;
+}

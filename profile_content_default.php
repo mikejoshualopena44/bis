@@ -12,6 +12,7 @@
                     }
                 }
             ?>
+<!--  Friends Pagination
                     <?php
             //pagination on previous and next page on class_F_paginationLink.php
             $pg = pagination_link();
@@ -27,6 +28,7 @@
                             <i class='bx bxs-chevron-right' style="color: #f0c310"></i>
                         </a>
                     </div>
+-->
         </div>
     </div>
 
@@ -138,7 +140,7 @@
                 }else{
                     $query = "SELECT * FROM notifications WHERE content_owner = '$id' AND stud_ID != '$id' ORDER BY id DESC LIMIT 30";
                 }
-                
+                //number of notification
                 $data = $DB->read($query);
 
 
@@ -159,7 +161,7 @@
                 <b>No Notifications were found</b> 
                 
             <?php endif; ?>
-            
+<!--  Notification Pagination     
             <?php
             //pagination on previous and next page on class_F_paginationLink.php
             $pg = pagination_link();
@@ -174,7 +176,8 @@
                             <input id="page" type="submit" value="Older"> 
                             <i class='bx bxs-chevron-right' style="color: #f0c310"></i>
                         </a>
-                    </div>              
+                    </div>   
+-->           
                     
               <?php
                   }

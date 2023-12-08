@@ -57,7 +57,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Home_page </title>
-    <link rel="stylesheet" href="style/index_style.css">
+    <link rel="stylesheet" href="style/style_index.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -165,35 +165,29 @@
         <div class="profile-content">
           <!-- friends area-->
 
-            <div class="org-bar">
-              <div class="label">&nbsp &nbsp Organizations</div> <br>
-                  <a href="https://www.facebook.com/bisuofficial" target="_blank">
-                    <img class="org-logo" src="images/org/BISU.jpg " alt="friends" ><br>  
-                  </a> 
-                  <a href="https://www.facebook.com/BISUMCCSO" target="_blank">
-                      <img class="org-logo" src="images/org/cso.jpg " alt="friends"><br>  
-                  </a> 
-                  <a href="https://www.facebook.com/bisumcSCV" target="_blank">
-                    <img class="org-logo" src="images/org/scv.jpg" alt="friends"><br>  
-                  </a>  
-                  <a href="https://www.facebook.com/icpepsebisumc" target="_blank">
-                    <img  class="org-logo" src="images/org/ICPEP.jpg" alt="friends"><br>  
-                  </a>
-                  <a href="https://www.facebook.com/cea.bisumain" target="_blank">
-                    <img class="org-logo" src="images/org/cea.jpg " alt="friends"><br>  
-                  </a>   
-                  <a href="https://www.facebook.com/BISUMCSSG" target="_blank">
-                    <img class="org-logo" src="images/org/ssg.jpg" alt="friends"><br>  
-                  </a> 
-                  <a href="https://www.facebook.com/bdats.bisumc" target="_blank">
-                    <img class="org-logo" src="images/org/bdats.jpg " alt="friends"><br>  
-                  </a> 
 
+        <div class="org-container"></div>
+          <div class="org-bar">
+            <div class="label">&nbsp &nbsp Organizations</div> <br>
+            <?php
+              $orgs = ['BISU', 'CSO', 'SCV', 'ICPEP', 'CEA', 'SSG', 'MAYORS_LEAGUE', 'LUDAFIL', 'YMMA', 'PICE_ACES', 'SEES_IIEE_SC', 'UAPSA', 
+              'BIDA', 'JPSME', 'ADA', 'ATTS', 'EESA', 'LATEST', 'MATH_ISIP', 'OASIS', 'SCUBAP', 'SPE', 'YES', 'AHWB', 'BISU_CHORALE', 
+              'GDSC', 'HSC', 'KGEN', 'PFC', 'SKILARTALES', 'TAWUSO', 'VAG', 'DOST_SA_BOHOL', 'RCY', 'IVCF', 'KKBM', 'SFC', 'SMCI', 
+              'YFCCB', 'JESUS_AND_ME', 'ASUL', 'BDATS', 'ALLY', 'ABCD', 'ANDA', 'ALSO', 'BISUs_PILAR', 'BISUbayanons', 'BTAP', 'BTAP_3', 
+              'BUGS', 'CYou', 'COOL', 'CSA', 'DANAO_SCOUT', 'ABDUCT', 'HCB', 'JUST', 'LOLs', 'MABINIANS', 'MYLS', 'SICAD', 'SIDLAK', 'SISS',
+              'SMART', 'SMTEP', 'SOLID', 'SQUAD', 'SYC', 'GO_TCC', 'TEGUM', 'TRIAD', 'UBSA_BISU', 'EG', 'USBBC', 'BVAULTS', 'USB', 'LLS', 'SIAW'];
 
-                  
+            foreach ($orgs as $org) {
+                $orgConfig = getOrgConfig($_SESSION['Bisuconnect_stud_ID'], $org);
 
-                  </a>
-              </div>
+                if ($orgConfig && $orgConfig['show_logo']) {
+                    echo "<a href='" . $orgConfig['logo_url'] . "' target='_blank'>";
+                    echo "<img class='org-logo' src='" . $orgConfig['logo_path'] . "' alt='$org'><br>";
+                    echo "</a>";
+                }
+            }
+            ?>
+          </div>
 
           <!-- Start Post area-->
 
