@@ -259,7 +259,7 @@
           }
           else
           {
-            include("P_logout.php.php");
+            include("P_logout.php");
           }
 
         ?>

@@ -5,33 +5,49 @@ class Login
 
 	private $error = "";
  
-	public function evaluate($data)
-	{
-		// Read if the user exists in the database
-		$email = addslashes($data['email']);
-		$password = $data['password'];
-	
-		$query = "select * from users where email = '$email' limit 1";
-	
-		$DB = new CONNECTION_DB();
-		$result = $DB->read($query);
-	
-		if ($result) {
-			$row = $result[0];
-	
-			if (password_verify($password, $row['password'])) {
-				// Password is correct
-				$_SESSION['Bisuconnect_stud_ID'] = $row['stud_ID'];
-			} else {			//wrong password
-				$this->error .= "Invalid email or password<br>";
-			}
-		} else {			//wrong email
-			$this->error .= "Invalid email or password<br>";
-				//For security purposes both input would be displayed if one is wrong
-		}
-	
-		return $this->error;
-	}
+    public function evaluate($data)
+    {
+        // Read if the user exists in the database
+        $email = addslashes($data['email']);
+        $password = $data['password'];
+
+        $query = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+
+        $DB = new CONNECTION_DB();
+        $result = $DB->read($query);
+
+        if ($result) {
+            $row = $result[0];
+			
+
+			//reading hashed password
+            if (password_verify($password, $row['password'])) {
+                // Password is correct
+                $_SESSION['Bisuconnect_stud_ID'] = $row['stud_ID'];
+
+                // Check conditions for admin access
+                if ($row['stud_ID'] == 12252023 
+				&& $row['firstName'] == 'Admin' 
+				&& $row['lastName'] == 'admin' 
+				&& $row['email'] == 'admin@bisu.edu.ph')
+				{
+                    // Redirect to admin.php for admin
+                    header("Location: admin.php");
+                    exit();
+                } else {
+                    // Redirect to Profile_page.php for non-admin users
+                    header("Location: Profile_page.php");
+                    exit();
+                }
+            } else { // wrong password
+                $this->error .= "Invalid email or password<br>";
+            }
+        } else { // wrong email
+            $this->error .= "Invalid email or password<br>";
+        }
+
+        return $this->error;
+    }
 
 	public function check_login($id)  //chck if not numeric redirect,if numeric retrieve user_data
 	{

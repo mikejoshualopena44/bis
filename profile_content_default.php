@@ -128,11 +128,11 @@
 
                 //check content I follow
                 //$sql = "SELECT * FROM content_follow WHERE (disabled = 0 AND stud_ID ='$id') LIMIT 99";
-                $i_follow = $DB->read($sql);
+                //$i_follow = $DB->read($sql);
 
-                if(is_array($i_follow)){
-                    $follow = array_column($i_follow, "content_id");
-                }
+                //if(is_array($i_follow)){
+                //    $follow = array_column($i_follow, "content_id");
+                //}
                 if(count($follow)> 0){
 
                     $str = "'" . implode("','", $follow) . "'";                 

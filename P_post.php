@@ -174,11 +174,11 @@ if (!function_exists('formatPostDuration')) {
 
         <div class="liked-by">
 
-            <!-- Display the recent people who like -->
+            <!-- Display the recent people who like 
            <span><img id="react_img"src="./images/profile-10.jpg" alt=""></span> 
            <span><img id="react_img1" src="./images/profile-4.jpg" alt=""></span>
            <span><img id="react_img2"src="./images/profile-15.jpg"alt=""></span> 
-            
+                    -->
             <!-- Display number of likes-->
             <?php 
                 $i_liked = false;
