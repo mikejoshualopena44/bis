@@ -107,7 +107,7 @@
                     Notifications
                     <i style="padding-left: 2rem; font-size: 2.6vh;" class='bx bx-bell'></i>
 
-                    <!-- notification count -->
+                    <!-- notification count 
                     <?php
 
                         $notif = check_notifications();      
@@ -115,7 +115,7 @@
                     <?php if($notif> 0 ) :?>
                             <div class="notification_count"><?=$notif?></div>
                     <?php endif; ?>
-
+                    -->
 
                 </div><br>
                 <div class="friends-container">

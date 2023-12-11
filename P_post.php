@@ -13,8 +13,11 @@ if (!function_exists('formatPostDuration')) {
     $secondsInMonth = $secondsInDay * 30;
     $secondsInYear = $secondsInDay * 365;
 
-    if ($timeDifference < $secondsInMinute) {
-        return $timeDifference . " seconds ago";
+    if ($timeDifference <= 1) {
+        return "Just now";
+    } elseif ($timeDifference < $secondsInMinute) {
+        $seconds = $timeDifference;
+        return $seconds . " second" . ($seconds > 1 ? "s" : "") . " ago";
     } elseif ($timeDifference < $secondsInHour) {
         $minutes = floor($timeDifference / $secondsInMinute);
         return $minutes . " minute" . ($minutes > 1 ? "s" : "") . " ago";
@@ -308,7 +311,9 @@ if (!function_exists('formatPostDuration')) {
                 </a>
             </div>
             <div class="right-icons">
+                <!--
                 <i class='bx bx-bookmark-plus bx-lg'></i>
+                -->
             </div>
         </div>
                 <br>

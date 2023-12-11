@@ -182,7 +182,7 @@
                     $ROW_user = $user->get_user($ROW['stud_ID']);
   
                     if($ROW['parent'] == 0){
-                      Include("P_post.php");  
+                      Include("P_post_comment.php");  
                     }else{
                       $COMMENT = $ROW;
                       Include("comment.php"); 

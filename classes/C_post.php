@@ -94,13 +94,15 @@ class Post{
                     add_notification($_SESSION['Bisuconnect_stud_ID'], "comment",$mypost);
                 }
 
-                $sql = "UPDATE posts SET comments = comments +1 WHERE post_id = '$parent' LIMIT 1";
-                $DB->save($sql);
-            }
-            $query = "INSERT INTO posts (post_id,stud_ID,post,image,parent,has_image,is_profile_image,is_cover_image ) VALUES ('$post_id','$stud_ID','$post','$myimage','$parent','$has_image','$is_profile_image','$is_cover_image' )";
+                $query = "UPDATE posts SET post = '$post', date = NOW() WHERE post_id = '$post_id'";
+                $DB->save($query);
 
+            }
+            $query = "INSERT INTO posts (post_id, stud_ID, post, image, parent, has_image, is_profile_image, is_cover_image, date)
+            VALUES ('$post_id', '$stud_ID', '$post', '$myimage', '$parent', '$has_image', '$is_profile_image', '$is_cover_image', NOW())";
             
             $DB->save($query);
+  
             
 
 
@@ -383,92 +385,96 @@ class Post{
     }
     
     
-
     public function like_post($id, $type, $Bisuconnect_stud_ID)
     {
         $DB = new CONNECTION_DB();
-    
+        
         if ($type == "post") {
-            // Fetch existing likes for the post from the database
-            $sql = "SELECT likes FROM likes WHERE type='post' AND content_id = '$id' LIMIT 1";
+            // Fetch the original post date from the posts table
+            $sql = "SELECT date FROM posts WHERE post_id = '$id' LIMIT 1";
             $result = $DB->read($sql);
     
             if (is_array($result)) {
-                $likes = json_decode($result[0]['likes'], true);
+                $original_post_date = $result[0]['date'];
     
-                // Check if the user has already liked the post
-                $user_already_liked = false;
-                $updated_likes = [];
-    
-                foreach ($likes as $like) {
-                    if ($like['stud_ID'] == $Bisuconnect_stud_ID) {
-                        $user_already_liked = true;
-                    } else {
-                        $updated_likes[] = $like;
+                // Fetch existing likes for the post from the database
+                $sql = "SELECT likes FROM likes WHERE type='post' AND content_id = '$id' LIMIT 1";
+                $result = $DB->read($sql);
+        
+                if (is_array($result)) {
+                    $likes = json_decode($result[0]['likes'], true);
+        
+                    // Check if the user has already liked the post
+                    $user_already_liked = false;
+                    $updated_likes = [];
+        
+                    foreach ($likes as $like) {
+                        if ($like['stud_ID'] == $Bisuconnect_stud_ID) {
+                            $user_already_liked = true;
+                        } else {
+                            $updated_likes[] = $like;
+                        }
                     }
-                }
+        
+                    if (!$user_already_liked) {
+                        // Add the user's like
+                        $arr["stud_ID"] = $Bisuconnect_stud_ID;
+                        $arr["date"] = date("Y-m-d H:i:s");
+                        $updated_likes[] = $arr;
+        
+                        // Update the likes in the database
+                        $likes_string = json_encode($updated_likes);
+                        $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' AND content_id = '$id' LIMIT 1";
+                        $DB->save($sql);
+        
+                        // Update the posts table with the original post date
+                        $sql = "UPDATE posts SET likes = likes + 1, date = '$original_post_date' WHERE post_id = '$id' LIMIT 1";
+                        $DB->save($sql);
+                    } else {
+                        // User already liked, remove the like
+                        $likes_string = json_encode($updated_likes);
+                        $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' AND content_id = '$id' LIMIT 1";
+                        $DB->save($sql);
+        
+                        // Update the posts table with the original post date
+                        $sql = "UPDATE posts SET likes = likes - 1, date = '$original_post_date' WHERE post_id = '$id' LIMIT 1";
+                        $DB->save($sql);
+                    }
     
-                if (!$user_already_liked) {
-                    // Add the user's like
+                    if ($type != "user") {
+                        $post = new Post();
+                        $single_post = $post->get_one_posts($id);
+    
+                        // Now add notification after fetching the post
+                        add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+                    }
+                } else {
+                    // No existing likes, create a new array with the user's like
                     $arr["stud_ID"] = $Bisuconnect_stud_ID;
                     $arr["date"] = date("Y-m-d H:i:s");
                     $updated_likes[] = $arr;
-    
-                    // Update the likes in the database
-                    $likes_string = json_encode($updated_likes);
-                    $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' AND content_id = '$id' LIMIT 1";
+        
+                    // Encode the likes array and insert it into the database
+                    $likes = json_encode($updated_likes);
+                    $sql = "INSERT INTO likes (type, content_id, likes) VALUES ('$type', '$id', '$likes')";
+                    $DB->save($sql);
+        
+                    // Update the posts table with the original post date
+                    $sql = "UPDATE posts SET likes = likes + 1, date = '$original_post_date' WHERE post_id = '$id' LIMIT 1";
                     $DB->save($sql);
     
-                    // Increment the likes count on the posts table
-                    $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";
-                    $DB->save($sql);
-                } else {
-                    // User already liked, remove the like
-                    $likes_string = json_encode($updated_likes);
-                    $sql = "UPDATE likes SET likes = '$likes_string' WHERE type='post' AND content_id = '$id' LIMIT 1";
-                    $DB->save($sql);
+                    if ($type != "user") {
+                        $post = new Post();
+                        $single_post = $post->get_one_posts($id);
     
-                    // Decrement the likes count on the posts table
-                    $sql = "UPDATE posts SET likes = likes - 1 WHERE post_id = '$id' LIMIT 1";
-                    $DB->save($sql);
+                        // Now add notification after fetching the post
+                        add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+                    }
                 }
-
-                if($type != "user"){
-                     $post = new Post();
-                    $single_post = $post->get_one_posts($id);           
-
-                    // Now add notification after fetching the post
-                    add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
-                }
-                
-               
-
-            } else {
-                // No existing likes, create a new array with the user's like
-                $arr["stud_ID"] = $Bisuconnect_stud_ID;
-                $arr["date"] = date("Y-m-d H:i:s");
-                $updated_likes[] = $arr;
-    
-                // Encode the likes array and insert it into the database
-                $likes = json_encode($updated_likes);
-                $sql = "INSERT INTO likes (type, content_id, likes) VALUES ('$type', '$id', '$likes')";
-                $DB->save($sql);
-    
-                // Increment the likes count on the posts table
-                $sql = "UPDATE posts SET likes = likes + 1 WHERE post_id = '$id' LIMIT 1";
-                $DB->save($sql);
-
-                if($type != "user"){
-                    $post = new Post();
-                   $single_post = $post->get_one_posts($id);           
-
-                   // Now add notification after fetching the post
-                   add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
-               }
             }
         }
-        
     }
+    
 
     private function create_post_id()   //Generate random number for every post of the user
     {
