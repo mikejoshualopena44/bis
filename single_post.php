@@ -154,7 +154,12 @@
 
             <div class="delete-content">
             <div class="close-del">
-              <a href="#" id="closeButton">+</a>
+              <?php if($ROW['parent'] == 0){ ?>
+                <a href="Profile_page.php?section=photos&id=<?php echo $user_data['stud_ID']?>" id="closeButton">+</a>
+              <?php }else{ ?>
+                <a href="single_post.php?id=<?php echo $ROW['parent'] ?>" id="closeButton">+</a>
+              <?php }?>  
+              
             </div>
             <?php if($ROW['parent'] != 0){ ?>
                 <h2> Replies</h2> 
@@ -320,7 +325,7 @@
   var currentPage = window.location.pathname.split('/').pop();
 
   // Add the 'profilebg' class to the corresponding list item
-  if (currentPage === 'people-likes.php') {
+  if (currentPage === 'single_post.php') {
     document.getElementById('profile').classList.add('profilebg');
   }else{
     document.getElementById('activity-stream').classList.add('profilebg');
@@ -409,21 +414,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<!-- Add this script in your people-likes.php page, after the previous script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Store the current page in session storage
-        sessionStorage.setItem('previousPage', document.referrer);
-        // Listen for closeButton click
-        var closeDelLink = document.getElementById('closeButton');
-        closeDelLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            var previousPage = sessionStorage.getItem('previousPage');
-            window.location.href = previousPage || 'index.php'; // Default to index.php if no previous page is stored
-        });
-    });
-</script>
-  
 
 
 </body>

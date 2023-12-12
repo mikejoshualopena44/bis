@@ -32,7 +32,7 @@
     }
 
   //To go back to a page where you came from
-	if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "view_image.php")){
+	if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "view_image_index.php")){
 
 		$_SESSION['return_to'] = $_SERVER['HTTP_REFERER'];
 	}
@@ -207,7 +207,7 @@
   var currentPage = window.location.pathname.split('/').pop();
 
   // Add the 'profilebg' class to the corresponding list item
-  if (currentPage === 'view_image.php') {
+  if (currentPage === 'people-likes.php') {
     document.getElementById('profile').classList.add('profilebg');
   }else{
     document.getElementById('activity-stream').classList.add('profilebg');

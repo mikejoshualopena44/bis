@@ -282,7 +282,7 @@ if (!function_exists('formatPostDuration')) {
                         </a>
                     <?php }?>
                     <!--view image-->
-                    <a class="view"href="view_image.php?id=<?php echo $COMMENT['post_id'] ?>">
+                    <a class="view"href="view_image_profile.php?id=<?php echo $COMMENT['post_id'] ?>">
                     <?php
                         if($COMMENT['has_image']){
 

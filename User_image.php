@@ -315,6 +315,13 @@
      closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
    }
   }
+
+    // Add the 'profilebg' class to the corresponding list item
+    if (currentPage === 'User_image.php') {
+    document.getElementById('profile').classList.add('profilebg');
+  }else{
+    document.getElementById('profile').classList.add('profilebg');
+  }
   </script>
 
 

@@ -301,7 +301,7 @@ if (!function_exists('formatPostDuration')) {
                     <i class='bx bx-message-dots bx-lg' id="icon"></i>
                     <?php echo "&nbsp <div style='font-size: 1.5rem;'> $comments </div>"?>
                 </a>
-                <a class="view"href="view_image.php?id=<?php echo $ROW['post_id'] ?>">
+                <a class="view"href="view_image_index.php?id=<?php echo $ROW['post_id'] ?>">
                 <?php
                     if($ROW['has_image']){
 
