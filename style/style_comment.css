@@ -932,6 +932,30 @@ body{
   margin: 1rem auto;
 }
 
+#up{
+  cursor: pointer;
+  background-color: var(--fourthbg);
+  border: 2px solid  var(--fourthbg);
+  border-radius: 2rem;
+  color: var(--secondbg);
+  padding: 4px 12px;
+  height: 2rem;
+  min-width: 5rem;
+  font-weight: bold;
+}
+
+#up:hover{
+  cursor: pointer;
+  background-color: var(--secondbg);
+  border: 2px solid  var(--secondbg);
+  border-radius: 2rem;
+  color: var(--fourthbg);
+  padding: 4px 12px;
+  height: 2rem;
+  min-width: 5rem;
+  font-weight: bold;
+}
+
 #page {
 
   cursor: pointer;

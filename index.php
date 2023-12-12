@@ -228,7 +228,7 @@
                                   foreach ($recent_posts as $ROW) {
                                       $user = new User();
                                       $ROW_user = $user->get_user($ROW['stud_ID']);
-                                      include("P_post.php");
+                                      include("P_post_index.php");
                                   }
                               }else{
                                   // No posts, display "No more comments" message

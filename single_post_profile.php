@@ -11,7 +11,7 @@
   $ROW = false;
 
   // To go back to a page where you came from
-  if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "single_post.php")){
+  if(isset($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], "single_post_profile.php")){
     $_SESSION['return_to'] = $_SERVER['HTTP_REFERER'];
   }
 
@@ -25,7 +25,7 @@
       //To avoid resubmission of post when refreshing
 
       if($result == ""){
-        header("Location: single_post.php?id=$_GET[id]");
+        header("Location: single_post_profile.php?id=$_GET[id]");
         die;
       }else{
 
@@ -154,7 +154,11 @@
 
             <div class="delete-content">
             <div class="close-del">
-              <a href="#" id="closeButton">+</a>
+              <?php if($ROW['parent'] == 0){ ?>
+                <a href="Profile_page.php" id="closeButton">+</a>
+              <?php }else{ ?>
+                <a href="single_post_profile.php?id=<?php echo $ROW['parent'] ?>" id="closeButton">+</a>
+              <?php }?>               
             </div>
             <?php if($ROW['parent'] != 0){ ?>
                 <h2> Replies</h2> 
@@ -184,10 +188,10 @@
                     $ROW_user = $user->get_user($ROW['stud_ID']);
   
                     if($ROW['parent'] == 0){
-                      Include("P_post_comment.php");  
+                      Include("P_post_comment_profile.php");  
                     }else{
                       $COMMENT = $ROW;
-                      Include("comment.php"); 
+                      Include("comment_profile.php"); 
                     }              
                     
                   }              
@@ -196,7 +200,7 @@
               
               ?> <!-- view original post -->
               <?php if($ROW['parent'] != 0){ ?>
-                <a href="single_post.php?id=<?php echo $ROW['parent'] ?>">
+                <a href="single_post_profile.php?id=<?php echo $ROW['parent'] ?>">
                   <input id="up" type="submit" value="View original post"> 
                 </a>
               <?php } ?>
@@ -236,7 +240,7 @@
 
                   foreach ($comments as $COMMENT){
 
-                    Include("comment.php");
+                    Include("comment_profile.php");
                   }
                 }else{
                   // No comments, display "No more comments" message
@@ -339,8 +343,6 @@
 
 
 
-
-
 <!-- using AJAX to not refresh the page when clicking like -->
 <script>
 // Function to check if the post is liked in local storage
@@ -407,21 +409,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-</script>
-
-<!-- Add this script in your people-likes.php page, after the previous script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Store the current page in session storage
-        sessionStorage.setItem('previousPage', document.referrer);
-        // Listen for closeButton click
-        var closeDelLink = document.getElementById('closeButton');
-        closeDelLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            var previousPage = sessionStorage.getItem('previousPage');
-            window.location.href = previousPage || 'index.php'; // Default to index.php if no previous page is stored
-        });
-    });
 </script>
   
 

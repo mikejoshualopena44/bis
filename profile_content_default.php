@@ -68,7 +68,7 @@
                                 $user = new User();
                                 $ROW_user = $user->get_user($ROW['stud_ID']);
 
-                                include("P_post.php");
+                                include("P_post_profile.php");
                             }
                         }else{
                             // No posts, display "No more comments" message

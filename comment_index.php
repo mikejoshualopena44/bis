@@ -274,7 +274,7 @@ if (!function_exists('formatPostDuration')) {
 
                     <!-- reply-->
                     <?php if($ROW['parent'] == 0){ ?>
-                        <a class="cmnt" href="single_post.php?id=<?php echo $COMMENT['post_id'] ?>">
+                        <a class="cmnt" href="single_post_index.php?id=<?php echo $COMMENT['post_id'] ?>">
                             <i class='bx bx-reply' id="icon"></i>
                             <?php echo "&nbsp  
                             <div style='font-size: 1.5rem; '> $comments </div> &nbsp
