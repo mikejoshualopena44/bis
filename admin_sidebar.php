@@ -16,8 +16,15 @@
           <i class='bx bx-menu' id="btn" ></i>
       </div>
       <ul class="nav-list">
+        <li id="announcement">
+          <a href="admin_announcement.php">
+            <i class='bx bx-news' ></i>
+            <span class="links_name">Announcement</span>
+          </a>
+          <span class="tooltip">Announcement</span>
+        </li>
         <li id="students">
-          <a href="#">
+          <a href="admin.php">
             <i class='bx bx-user' ></i>
             <span class="links_name">Students</span>
           </a>

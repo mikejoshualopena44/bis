@@ -217,7 +217,7 @@
               <div class="label">Change Photo</div> <br>
                   <div class="posts-area">
                     <form method="post" action="" class="create-post" enctype="multipart/form-data">
-                        <input type="file" name="file" id="upload-btn">
+                        <input type="file" name="file" id="upload-btn" accept="image/jpeg, image/png">
                         <input type="submit" value="Change" id="posts_btn"> 
                     </form>
                   </div><br>

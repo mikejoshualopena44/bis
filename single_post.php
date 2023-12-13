@@ -325,7 +325,7 @@
   var currentPage = window.location.pathname.split('/').pop();
 
   // Add the 'profilebg' class to the corresponding list item
-  if (currentPage === 'single_post.php') {
+  if (currentPage === '.php') {
     document.getElementById('profile').classList.add('profilebg');
   }else{
     document.getElementById('activity-stream').classList.add('profilebg');
@@ -389,9 +389,9 @@ function updateLikeCount(postId, count) {
 
         if (count > 0) {
             if (count === 1) {
-                text = "1 person loved this comment";
+                text = "1 person loved this ";
             } else {
-                text = count + " people loved this comment";
+                text = count + " people loved this ";
             }
         }
 

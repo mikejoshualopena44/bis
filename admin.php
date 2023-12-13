@@ -1,17 +1,34 @@
 <?php
-
 include ("classes/autoloader.php");
 
-$query = "SELECT * FROM users";
 $DB = new CONNECTION_DB();
+
+// Check if the delete button is clicked
+if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['stud_ID'])) {
+    $stud_ID = $_GET['stud_ID'];
+
+    // Assuming your users table has a column named 'stud_ID' as the primary key
+    $query = "DELETE FROM users WHERE stud_ID = $stud_ID";
+
+    $success = $DB->save($query);
+
+    if ($success) {
+        echo "<div class='error' id='error-message'>";
+        echo "<hr style='border: 1.5px solid black'>";
+        echo "User with ID $stud_ID deleted successfully.";
+        echo "<hr style='border: 1.5px solid black'>";
+        echo "</div>";
+    } else {
+        echo "Error deleting user with ID $stud_ID.";
+    }
+}
+
+$query = "SELECT * FROM users";
 $users = $DB->read($query);
 
 // Check if users were retrieved successfully
 if ($users !== false && is_array($users) && count($users) > 0) {
 ?>
-
-
-
 
 <!--=== HTML ===-->
 <!DOCTYPE html>
@@ -19,7 +36,7 @@ if ($users !== false && is_array($users) && count($users) > 0) {
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Admin Access! </title>
-    <link rel="stylesheet" href="style/admin_style.css">
+    <link rel="stylesheet" href="style/style_admin.css">
 
     <link rel="shortcut icon" type="x-icon" href="admin1.png">
     <!-- Boxicons CDN Link -->
@@ -97,47 +114,56 @@ if ($users !== false && is_array($users) && count($users) > 0) {
 
     <!-- SEARCH BAR -->
     <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search..."> 
+        <input style="margin-top:40px;" type="text" id="searchInput" placeholder="Search..."> 
         <button  id="search_btn" onclick="searchUsers()">Search</button>
     </div>
     <br>
 
     <!-- Display user data in a table -->
     <div class="profile-posts">
-      <table id="userTable">
-          <thead>
-              <tr>
-                  <th>Student ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Date created</th>
-                  <th>Option</th>
-              </tr>
-          </thead>
-          <tbody>
-              <?php foreach ($users as $user): ?>
-                  <tr>
-                      <td><?php echo $user['stud_ID']; ?></td>
-                      <td><?php echo $user['firstName']; ?></td>
-                      <td><?php echo $user['lastName']; ?></td>
-                      <td><?php echo $user['email']; ?></td>
-                      <td><?php echo $user['date']; ?></td>
-                      <td>
-                      <!-- <button class="update">Update</button> -->
-                          <button class="delete" onclick="confirmDelete(<?php echo $user['stud_ID']; ?>)">Delete</button>
-                      </td>
-                  </tr>
-              <?php endforeach; ?>
-          </tbody>
-      </table>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Date created</th>
+                    <th>Option</th>
+                    <!-- ... (add more columns as needed) ... -->
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?php echo $user['stud_ID']; ?></td>
+                        <td><?php echo $user['firstName']; ?></td>
+                        <td><?php echo $user['lastName']; ?></td>
+                        <td><?php echo $user['email']; ?></td>
+                        <td><?php echo $user['date']; ?></td>
+                        <td>
+                            <button class="update" onclick="viewPosts(<?php echo $user['stud_ID']; ?>)">View Posts</button>
+                            <button class="delete" onclick="confirmDelete(<?php echo $user['stud_ID']; ?>)">Delete</button>
+                        </td>
+                        <!-- ... (Add more cells based on your table structure) ... -->
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
-                </div>
 
+    <!-- Include necessary scripts -->
+    <script>
+          function viewPosts(studID) {
+              window.location.href = "admin_user_post.php?stud_ID=" + studID;
+          }
 
-
-
-
+          function confirmDelete(studID) {
+              if (confirm("Are you sure you want to delete this user?")) {
+                  window.location.href = "admin.php?action=delete&stud_ID=" + studID;
+              }
+          }
+      </script>
 
 
       <!--=== Mobileview Bar Script==-->
@@ -176,15 +202,17 @@ if ($users !== false && is_array($users) && count($users) > 0) {
         closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
       }
       }
-      // Get the current page filename
-      var currentPage = window.location.pathname.split('/').pop();
-
-      // Add the 'profilebg' class to the corresponding list item
-      if (currentPage === 'bisuans.php') {
-        document.getElementById('bisuan').classList.add('profilebg');
-      } 
-
       </script>
+
+<script>
+// Get the current page filename
+  var currentPage = window.location.pathname.split('/').pop();
+
+  // Add the 'profilebg' class to the corresponding list item
+  if (currentPage === 'admin.php') {
+    document.getElementById('students').classList.add('profilebg');
+  } 
+</script>
 
 
 
@@ -221,24 +249,19 @@ if ($users !== false && is_array($users) && count($users) > 0) {
           }
       </script>
 
-<script>
-// Get the current page filename
-  var currentPage = window.location.pathname.split('/').pop();
 
-  // Add the 'profilebg' class to the corresponding list item
-  if (currentPage === 'admin.php') {
-    document.getElementById('students').classList.add('profilebg');
-  } 
 
-</script>
+      
+    <!-- Timer for error message to display -->
+    <script>
+      // Show the error message
+        document.getElementById('error-message').style.display = 'block';
 
-<script>
-    function confirmDelete(studID) {
-        if (confirm("Are you sure you want to delete this user?")) {
-            window.location.href = "delete_user.php?stud_ID=" + studID;
-        }
-    }
-</script>
+      // Automatically hide the error message after 5 seconds
+        setTimeout(function() {
+          document.getElementById('error-message').style.display = 'none';
+        }, 1000);
+    </script>
 
 
 </body>

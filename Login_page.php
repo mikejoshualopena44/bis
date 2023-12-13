@@ -132,7 +132,7 @@ session_start();
                         <input value="<?php echo $password?>" name="password" type="password"  placeholder="Enter your password">
                       </div>
                       <div class="text">
-                        <a href="#">Forgot password?</a>
+                        <a href="#"></a>
                       </div>
                       <div class="button input-box" >
                         <input name="login_button" type="submit" value="Submit"> <!-- Submit type only work if nested from form tag-->

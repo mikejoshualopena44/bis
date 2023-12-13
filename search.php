@@ -120,6 +120,11 @@
                                     foreach ($results as $row) {
                                         # code...
                                         $FRIEND_ROW = $User->get_user($row['stud_ID']);
+
+                                          // Exclude the admin
+                                        if ($FRIEND_ROW['stud_ID'] == 12252023) {
+                                          continue; // Skip this iteration of the loop
+                                        }
                                         include("P_user.php");
 
                                 }

@@ -386,9 +386,9 @@ function updateLikeCount(postId, count) {
 
         if (count > 0) {
             if (count === 1) {
-                text = "1 person loved this comment";
+                text = "1 person loved this ";
             } else {
-                text = count + " people loved this comment";
+                text = count + " people loved this ";
             }
         }
 

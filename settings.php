@@ -210,8 +210,8 @@
                     <!-- profile Options-->
                     <br>
                 <div class="menu-main">
-                    <a href="settings.php?id=<?php echo $user_data['stud_ID']?>"><div class="menu-buttons"> <i class='bx bx-user-circle' > &nbsp;</i>Account</div></a>
-                    <a href="settings.php?section=password&id=<?php echo $user_data['stud_ID']?>"  ><div class="menu-buttons"> <i class='bx bx-shield'> &nbsp; </i>Details and Password</div></a>
+                    <a href="settings.php?id=<?php echo $user_data['stud_ID']?>"  ><div class="menu-buttons"> <i class='bx bx-shield'> &nbsp; </i>Account and Password</div></a>
+                    <a href="settings.php?section=org&id=<?php echo $user_data['stud_ID']?>"><div class="menu-buttons"> <i class='bx bx-user-circle' > &nbsp;</i>Organization Configuration</div></a>                   
                     <a href="settings.php?section=terms_condition&id=<?php echo $user_data['stud_ID']?>"  ><div class="menu-buttons"><i class='bx bx-error-circle'> &nbsp;</i>Terms and Conditions</div></a>
                     <a href="settings.php?section=about_us&id=<?php echo $user_data['stud_ID']?>"  ><div class="menu-buttons"><i class='bx bxs-quote-right' > &nbsp;</i>About us</div></a>
                     <a href="P_logout.php"><div class="menu-buttons"><i class='bx bx-log-out' >  &nbsp;</i>Logout</div></a>
@@ -243,11 +243,11 @@
           }
           if($section == "default")
           {
-            include("settings_account.php");
-          }
-          elseif($section == "password")
-          {
             include("settings_password.php");
+          }
+          elseif($section == "org")
+          {
+            include("settings_account.php");
           }
           elseif($section == "terms_condition")
           {

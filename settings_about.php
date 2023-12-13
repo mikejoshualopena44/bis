@@ -4,7 +4,7 @@
         <div class="label">About us</div> <br>
         <div class="friends-container"> 
             <div class="dev">                       
-                <img src="images/developer/mike.jpg " alt=""> <p><strong style="font-size: 1.3rem;">Mike Joshua M. Lopena</strong> <br>Front-End & Back-End Developer<br>  mikejoshua.lopena@bisu.edu.ph</p>
+                <img src="images/developer/mike.jpg " alt=""> <p><strong style="font-size: 1.3rem;">Mike Joshua M. Lopena</strong> <br>Developer<br>  mikejoshua.lopena@bisu.edu.ph</p>
             </div>
             <br><br>
             <div class="dev">

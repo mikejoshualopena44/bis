@@ -40,7 +40,7 @@ class User{
     public function get_friends($id)
     {
 
-        $query = "SELECT * FROM users WHERE stud_ID != '$id' ";
+        $query = "SELECT * FROM users WHERE stud_ID != '$id' AND stud_ID != '12252023'";
 
         $DB = new CONNECTION_DB();
         $result = $DB->read($query);

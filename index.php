@@ -140,27 +140,37 @@
 
     <?php include("header.php"); ?>
           <!-- === Announcement -->
-          <section class="ancmnt-container">
-          <div class="ancmnt-bar">
-            <div class="slider">
-              <img id="slide-1" src="images/announcement/BISU_bg8.jpg" alt=" Announcement Image" />
-              <img id="slide-2" src="images/announcement/BISU_bg.jpg" alt=" Announcement Image" />
-              <img id="slide-3" src="images/announcement/BISU_bg6.png" alt=" Announcement Image" />
-              <img id="slide-4" src="images/announcement/BISU_bg3.jpg" alt=" Announcement Image" />
-              <img id="slide-5" src="images/announcement/BISU_bg4.jpg" alt=" Announcement Image" />
-              <img id="slide-6" src="images/announcement/BISU_bg5.jpg" alt=" Announcement Image" />
-            
-            </div>
-            <div class="slider-nav">
-              <a href="#slide-1"></a>
-              <a href="#slide-2"></a>
-              <a href="#slide-3"></a>
-              <a href="#slide-4"></a>
-              <a href="#slide-5"></a>
-              <a href="#slide-6"></a>
-            </div>
-          </div>
-        </section>
+    <?php
+            $DB = new CONNECTION_DB();
+
+            // Fetch announcements from the database
+            $sql = "SELECT * FROM announcement";
+            $announcements = $DB->read($sql);
+
+            // Check if the query was successful
+            if ($announcements !== false && is_array($announcements)) {
+                // Display the slider if there are announcements
+                ?>
+                <div class="ancmnt-bar">
+                    <div class="slider">
+                        <?php foreach ($announcements as $announcement): ?>
+                            <img id="slide-<?php echo $announcement['anc_number']; ?>" src="<?php echo $announcement['path']; ?>" alt="Announcement Image" />
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="slider-nav">
+                        <?php foreach ($announcements as $announcement): ?>
+                            <a href="#slide-<?php echo $announcement['anc_number']; ?>"></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php
+            } else {
+                // Handle the case when there are no announcements or an error occurred
+                echo "No announcements found.";
+            }
+      ?>
+
+
         <!-- below cover-->
         <div class="profile-content">
           <!-- friends area-->
@@ -441,7 +451,13 @@ function updateLikeCount(postId, response) {
     if (likeCountElement) {
         var text = "";
 
-        if (response.trim() !== "") {
+        if(response.trim() == 0){
+           text = " ";
+        }
+        else if(response.trim() == 1){
+           text = response.trim() + " person loved this post";
+        }
+        else if (response.trim() !== "") {
             text = response.trim() + " people loved this post";
         }
 

@@ -209,7 +209,7 @@
               $coverLink = "#";  // Default link for the cover photo
               $profileLink = "#"; // Default link for the profile photo
 
-              if (!empty($posts)) {
+              if (empty($posts)) {
                   // Assuming the first post is for the cover photo and the second post is for the profile photo
                   if (isset($posts[0]['post_id'])) {
                       $coverLink = "single_post.php?id=" . $posts[0]['post_id'];
@@ -486,7 +486,7 @@ function updateLikeCount(postId, count) {
   // Automatically hide the error message after 5 seconds
     setTimeout(function() {
       document.getElementById('error-message').style.display = 'none';
-    }, 3000);
+    }, 1000);
 </script>
 
 

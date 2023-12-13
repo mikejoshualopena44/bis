@@ -13,7 +13,7 @@
         $DB = new CONNECTION_DB();
         $image_class = new Image();
 
-        $sql = "SELECT image, post_id FROM posts WHERE has_image = 1 && stud_ID = $user_data[stud_ID] ORDER BY id DESC LIMIT 30 ";
+        $sql = "SELECT image, post_id FROM posts WHERE has_image = 1 && stud_ID = $user_data[stud_ID] ORDER BY id DESC LIMIT 100 ";
         $images = $DB->read($sql);
 
         if (is_array($images)) {

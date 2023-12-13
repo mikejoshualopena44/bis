@@ -493,6 +493,21 @@ class Post{
 
 
 
+    public function admin_get_user_posts($stud_ID)
+    {
+        $DB = new CONNECTION_DB();
+        $query = "SELECT * FROM posts WHERE stud_ID = '$stud_ID' ORDER BY id DESC";
+        return $DB->read($query);
+    }
+
+    public function admin_delete_post($post_id)
+    {
+        $DB = new CONNECTION_DB();
+        $query = "DELETE FROM posts WHERE post_id = '$post_id'";
+        return $DB->save($query);
+    }
+
+
 }
 
 

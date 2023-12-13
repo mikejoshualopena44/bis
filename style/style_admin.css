@@ -36,6 +36,17 @@ body{
 
 
 /* Table styles */
+.error{
+  padding:1rem;
+  background-color: var(--secondbg);
+  font-weight: 600;
+  color: var(--fourthbg);
+  margin-top: -5.5rem;
+  border-radius: 1rem;
+  z-index: 220;
+  display: none;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
