@@ -56,7 +56,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | View Image </title>
-    <link rel="stylesheet" href="style/view.css">
+    <link rel="stylesheet" href="style/view_t.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->

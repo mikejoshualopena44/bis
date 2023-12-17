@@ -65,7 +65,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Comments </title>
-    <link rel="stylesheet" href="style/style_comment.css">
+    <link rel="stylesheet" href="style/style_comment_t.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
