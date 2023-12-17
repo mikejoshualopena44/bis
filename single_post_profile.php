@@ -155,7 +155,7 @@
             <div class="delete-content">
             <div class="close-del">
               <?php if($ROW['parent'] == 0){ ?>
-                <a href="Profile_page.php" id="closeButton">+</a>
+                <a href="Profile_page.php?id=<?php echo $ROW['stud_ID'];  ?>" id="closeButton">+</a>
               <?php }else{ ?>
                 <a href="single_post_profile.php?id=<?php echo $ROW['parent'] ?>" id="closeButton">+</a>
               <?php }?>               

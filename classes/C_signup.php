@@ -18,14 +18,19 @@ class Signup
                 {
                     $this->error .="Invalid email address!<br>";
                 }
+
+                if ($this->isEmailExist($value)) {
+                    $this->error .= "Email already exists!<br>";
+                }
                
             }
 
             if($key == "firstName")
             {
-                if (is_numeric($value))
+                
+                if (is_numeric($value) || !preg_match('/^[a-zA-Z ]+$/', $value))
                 {
-                    $this->error .="First name should be consists of letter!<br>";
+                    $this->error .="First name should be consists of letters!<br>";
                 }      
                 
                 // Check if the length of firstName is greater than 16 characters
@@ -37,9 +42,9 @@ class Signup
 
             if($key == "lastName")
             {
-                if (is_numeric($value))
+                if (is_numeric($value) || (!ctype_alpha($value)) )
                 {
-                    $this->error .="Last name should be consists of letter!<br>";
+                    $this->error .="Last name should be consists of letters!<br>";
                 }
 
                 // Check if the length of lastName is greater than 16 characters
@@ -55,12 +60,15 @@ class Signup
                
             }
 
+
             if ($key == "stud_ID") {
                 // Check if the student ID already exists in the database
                 if ($this->isStudentIDExists($value)) {
                     $this->error .= "Student ID already exists!<br>";
                 }
             }
+
+
 
         }
 
@@ -84,6 +92,18 @@ class Signup
 
         return is_array($result) && count($result) > 0;
     }
+
+    private function isEmailExist($email)
+    {
+        $DB = new CONNECTION_DB();
+        $email = addslashes($email);
+
+        $sql = "SELECT email FROM users WHERE email = '$email' LIMIT 1";
+        $result = $DB->read($sql);
+
+        return is_array($result) && count($result) > 0;
+    }
+
 
     public function create_user($data)
     {

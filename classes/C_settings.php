@@ -23,8 +23,14 @@ Class Settings
         // Check if firstName and lastName are provided
         if (empty($data['firstName']) || empty($data['lastName'])) {
             // Show an alert if either firstName or lastName is empty
-            echo "<script>alert('First name and last name should be provided');</script>";
+            echo "<script>alert('First name or last name should be provided');</script>";
             return; // Stop execution if not provided
+        }
+        
+        if (!preg_match('/^[a-zA-Z ]+$/',($data['firstName']) ) || !preg_match('/^[a-zA-Z ]+$/',($data['lastName']) )) {
+            // Show an alert if either firstName or lastName is empty
+            echo "<script>alert('First name or last name should be consists of letter');</script>";
+            return; // Stop execution if symbols provided
         }
 
         // Check if firstName and lastName are less than 16 characters

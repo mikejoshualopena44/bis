@@ -132,12 +132,12 @@ session_start();
                         <input value="<?php echo $password?>" name="password" type="password"  placeholder="Enter your password">
                       </div>
                       <div class="text">
-                        <a href="#"></a>
+                        <a href="#">contact authority</a>
                       </div>
                       <div class="button input-box" >
                         <input name="login_button" type="submit" value="Submit"> <!-- Submit type only work if nested from form tag-->
                       </div>
-                      <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+                      <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label></div>
                     </div>
                 </form>
 

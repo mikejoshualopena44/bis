@@ -16,7 +16,7 @@
             </div>
             <br><br>
             <div class="dev">
-                <img src="images/developer/mikee.jpg " alt=""> <p><strong style="font-size: 1.3rem;">Mikee Samantha Gamoroth</strong> <br>Documentation<br> mikeesamantha.gamoroth@bisu.edu.ph</p>
+                <img src="images/developer/mikee.jpg " alt=""> <p><strong style="font-size: 1.3rem;">Mikee Samantha Gamoroth</strong> <br>Layout Design<br> mikeesamantha.gamoroth@bisu.edu.ph</p>
             </div> 
         </div>
     </div>

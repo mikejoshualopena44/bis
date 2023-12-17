@@ -1072,3 +1072,54 @@ thead th {
   color: var(--fourthbg);
   margin-bottom: -20x;
 }
+
+
+
+.priv{
+  height: 20rem;
+  font-size: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  
+}
+
+
+.priv_txt{
+  width: 35rem;
+  font-size:15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  margin: auto;
+  
+}
+
+.goto{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#goto_btn{
+    background-color: var(--secondbg);
+    border-radius: 2rem;
+    border: 2px solid var(--secondbg);
+    color: var(--fourthbg);
+    padding: 4px;
+    height: 2rem;
+    width: 10rem;
+    font-weight: bold;
+    cursor: pointer;
+  
+}
+
+#goto_btn:hover{
+  background-color: var(--fourthbg);
+  border: 2px solid var(--secondbg);
+  color: var(--secondbg);
+}
+

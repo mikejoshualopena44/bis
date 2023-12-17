@@ -238,17 +238,24 @@ if (!function_exists('formatPostDuration')) {
          </div>
         
         <div class="comments text-muted"  style=" color:darkgray">
-            <?php
+        <?php
 
-            $comments = " ";
+            if($ROW['parent'] == 0){ 
+                $comments = " ";
+                $sub_text = " ";
+                
 
-            if($ROW['comments'] > 0){
+                if ($ROW['comments'] > 0) {
+                    $comments = "(" . $ROW['comments'] . ")";
 
-               $comments = "(" . $ROW['comments'] . ")";            
-
+                    if($ROW['comments'] == 1){
+                        $sub_text = "comment";
+                    }else{
+                        $sub_text = "comments";
+                    }
+                    
+                }
             }
-            
-            
             ?>
         </div>
         <!-- like, comment icon -->
@@ -257,10 +264,16 @@ if (!function_exists('formatPostDuration')) {
                 <a href="like.php?type=post&id=<?php echo $ROW['post_id']; ?>" class="heart <?php echo $i_liked ? 'liked' : ''; ?>" onclick="like_post(event, <?php echo $ROW['post_id']; ?>)">
                     <i class='bx bx-heart bx-lg'></i>
                 </a>
-                <a class="cmnt" href="single_post_index.php?id=<?php echo $ROW['post_id'] ?>">
-                    <i class='bx bx-message-dots bx-lg' id="icon"></i>
-                    <?php echo "&nbsp <div style='font-size: 1.5rem;'> $comments </div>"?>
-                </a>
+                <!-- comment-->
+                <?php if($ROW['parent'] == 0){ ?>
+                        <a class="cmnt" href="single_post_profile.php?id=<?php echo $COMMENT['post_id'] ?>">
+                            <i class='bx bx-reply' id="icon"></i>
+                            <?php echo "&nbsp  
+                            <div style='font-size: 1.5rem; '> $comments </div> &nbsp
+                            <div style='font-size: 1rem; float:right; '> $sub_text </div>" ?>
+                        </a>
+                    <?php }?>
+                    
                 <a class="view"href="view_image_index.php?id=<?php echo $ROW['post_id'] ?>">
                 <?php
                     if($ROW['has_image']){

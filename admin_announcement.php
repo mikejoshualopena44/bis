@@ -3,6 +3,26 @@ include ("classes/autoloader.php");
 
 $DB = new CONNECTION_DB();
 
+
+// Check if user is logged in
+if (!isset($_SESSION['Bisuconnect_stud_ID'])) {
+  // Redirect to the login page or any other appropriate page
+  header("Location: Login_page.php");
+  exit();
+}
+
+// Get user data
+$login = new Login();
+$user_data = $login->check_login($_SESSION['Bisuconnect_stud_ID']);
+
+// Check if the logged-in user has admin privileges (using a email)
+$admin_email = 'admin@bisu.edu.ph'; // Replace with your actual admin email
+if ($user_data['email'] !== $admin_email) {
+    // Redirect to a page indicating insufficient privileges
+    header("Location: insufficient_privileges.php");
+    exit();
+}
+
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Announcement_number'])) {
     $announcement_number = $_POST['Announcement_number'];
@@ -56,7 +76,7 @@ if ($announcements !== false && is_array($announcements)) {
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Admin Access! </title>
-    <link rel="stylesheet" href="style/style_admin.css">
+    <link rel="stylesheet" href="style/style_admin_t.css">
 
     <link rel="shortcut icon" type="x-icon" href="admin1.png">
     <!-- Boxicons CDN Link -->
