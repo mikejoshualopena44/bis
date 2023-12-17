@@ -164,6 +164,19 @@ class Post{
             return false;
         }
     }
+
+    public function get_comments_count($post_id)
+    {
+        $DB = new CONNECTION_DB();
+        $query = "SELECT COUNT(*) AS comment_count FROM posts WHERE parent = '$post_id'";
+        $result = $DB->read($query);
+
+        if ($result && isset($result[0]['comment_count'])) {
+            return $result[0]['comment_count'];
+        } else {
+            return 0;
+        }
+    }
     
     //number of post
     public function get_recent_posts($current_user_id) //Get the recent posts of users //limit index posts

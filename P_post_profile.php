@@ -277,18 +277,30 @@ if (!function_exists('formatPostDuration')) {
 
          </div>
         
-        <div class="comments text-muted"  style=" color:darkgray">
+         <div class="comments text-muted" style="color: darkgray">
             <?php
+            if ($ROW['parent'] == 0) {
+                $comments = "";
+                $sub_text = "";
 
-            $comments = " ";
+                if ($ROW['comments'] > 0) {
+                    $comments = "(" . $ROW['comments'] . ")";
+                    if ($ROW['comments'] == 1) {
+                        $sub_text = "comment";
+                    } else {
+                        $sub_text = "comments";
+                    }
+                } else {
+                    // Fetch the number of replies (comments) using the $Post object
+                    $reply_count = $Post->get_comments_count($ROW['post_id']);
+                    if ($reply_count >0){
+                        $comments = "(" . $reply_count . ")";
+                        $sub_text = ($reply_count == 1) ? "comment" : "comments";                        
+                    }
 
-            if($ROW['comments'] > 0){
 
-               $comments = "(" . $ROW['comments'] . ")";            
-
+                }
             }
-            
-            
             ?>
         </div>
         <!-- like, comment icon -->
@@ -299,7 +311,8 @@ if (!function_exists('formatPostDuration')) {
                 </a>
                 <a class="cmnt" href="single_post_profile.php?id=<?php echo $ROW['post_id'] ?>">
                     <i class='bx bx-message-dots bx-lg' id="icon"></i>
-                    <?php echo "&nbsp <div style='font-size: 1.5rem;'> $comments </div>"?>
+                    <?php echo "&nbsp <div style='font-size: 1.5rem;'> $comments </div>
+                    <div style='font-size: 1rem; float:right; '> $sub_text </div>" ?>
                 </a>
                 <a class="view"href="view_image_profile.php?id=<?php echo $ROW['post_id'] ?>">
                 <?php
