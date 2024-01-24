@@ -57,7 +57,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Bisuans </title>
-    <link rel="stylesheet" href="style/bisu.css">
+    <link rel="stylesheet" href="style/bisuans.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->

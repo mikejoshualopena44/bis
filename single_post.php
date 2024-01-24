@@ -65,7 +65,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Comments </title>
-    <link rel="stylesheet" href="style/style_comment.css">
+    <link rel="stylesheet" href="style/style_comment_t.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -155,7 +155,7 @@
             <div class="delete-content">
             <div class="close-del">
               <?php if($ROW['parent'] == 0){ ?>
-                <a href="Profile_page.php?section=photos&id=<?php echo $user_data['stud_ID']?>" id="closeButton">+</a>
+                <a href="Profile_page.php" id="closeButton">+</a>
               <?php }else{ ?>
                 <a href="single_post.php?id=<?php echo $ROW['parent'] ?>" id="closeButton">+</a>
               <?php }?>  

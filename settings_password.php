@@ -21,8 +21,8 @@
                     </div>
                     <div class='input-box'>
                         <i class='fas fa-lock'></i>
-                        <input name='password' type='text' placeholder='Password'>
-                        <input name='password2' type='text' placeholder='Password_Confirmation'>
+                        <input name='password' type='Password' placeholder='Password'>
+                        <input name='password2' type='Password' placeholder='Password_Confirmation'>
                     </div> <br>
                     <div class='input-box'>
                         <select  value='".htmlspecialchars($settings["gender"])."' name='gender' class='round'>
@@ -31,8 +31,6 @@
                         </select>
                     </div>
 
-                    <br>
-                    * double click button to confirm changes 
                     <br> <br> 
                     
                     <input type='submit' value='Save Changes' class='btn'>

@@ -280,9 +280,7 @@
                         </a>
                     </div>
 
-
-
-
+                    
   <!--=== Mobileview Bar Script==-->
   <script>
     const list = document.querySelectorAll('.list');

@@ -20,32 +20,35 @@
   }
  
 
-  // For posting start here
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+// Handle form data
+  if (isset($_POST['firstName'])) {
+    $settings_class = new Settings();
+    $settings_class->save_settings($_POST, $_SESSION['Bisuconnect_stud_ID']);
 
+    
 
-  if($_SERVER['REQUEST_METHOD'] == "POST" ) //inserting post to db
-  {
-    if(isset($_POST['firstName'])){
-      $settings_class = new Settings();
-      $settings_class->save_settings($_POST,$_SESSION['Bisuconnect_stud_ID']);
-    }else{
+  } else {
       $post = new Post();
       $id = $_SESSION['Bisuconnect_stud_ID'];
-      $result = $post->create_post($id, $_POST,$_FILES);
+      $result = $post->create_post($id, $_POST, $_FILES);
 
-      //To avoid resubmission of post when refreshing
-
-      if($result == ""){
-        header("Location: Profile_page.php");
-        die;
-      }else{
-        echo "<div class='error' id='error-message'>";
-        echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
-        print_r($result);
-        echo "</div>";
+      // To avoid resubmission of post when refreshing
+      if ($result == "") {
+          header("Location: Profile_page.php");
+          die;
+      } else {
+          echo "<div class='error' id='error-message'>";
+          echo "The following errors occurred:<br><hr style='border: 1.5px solid black'>";
+          print_r($result);
+          echo "</div>";
       }
-    }
   }
+}
+
+
+  
 
   // to collect posts
   $post = new Post();
@@ -338,39 +341,6 @@
       document.getElementById('error-message').style.display = 'none';
     }, 3000);
 </script>
-
-<!-- refresh after submitting -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Check if the page is /settings.php?section=password
-        if (window.location.pathname === 'settings.php' && window.location.search === '?section=password') {
-            // Add a click event listener to the submit button
-            var confirmation = confirm("Save changes. Do you want to continue?");
-
-            document.querySelector('.btn').addEventListener('click', function () {
-              
-                              
-                // If the user clicks "OK," proceed with form submission and redirection
-                if (confirmation) {
-                    // Submit the form
-                    document.getElementById('settingsForm').submit();
-                    
-                    // Redirect to profile_page.php after a short delay (adjust the delay as needed)
-                    setTimeout(function () {
-                        window.location.href = 'profile_page.php';
-                    }, 500);
-                }
-            });
-        }
-    });
-</script>
-
-
-
-
-
-
-
 
 
       

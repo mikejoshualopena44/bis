@@ -91,7 +91,7 @@ class Post{
                     content_i_follow($stud_ID, $mypost);
 
                     // Now add notification after fetching the comment
-                    add_notification($_SESSION['Bisuconnect_stud_ID'], "comment",$mypost);
+                    add_notification($_SESSION['Bisuconnect_stud_ID'], "comment",$mypost,$post_id);
                 }
 
                 $query = "UPDATE posts SET post = '$post', date = NOW() WHERE post_id = '$post_id'";
@@ -244,7 +244,9 @@ class Post{
 			}
 		}
 			  
-        
+        // Delete notifications related to the post
+        $deleteNotificationsQuery = "DELETE FROM notifications WHERE post_id = '$post_id'";
+        $DB->save($deleteNotificationsQuery);
 
         $query = "DELETE FROM posts WHERE post_id = '$post_id' LIMIT 1";
 
@@ -401,6 +403,7 @@ class Post{
     public function like_post($id, $type, $Bisuconnect_stud_ID)
     {
         $DB = new CONNECTION_DB();
+        $post_id = $this->create_post_id();
         
         if ($type == "post") {
             // Fetch the original post date from the posts table
@@ -459,7 +462,7 @@ class Post{
                         $single_post = $post->get_one_posts($id);
     
                         // Now add notification after fetching the post
-                        add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+                        add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post, $post_id);
                     }
                 } else {
                     // No existing likes, create a new array with the user's like
@@ -481,7 +484,7 @@ class Post{
                         $single_post = $post->get_one_posts($id);
     
                         // Now add notification after fetching the post
-                        add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post);
+                        add_notification($_SESSION['Bisuconnect_stud_ID'], "like", $single_post,$post_id);
                     }
                 }
             }
@@ -489,20 +492,35 @@ class Post{
     }
     
 
-    private function create_post_id()   //Generate random number for every post of the user
+    private function create_post_id() //generate post_id
     {
-
-        $length = rand(4,19);
-        $number = "";
-
-        for ($i=0; $i<$length; $i++ ){
-            $new_rand = rand(0,9);
-
-            $number = $number . $new_rand;
+        $DB = new CONNECTION_DB();
+    
+        // Try to generate a unique post_id for up to 10 times
+        for ($attempt = 1; $attempt <= 10; $attempt++) {
+            $length = rand(4, 19);
+            $number = "";
+    
+            for ($i = 0; $i < $length; $i++) {
+                $new_rand = rand(0, 9);
+                $number .= $new_rand;
+            }
+    
+            // Check if the generated post_id already exists in the posts table
+            $sql = "SELECT post_id FROM posts WHERE post_id = '$number' LIMIT 1";
+            $result = $DB->read($sql);
+    
+            if (!$result) {
+                // The generated post_id is unique, return it
+                return $number;
+            }
         }
-        return $number;
-
+    
+        // If after 10 attempts, a unique post_id is not found, you may handle it accordingly (throw an exception, log an error, etc.)
+        // For simplicity, I'll just return an empty string here, but you might want to adjust this part based on your application's requirements.
+        return "";
     }
+    
 
 
 

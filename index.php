@@ -57,7 +57,7 @@
   <head>
     <meta charset="UTF-8">
     <title>BISUconnect | Home_page </title>
-    <link rel="stylesheet" href="style/style_index.css">
+    <link rel="stylesheet" href="style/style_indexs.css">
 
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
     <!-- Boxicons CDN Link -->
@@ -440,7 +440,7 @@ function like_post(e, postId) {
         }
     };
 
-    xml.open("GET", link, true);
+    xml.open("POST", link, true);
     xml.send();
 }
 

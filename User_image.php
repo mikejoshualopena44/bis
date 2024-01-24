@@ -13,7 +13,7 @@
   //userdata we will know whos the person who log in
 	//posting starts here
 
-
+  $DB = new CONNECTION_DB();
   //check user post upon posting
   if($_SERVER['REQUEST_METHOD'] == "POST")
 	{
@@ -68,27 +68,58 @@
               }
               $image->resize_img($filename,$filename,1500,1500);
             }
-    
+
 
             if(file_exists($filename))
             {
               $stud_ID = $user_data['stud_ID'];
+              $is_profile_image = $user_data['profile_image'];
+              $is_cover_image = $user_data['cover_image'];
 
 
               if($change == "cover")
-              {
-                $query = "UPDATE users SET cover_image = '$filename' WHERE stud_ID =' $stud_ID' LIMIT 1 ";       
+              { 
+                //delete comments on that post
+                $deleteCommentQuery = "DELETE FROM posts WHERE parent IN (SELECT post_id FROM posts WHERE stud_ID = '$stud_ID' AND is_cover_image = 1)";
+                $DB->save($deleteCommentQuery);  
+
+                //delete notification on that post
+                $deleteNotifQuery = "DELETE FROM notifications WHERE content_id IN (SELECT post_id FROM posts WHERE stud_ID = '$stud_ID' AND is_cover_image = 1)";  
+                $DB->save($deleteNotifQuery);   
+
+                //delete previoues post
+                $deleteCoverQuery = "DELETE FROM posts WHERE stud_ID = '$stud_ID' AND is_cover_image = 1 AND image != '$filename' LIMIT 1";               
+                $DB->save($deleteCoverQuery);
+
+                //Update user table image
+                $query = "UPDATE users SET cover_image = '$filename' WHERE stud_ID =' $stud_ID' LIMIT 1 "; 
                 $_POST['is_cover_image'] = 1;
 
               }else
               {
+
+                //delete comments on that post
+                $deleteCommentQuery = "DELETE FROM posts WHERE parent IN (SELECT post_id FROM posts WHERE stud_ID = '$stud_ID' AND is_profile_image = 1)";
+                $DB->save($deleteCommentQuery);  
+                
+
+                //delete notification on that post
+                $deleteNotifQuery = "DELETE FROM notifications WHERE content_id IN (SELECT post_id FROM posts WHERE stud_ID = '$stud_ID' AND is_profile_image = 1)";  
+                $DB->save($deleteNotifQuery);   
+
+                //delete previoues post
+                $deleteProfileQuery = "DELETE FROM posts WHERE stud_ID = '$stud_ID' AND is_profile_image = 1 AND image != '$filename' LIMIT 1";    
+                $DB->save($deleteProfileQuery); 
+                
+                //Update user table image
                 $query = "UPDATE users SET profile_image = '$filename' WHERE stud_ID =' $stud_ID' LIMIT 1 ";  
+                
+                             
                 $_POST['is_profile_image'] = 1;
               }
 
-      
-              $DB = new CONNECTION_DB();
               $DB->save($query);
+
 
               //Create a posts
 

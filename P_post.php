@@ -137,7 +137,7 @@ if (!function_exists('formatPostDuration')) {
                         <a href="edit.php?id=<?php echo $ROW['post_id']?>">
                                 Edit
                             </a>
-                        </span>.
+                        </span>|
                         <span id="del-opt" class="del">
                             <a href="delete.php?id=<?php echo $ROW['post_id']?>">
                                 Delete

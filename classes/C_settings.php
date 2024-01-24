@@ -50,10 +50,17 @@ Class Settings
             } else {
                 // Show an alert if the password is less than 4 characters long
                 echo "<script>alert('Password should be at least 4 characters long');</script>";
+                return;
                 // Do not update the password in this case
                 unset($data['password']);
             }
         } else {
+
+            // Show an alert if the passwords don't match
+            if (!empty($data['password']) || !empty($data['password2'])) {
+                echo "<script>alert('Password doesn\'t match');</script>";
+                return;
+            }
             // Do not update the password if not provided or doesn't match confirmation
             unset($data['password']);
         }
@@ -63,12 +70,23 @@ Class Settings
         $sql = "UPDATE users SET ";
     
         foreach ($data as $key => $value) {
+            // Check if the current key is 'firstName' or 'lastName'
+            // If yes, capitalize the first letter and convert the rest to lowercase
+            if ($key === 'firstName' || $key === 'lastName') {
+                $value = ucfirst(strtolower($value));
+            }
+    
             $sql .= $key . "='" . $value . "' ,";
         }
     
         $sql = rtrim($sql, ", ") . " WHERE stud_ID = '$id' LIMIT 1";
     
         $DB->save($sql);
+
+        // Redirect to Profile_page.php
+        header("Location: Profile_page.php");
+        die;
+
     }
     
 

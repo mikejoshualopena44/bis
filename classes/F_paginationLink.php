@@ -56,7 +56,7 @@ function pagination_link(){
 }
 
 
-function add_notification($stud_ID, $activity, $row)
+function add_notification($stud_ID, $activity, $row, $post_id)
 {
 
   $row = (object)$row;
@@ -64,6 +64,7 @@ function add_notification($stud_ID, $activity, $row)
   $activity = esc($activity);
   $content_owner = $row->stud_ID;
 
+  $post_id = esc($post_id);
   $content_id = 0;
   $content_type = "";
 
@@ -82,8 +83,8 @@ function add_notification($stud_ID, $activity, $row)
     $content_id = $row->stud_ID;
   }
 
-  $query = "INSERT INTO notifications (stud_ID,activity,content_owner,content_id, content_type) 
-            VALUES ('$stud_ID','$activity','$content_owner','$content_id', '$content_type') ";
+  $query = "INSERT INTO notifications (stud_ID,activity,post_id,content_owner,content_id, content_type) 
+            VALUES ('$stud_ID','$activity','$post_id','$content_owner','$content_id', '$content_type') ";
   
   $DB = new CONNECTION_DB();
   $DB->save($query);

@@ -23,90 +23,84 @@ if ($user_data['email'] !== $admin_email) {
 $DB = new CONNECTION_DB();
 
 // Check if the delete button is clicked
+// Check if the delete button is clicked
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['stud_ID'])) {
   $stud_ID = $_GET['stud_ID'];
 
+    // Fetch all rows from the likes table
+    $queryFetchLikes = "SELECT content_id, likes FROM likes WHERE type='post'";
+    $result = $DB->read($queryFetchLikes);
 
-  // Fetch the existing likes from the database
-  $queryFetchLikes = "SELECT likes FROM likes WHERE type='post'";
-  $result = $DB->read($queryFetchLikes);
-  
+    if ($result !== false) {
+        foreach ($result as $row) {
+            $content_id = $row['content_id'];
+            $existing_likes = json_decode($row['likes'], true);
 
-  if ($result !== false) {
-      // Check if the query was successful before attempting to fetch the result
-      $row = current($result); // Use current() to get the first (and only) element in the array
+            // Check if the target stud_ID is present in the array and remove it
+            foreach ($existing_likes as $key => $like) {
+                if ((string) $like['stud_ID'] === (string) $stud_ID) {
+                    unset($existing_likes[$key]);
+                }
+            }
 
-      if ($row !== false) {
-          // Decode the existing likes
-          $existing_likes = json_decode($row['likes'], true);
+            // If the array is modified, update the row
+            if (count($existing_likes) !== count(json_decode($row['likes'], true))) {
+                // Encode the updated likes array
+                $updated_likes_string = json_encode(array_values($existing_likes));
 
-          // Remove the specified stud_ID from the likes array
-          foreach ($existing_likes as $key => $like) {
-              if ($like['stud_ID'] == $stud_ID) {
-                  unset($existing_likes[$key]);
+                // Update the likes in the database for the specific row
+                $queryUpdateLikes = "UPDATE likes SET likes = '$updated_likes_string' WHERE type='post' AND content_id = '$content_id'";
+                $successUpdateLikes = $DB->save($queryUpdateLikes);
 
+                // Add additional logic if needed after updating the row
+            }
+        }
 
+      // Decrement likes column based on the notification table
+      $queryDecrementLikes = "UPDATE posts
+                              SET likes = likes - 1
+                              WHERE post_id IN (
+                                    SELECT content_id
+                                    FROM notifications
+                                    WHERE stud_ID = $stud_ID
+                                )";
+      $DB->save($queryDecrementLikes);
 
-              }
+      // Delete the user and other related records
+      $tables = ['users', 'posts', 'notifications', 'notification_seen', 'content_follow', 'org_config'];
+
+      foreach ($tables as $table) {
+          $query = "DELETE FROM $table WHERE stud_ID = $stud_ID";
+          $success = $DB->save($query);
+
+          if (!$success) {
+              echo "Error deleting records from $table for user with ID $stud_ID.";
+              exit; // Exit the loop and stop further deletions if an error occurs
           }
-          //Decrement likes column base on the notification table
-                  $queryDecrementLikes = "UPDATE posts
-                                          SET likes = likes - 1
-                                          WHERE post_id IN (
-                                                SELECT content_id
-                                                FROM notifications
-                                                WHERE stud_ID = $stud_ID
-                                            )";
-                  $DB->save($queryDecrementLikes);
+      }
 
-          // Encode the updated likes array
-          $updated_likes_string = json_encode(array_values($existing_likes));
-
-          // Update the likes in the database
-          $queryUpdateLikes = "UPDATE likes SET likes = '$updated_likes_string' WHERE type='post'";
-          $successUpdateLikes = $DB->save($queryUpdateLikes);
-
-          // Delete the user and other related records
-          $tables = ['users', 'posts', 'notifications', 'notification_seen', 'content_follow', 'org_config'];
-
-          foreach ($tables as $table) {
-              $query = "DELETE FROM $table WHERE stud_ID = $stud_ID";
-              $success = $DB->save($query);
-
-              if (!$success) {
-                  echo "Error deleting records from $table for user with ID $stud_ID.";
-                  exit; // Exit the loop and stop further deletions if an error occurs
-              }
-          }
-
-          if ($successUpdateLikes) {
-              echo "<div class='error' id='error-message'>";
-              echo "<hr style='border: 1.5px solid black'>";
-              echo "User with ID $stud_ID and related records deleted successfully.";
-              echo "<hr style='border: 1.5px solid black'>";
-              echo "</div>";
-          } else {
-              echo "<div class='error' id='error-message'>";
-              echo "Error updating likes for user with ID $stud_ID.";
-              echo "</div>";
-
-          }
+      if ($successUpdateLikes) {
+          echo "<div class='error' id='error-message'>";
+          echo "<hr style='border: 1.5px solid black'>";
+          echo "User with ID $stud_ID and related records deleted successfully.";
+          echo "<hr style='border: 1.5px solid black'>";
+          echo "</div>";
       } else {
           echo "<div class='error' id='error-message'>";
-          echo "No likes found for user with ID $stud_ID.";
+          echo "Error updating likes for user with ID $stud_ID.";
           echo "</div>";
       }
   } else {
       echo "<div class='error' id='error-message'>";
-      echo "Error fetching likes for user with ID $stud_ID.";
+      echo "No likes found for user with ID $stud_ID.";
       echo "</div>";
   }
 } else {
   echo "<div class='error' id='error-message'>";
-  echo "Invalid request.";
+  echo "Error fetching likes for user with ID $stud_ID.";
   echo "</div>";
-
 }
+
 
 
 

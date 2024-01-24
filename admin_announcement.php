@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Announcement_number'])
     $targetFilePath = $uploadDirectory . $fileName;
     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-    $allowedExtensions = array("jpg", "jpeg", "png");
+    $allowedExtensions = array("jpg", "jpeg", "png", "gif");
 
     if (in_array($fileType, $allowedExtensions)) {
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
@@ -58,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Announcement_number'])
             echo "Error moving the uploaded file.";
         }
     } else {
+        echo "<div class='error' id='error-message'>";
+        echo "<hr style='border: 1.5px solid black'>";
         echo "Invalid file type. Only JPG, JPEG, and PNG files are allowed.";
+        echo "</div>";
     }
 }
 

@@ -120,7 +120,7 @@ class Signup
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         $query = "INSERT INTO users (stud_ID,firstName,lastName,gender,email,password,url_address)
-                  VALUES ('$stud_ID','$firstName','$lastName','$gender','$email', '$passwordHash','$url_address')";
+                  VALUES ('$stud_ID','" . ucfirst(strtolower($firstName)) . "','" . ucfirst(strtolower($lastName)) . "','$gender','$email', '$passwordHash','$url_address')";
 
         
 

@@ -25,7 +25,7 @@
                     continue;
                 }
 
-                echo "<a class='info' href='single_post.php?id=$image_row[post_id]'> ";
+                echo "<a class='info' href='single_post_photos.php?id=$image_row[post_id]'> ";
                 echo "<img src='" . $image_class->get_thumb_posts($image_row['image']) . "' class='photos' />";
                 echo "</a>";
             }

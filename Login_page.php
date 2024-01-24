@@ -132,19 +132,19 @@ session_start();
                         <input value="<?php echo $password?>" name="password" type="password"  placeholder="Enter your password">
                       </div>
                       <div class="text">
-                        <a href="#">contact authority</a>
+                        <a href="https://www.facebook.com/profile.php?id=100021077883020" target="_blank">contact administrator</a>
                       </div>
                       <div class="button input-box" >
-                        <input name="login_button" type="submit" value="Submit"> <!-- Submit type only work if nested from form tag-->
+                        <input name="login_button" type="submit" value="Login"> <!-- Submit type only work if nested from form tag-->
                       </div>
-                      <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label></div>
+                      <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up now</label></div>
                     </div>
                 </form>
 
               </div>
 
               <div class="signup-form" id="signup-form"> 
-                <div class="title">Signup</div>
+                <div class="title">Sign up</div>
                 <form method="post" action="#" id="signup-form" onsubmit="return validateEmail('signup-form');">
                     <div class="input-boxes">
                       <div class="input-box">
@@ -176,7 +176,7 @@ session_start();
                         <input value="<?php echo $stud_ID?>" name="stud_ID" type="number" placeholder="Enter your university ID">
                       </div>
                       <div class="button input-box">
-                        <input  name="signup_button" type="submit" value="Submit">
+                        <input  name="signup_button" type="submit" value="Sign up">
                       </div>
                       <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
                     </div>

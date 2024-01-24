@@ -97,7 +97,7 @@
     <meta charset="UTF-8">
     <title>BISUconnect | Profile_page </title>
     <link rel="shortcut icon" type="x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="style/profile_style2.css">
+    <link rel="stylesheet" href="style/profile_style3.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -205,21 +205,53 @@
           <div class="profile-box">
 
 
-            <?php
+          <?php
               $coverLink = "#";  // Default link for the cover photo
               $profileLink = "#"; // Default link for the profile photo
 
-              if (empty($posts)) {
-                  // Assuming the first post is for the cover photo and the second post is for the profile photo
-                  if (isset($posts[0]['post_id'])) {
-                      $coverLink = "single_post.php?id=" . $posts[0]['post_id'];
-                  }
+              // Assuming $id is the user's ID
+              $id = $user_data['stud_ID']; 
 
-                  if (isset($posts[1]['post_id'])) {
-                      $profileLink = "single_post.php?id=" . $posts[1]['post_id'];
+              $DB = new CONNECTION_DB();
+
+              // Retrieve the cover image of the user from the users table
+              $coverQuery = "SELECT cover_image FROM users WHERE stud_ID = '$id' AND cover_image != ' ' LIMIT 1;";
+              $coverResult = $DB->read($coverQuery);
+              
+              if ($coverResult) { // Check if the query was successful
+                  if (isset($coverResult[0]['cover_image'])) {
+                      $coverImage = $coverResult[0]['cover_image'];
+
+                      // Retrieve the post_id from the posts table based on the cover image
+                      $postQuery = "SELECT post_id FROM posts WHERE image = '$coverImage' LIMIT 1";
+                      $postResult = $DB->read($postQuery);
+
+                      if ($postResult && isset($postResult[0]['post_id'])) {
+                          $coverLink = "single_post.php?id=" . $postResult[0]['post_id'];
+                      }
                   }
-              }
-            ?>
+              } 
+
+              // Retrieve the profile image of the user from the users table
+              $profileQuery = "SELECT profile_image FROM users WHERE stud_ID = '$id' AND profile_image != ' ' LIMIT 1;";
+              $profileResult = $DB->read($profileQuery);
+
+              if ($profileResult) { // Check if the query was successful
+                  if (isset($profileResult[0]['profile_image'])) {
+                      $profileImage = $profileResult[0]['profile_image'];
+
+                      // Retrieve the post_id from the posts table based on the profile image
+                      $postQuery = "SELECT post_id FROM posts WHERE image = '$profileImage' LIMIT 1";
+                      $postResult = $DB->read($postQuery);
+
+                      if ($postResult && isset($postResult[0]['post_id'])) {
+                          $profileLink = "single_post.php?id=" . $postResult[0]['post_id'];
+                      }
+                  }
+              } 
+
+              ?>
+            
 
             <!-- Cover photo-->
             <a href=<?php echo $coverLink;?> >
@@ -450,7 +482,7 @@
         }
     };
 
-    xml.open("GET", link, true);
+    xml.open("POST", link, true);
     xml.send();
 }
 

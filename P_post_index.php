@@ -137,7 +137,7 @@ if (!function_exists('formatPostDuration')) {
                         <a href="edit.php?id=<?php echo $ROW['post_id']?>">
                                 Edit
                             </a>
-                        </span>.
+                        </span>|
                         <span id="del-opt" class="del">
                             <a href="delete.php?id=<?php echo $ROW['post_id']?>">
                                 Delete
@@ -156,7 +156,9 @@ if (!function_exists('formatPostDuration')) {
                         if (file_exists($ROW['image'])) {
                             $post_img = $image_class->get_thumb_posts($ROW['image']);
                             
+                            echo "<a href='single_post_index.php?id=$ROW[post_id] '> ";
                             echo "<img src='$post_img' class='custom-image-class' />";
+                            echo "</a> ";
                         }
                     ?>
        

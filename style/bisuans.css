@@ -1,0 +1,989 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+
+a {
+  text-decoration: none; /* Remove underline */
+  color: var(--text-color); /* Set text color to white */
+}
+img{
+    background-color: none;
+    position: relative;
+    height: 2rem;
+    margin-right:1rem;
+}
+:root {
+    --text-color: #fff;
+    --firstbg: #42428a;
+    --secondbg: #f0c310;
+    --thirdbg: #42428aa4;
+    --fourthbg: #212145;
+    --clr: #222327;
+}
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--text-color);
+  flex-direction: column;
+}
+
+::-webkit-scrollbar { /*design scrollbar*/
+  width: 15px;
+
+}
+
+::-webkit-scrollbar-track{
+  background-color: var(--fourthbg) ;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #f0c310;
+  background: -webkit-linear-gradient(0deg, #f0c310 0%, #42428a 100%);
+  background: linear-gradient(0deg, #f0c310 0%, #42428a 100%);
+  border-radius: 1rem;
+}
+.label {
+  font-weight: bold;
+  font-size:1.2vw;
+}
+/*=== MOBILE NAVBAR ===*/
+.mobile-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--secondbg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5px;
+  z-index: 1000; /* Adjust the value as needed */
+}
+
+.mobile-separator {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5.4rem; /* Adjust the height as needed */
+  background:  var(--fourthbg); /* Set the color you want for the separator bar */
+  z-index: 999; /* A lower z-index to place it below the mobile navbar */
+}
+
+
+.mobile-navbar ul{
+  display: flex;
+  width: 350px;
+}
+.mobile-navbar ul li {
+  position: relative;
+  list-style: none;
+  width: 25%;
+  height: 70px;
+  z-index: 1;
+}
+
+.mobile-navbar ul li a{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mobile-navbar ul li a .mobile-icon{
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.5em;
+  text-align: center;
+  transition: 0.5s;
+  color: var(--fourthbg);
+}
+.mobile-navbar ul li.active a .mobile-icon{
+  transform: translateY(-32px);
+  color: var(--text-color);
+}
+.mobile-navbar ul li a .mobile-txt{
+  position: absolute;
+  color: var(--firstbg);
+  font-weight: 400;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px)
+}
+.mobile-navbar ul li.active a .mobile-txt{
+  opacity: 1;
+  transform: translateY(10px)
+}
+
+.indicator{
+  position: absolute;
+  margin-top: -10%;
+  width: 70px;
+  height: 70px;
+  background: var(--firstbg);
+  border-radius: 50%;
+  border: 6px solid var(--fourthbg);
+  transition: 0.5s;
+}
+
+.indicator::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 0px -10px 0 0 var(--fourthbg);
+}
+
+.indicator::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: 0px -10px 0 0 var(--fourthbg) ;
+}
+
+.mobile-navbar ul li:nth-child(1).active ~ .indicator{
+  transform: translateX(calc(70px* 0 ));
+}  
+.mobile-navbar ul li:nth-child(2).active ~ .indicator{
+  transform: translateX(calc(70px* 1));
+}  
+.mobile-navbar ul li:nth-child(3).active ~ .indicator{
+  transform: translateX(calc(70px* 2));
+}  
+.mobile-navbar ul li:nth-child(4).active ~ .indicator{
+  transform: translateX(calc(70px* 3));
+}  
+.mobile-navbar ul li:nth-child(5).active ~ .indicator{
+  transform: translateX(calc(70px* 4));
+}  
+
+
+ /*==== SIDEBAR ====*/   
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: var(--secondbg);
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open{
+  width: 250px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name{
+  color: var(--fourthbg);
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  color: var(--fourthbg);
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+  color: var(--fourthbg);
+}
+
+
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: var(--text-color);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
+  display: none;
+}
+.sidebar input{
+  font-size: 15px;
+  color: var(--fourthbg);
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: var(--text-color);
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: var(--firstbg);
+  color: #FFF;
+}
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: var(--secondbg);
+}
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: var(--secondbg);
+}
+.sidebar li a {
+  display: flex;
+  height: 50px; /* Set a fixed height or adjust this value as needed */
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: var(--thirdbg);
+  overflow: hidden; /* Add this line to hide content exceeding the fixed height */
+}
+
+
+.sidebar .nav-list .profilebg {
+    color: var(--secondbg);
+    background: #0a0a1c;
+    border-radius: 12px;
+}
+
+.sidebar li a:hover{
+  background: var(--fourthbg);
+}
+.sidebar li a .links_name{
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i{
+  transition: all 0.5s ease;
+  color: var(--secondbg);
+}
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.sidebar.open li.profile{
+  width: 250px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: auto;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+.online{
+    position: relative;
+}
+.online::after{
+    content: '';
+    width: 7px;
+    height: 7px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background-color: #41db51;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/*bg color */
+
+
+.profile-section{
+  display: flex;
+  position: relative;
+  min-height: 100vh; /* Set a minimum height to take up the entire viewport height */
+  top: 0;
+  left: 78px;
+  max-width: 100dvw;
+  transition: all 0.5s ease;
+  z-index: 2;
+  overflow: hidden; /* Add this property to hide overflowing content */
+  padding-bottom: 80px;
+  padding-left: 20px;
+  padding-right: 70px;
+  background-color: var(--fourthbg);
+}
+.sidebar.open ~ .profile-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.profile-section .text{
+  display: inline-block;
+  color: var(--fourthbg);
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+/* For desktop view (screens wider than 768px) */
+@media screen and (min-width: 426px) {
+  .mobile-separator,
+  .mobile-navbar {
+    display: none;
+  }
+
+  .sidebar {
+    display: block; /* Show the sidebar */
+  }
+  .profile-section {
+    left: 78px; /* Adjust the position of the profile section to accommodate the sidebar */
+  }
+  .menu-buttons {
+    font-size: 16px; /* Adjust the font size for larger screens */
+  }
+  .home-header {
+    height: 4rem; /* Set the height to 2rem for mobile view */
+  }
+
+  .profile-posts {
+    min-width: 50rem;
+  }
+  #create-post{
+    font-size: 15px;
+    padding: 10px;
+  }
+  .posts-area{
+    padding: 10px;
+  }
+  #posts_btn{
+    margin: 0 10px 0 10px;
+    font-size: 14px;
+  }
+  p{
+    font-size: 1vw;
+  }
+  .timeline-bar{
+    padding: 10px;
+  }
+  .tag i {
+    font-size: 30px; /* You can adjust the size as needed */
+  }
+  .label {
+    font-size:1.2vw;
+  }
+  .date {
+    font-size:.9vw;
+  }
+  .edit {
+    font-size:.9vw;
+  }
+  .posted-text{
+    font-size: 1vw;
+  }
+
+  /*newsfeed*/
+}
+
+/* For mobile view (screens up to 767px) */
+@media (max-width: 425px) {
+
+  .sidebar {
+    display: none; /* Hide the sidebar */
+  }
+  .profile-dp{
+    max-width: 50% !important;
+  }
+  .profile-section {
+    left: 0; /* Move the profile section to the left edge */
+    width: 100%; /* Expand the profile section to full width */
+    padding-top: 5.5vh;
+  }
+  .home-header {
+    height: 2rem; /* Set the height to 2rem for mobile view */
+  }
+  textarea{
+    font-size: 10px;
+    padding:10px;
+  }
+  #posts_btn{
+    font-size: 10px;
+    margin-top: px;
+    margin-right: 4px;
+  }
+  span,
+  p{
+    font-size: 2vw;
+  }
+  .timeline-img img{
+    max-width: 20% !important;
+    margin-bottom: 15px;
+  }
+  .timeline-bar{
+    padding: 12px;
+  }
+  .timeline-txt .tag{
+    font-size: 2vw; /* Increase the font size for the .tag class */
+  }
+  .profile-friends{
+    display: none;
+  }
+  .tag i {
+    font-size: 15px; /* You can adjust the size as needed */
+  }
+  .label {
+    font-weight: bold;
+    font-size:3vw;
+  }
+  .date {
+    font-size:2vw;
+  }
+  .edit {
+    font-size:2vw;
+  }
+  .posted-text{
+    font-size: 2vw;
+  }
+    /*newsfeed*/
+  .profile-posts{
+    margin-right: 0;
+  }
+
+}
+@media (max-width: 1214px) {
+
+  .label {
+    font-weight: bold;
+    font-size:2vw;
+  }
+/*  .profile-content{
+    flex-direction: column;
+  }
+
+  .profile-friends{
+    display: none;
+  }*/
+  #create-post{
+    font-size: 10px;
+    padding: 10px;
+  }
+
+}
+
+/* === MOBILE === 1214*/
+/*=== PROFILE ===*/
+.home-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--secondbg);
+  color: var(--fourthbg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50; 
+}
+
+/* === Announcement == */
+.ancmnt-container{
+  width: 100%;
+  height: 400px;
+  background-color: var(--fourthbg);
+  margin-top: 60px;
+  padding: 2rem;
+  margin-top: 60px
+}
+
+.ancmnt-bar {
+	position: relative;
+	max-width: 70rem;
+	margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.slider {
+	display: flex;
+  min-height: 250px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
+	border-radius: 0.5rem;
+	-ms-overflow-style: none; /* Hide scrollbar IE and Edge */
+	scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.slider::-webkit-scrollbar {
+	display: none;
+}
+
+.slider img {
+  height: 300px;
+	flex: 1 0 100%;
+	scroll-snap-align: start;
+	object-fit: cover;
+}
+
+.slider-nav {
+	display: flex;
+	column-gap: 1rem;
+	position: absolute;
+	bottom: 1.25rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+}
+
+.slider-nav a {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background-color: var(--secondbg);
+	opacity: 0.75;
+	transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover {
+	opacity: 1;
+}
+
+
+
+/* == Create post ===*/
+.profile-photo {
+  width: 2.7rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.create-post {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-white);
+  padding: 0.4rem var(--card-padding);
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+.create-post input[type="text"] {
+  width: 100%;
+  justify-self: start;
+  padding-left: 1rem;
+  background: transparent;
+  color: var(--color-dark);
+  margin-right: 1rem;
+}
+
+/* For Profile*/
+.profile-box {
+  background-color: var(--fourthbg) ;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.menu-buttons {
+  font-weight: bold;
+  display: inline-block;
+  width: 65px;
+  background-color: var(--secondbg);
+  color: var(--fourthbg);
+  font-size: 1rem; /* Use vw (viewport width) for responsive font size */
+  margin: 2px;
+  border-radius: 1rem;
+}
+
+
+.profile-content {
+  margin-top: 7vh;
+  display: flex;
+}
+
+/* ===Organizations=== */
+.org-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px; /* Adjust the spacing between images */
+  padding: 20px; /* Add padding to the container */
+}
+
+.org-bar {
+  flex: 1;
+  padding: 20px; /* Add padding to the org-bar if needed */
+  background-color: var(--thirdbg);
+  border-radius: 1rem; /* Rounded corners for the org-bar */
+  row-gap: 2;
+}
+
+.label {
+  font-weight: bold;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.org-logo {
+  width: 160px; /* Set a fixed width for square images */
+  height: 160px; /* Set a fixed height for square images */
+  object-fit: cover; /* Maintain the aspect ratio and cover the entire container */
+  border-radius: 50%; /* Rounded corners for the image container */
+  margin: 5px; /* Adjust the margin for spacing between images */
+  margin-bottom:2rem;
+
+
+}
+
+.org-logo:hover {
+  transform: scale(1.1); /* Zoom in the image on hover */
+  -webkit-box-shadow: 10px 13.5px 13.5px -2px #000000;
+  -moz-box-shadow: 10px 13.5px 13.5px -2px #000000;
+  box-shadow: 10px 13.5px 13.5px -2px #000000;
+}
+
+
+/* profile timeline */
+.timeline{
+  margin-bottom: 20px;
+}
+.timeline-img img {
+  max-width: 100px; /* Ensure the image doesn't exceed its container's width */
+  height: auto; /* Automatically adjust the height to maintain the aspect ratio */
+  border-radius: 15%;
+  float: left;
+}
+
+
+.timeline-txt p{
+  color: var(--text-color);
+  text-align: justify;
+  
+}
+
+.timeline-bar {
+  margin-top: 20px;
+  background-color: var(--fourthbg);
+  color: var(--secondbg);
+  border-radius: 1rem;
+  min-height: 7rem;
+}
+
+
+.friends-container::-webkit-scrollbar { /*Hide scrollbar univarsal*/
+  display: none; 
+}
+
+
+#info{
+  margin-left: auto;
+}
+.friends {
+  display: grid; /* Use flex display for each friend */
+  align-items: center; /* Vertically align the content within each friend */
+  margin: 10px; /* Add some margin for spacing between friends */
+  text-align: center;
+  border: solid 1px var(--fourthbg);
+  border-radius: 2rem;
+  align-items: center;
+
+}
+
+/* Style the text part of the friend */
+.friends a {
+  margin-left: 10px; /* Add space between the image and text */
+}
+
+.friends:hover {
+  color: var(--secondbg);
+  font-size: 16px;
+  font-weight: bold;
+
+}
+
+/* friends area*/
+.profile-friends {
+  max-height: 200px;
+  flex:1;
+  padding-right: 20px;
+}
+
+.profile-friends-img {
+  min-height: 12rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Start images at the left */
+  align-items: center;
+  margin: 10px; /* Adjust the spacing between images */
+}
+
+.profile-friends-img img {
+  width: 10%; /* Adjust the percentage based on your layout */
+  height: auto;
+  margin: 5px; /* Adjust the spacing between images */
+}
+
+
+.friends-bar {
+  background-color: var(--thirdbg);
+  min-height: 500px; /* Set a fixed height for the friends container */
+  margin-top: 20px;
+  color: var(--text-color);
+  padding: 15px;
+  border-radius: 1.5rem;
+  padding-bottom: 60px;
+
+}
+
+.friends-container {
+  height: auto;
+  width: 100%;
+  flex:2;
+  padding:20px;
+  padding-right: 20px;
+  margin-top: 20px;
+  margin-right:20px;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Start images at the left */
+  align-items: center; /* Align images to the top */
+  border-radius: 1rem;
+  padding: 4px;
+  /* Set a max-height to limit the number of displayed friends */
+/*  overflow-y: auto; /* Add a vertical scrollbar when the content overflows 
+
+  -ms-overflow-style: none; /* Hide scrollbar for Edge 
+
+  scrollbar-width: thin; /* Hide scrollbar for webkit (Chrome, Safari) 
+  scrollbar-color: transparent transparent;
+  
+    
+  scrollbar-width: thin; /* Hide scrollbar for Firefox 
+*/
+}
+
+
+/*a or anchor setup above as public variable*/
+/*posts area*/
+.profile-posts {
+  min-width: 50rem;
+  min-height: 400px;
+  flex:3.7;
+  background: var(--firstbg);
+  padding:10px;
+  margin-top: 20px;
+  border-radius: 1.5rem;
+  transition: all 1s ease;
+}
+
+
+.posts-area {
+  background-color: var(--text-color);
+  border-radius: 15px;
+
+}
+
+#create-post{
+  width: 100%;
+  border: none;
+  font-family: "Poppins" , sans-serif;
+  resize: vertical; /* Allow vertical resizing only */
+  color: var(--fourthbg);
+  border-radius: 15px;
+}
+
+#posts_btn {
+  float: right;
+  background-color: var(--secondbg);
+  border-radius: 2rem;
+  border: none;
+  color: var(--fourthbg);
+  padding: 4px;
+  height: 2rem;
+  width: 5rem;
+  font-weight: bold;
+}
+
+
+/* posts */
+.posted-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-image-class {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  margin:0;
+}
+
+
+/*Like comment share */
+.tag {
+  margin-top: 1rem;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between; /* Add space between the two icon groups */
+}
+
+.tag a:hover {
+  color: var(--secondbg);
+}
+
+.left-icons {
+  display: flex;
+  align-items: center;
+  margin-left:10px;
+}
+
+.left-icons a:not(:last-child) {
+  margin-right: 1rem; /* Add margin between the icons */
+}
+
+.right-icons {
+  margin-left: auto; /* Push right-icons to the right corner */
+  margin-right:10px;
+}
+
+
+
+.timeline-bar hr{
+  color: var(--fourthbg);
+  margin-bottom: -20x;
+}
